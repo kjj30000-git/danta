@@ -1,0 +1,49 @@
+================================================================================
+A_GITHUB: 014_260901_v1.6.8.ipynb
+================================================================================
+test_v166_core_logic: FAIL / OSError: source code not available
+Traceback (most recent call last):
+  File "/home/runner/work/danta/danta/.github/tools/run_v168_regressions.py", line 47, in <module>
+    result=fn()
+           ^^^^
+  File "014_260901_v1.6.8.ipynb:cell2", line 9987, in test_v166_core_logic
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/inspect.py", line 1258, in getsource
+    lines, lnum = getsourcelines(object)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/inspect.py", line 1240, in getsourcelines
+    lines, lnum = findsource(object)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/inspect.py", line 1069, in findsource
+    raise OSError('source code not available')
+OSError: source code not available
+
+test_v166_live_order_safety: FAIL / AssertionError: 
+Traceback (most recent call last):
+  File "/home/runner/work/danta/danta/.github/tools/run_v168_regressions.py", line 47, in <module>
+    result=fn()
+           ^^^^
+  File "014_260901_v1.6.8.ipynb:cell2", line 10267, in test_v166_live_order_safety
+AssertionError
+
+test_v168_manual_sell_ledger_helpers: PASS / return=True
+================================================================================
+B_NEWCHAT: 014_260901_v1.6.8(새채팅).ipynb
+================================================================================
+test_v166_core_logic: FAIL / OSError: source code not available
+Traceback (most recent call last):
+  File "/home/runner/work/danta/danta/.github/tools/run_v168_regressions.py", line 47, in <module>
+    result=fn()
+           ^^^^
+  File "014_260901_v1.6.8(새채팅).ipynb:cell2", line 10072, in test_v166_core_logic
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/inspect.py", line 1258, in getsource
+    lines, lnum = getsourcelines(object)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/inspect.py", line 1240, in getsourcelines
+    lines, lnum = findsource(object)
+                  ^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.16/x64/lib/python3.11/inspect.py", line 1069, in findsource
+    raise OSError('source code not available')
+OSError: source code not available
+
+test_v166_live_order_safety: PASS / return=None
+test_v168_live_ledger_and_timing: PASS / return=True
