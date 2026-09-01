@@ -1,21 +1,12 @@
-================================================================================
-A_GITHUB: 014_260901_v1.6.8.ipynb
-================================================================================
-test_v166_core_logic: PASS / return=None
-test_v166_live_order_safety: FAIL / AssertionError: 
-Traceback (most recent call last):
-  File "/home/runner/work/danta/danta/.github/tools/run_v168_regressions.py", line 50, in <module>
-    result=fn()
-           ^^^^
-  File "/home/runner/work/danta/danta/_tmp_v168_1.py", line 10342, in test_v166_live_order_safety
-    assert stock["stock_code"] in live_entered_today
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError
-
-test_v168_manual_sell_ledger_helpers: PASS / return=True
-================================================================================
-B_NEWCHAT: 014_260901_v1.6.8(새채팅).ipynb
-================================================================================
-test_v166_core_logic: PASS / return=None
-test_v166_live_order_safety: PASS / return=None
-test_v168_live_ledger_and_timing: PASS / return=True
+========================================================================================
+GITHUB_RELEASE: code/releases/014_260901_v1.6.8.ipynb
+========================================================================================
+STATIC_NOTEBOOK: PASS / 4 code cells, live OFF, strategy markers, tempfile import, principle before history
+test_v166_core_logic: PASS / fresh-module / return=None
+test_v166_live_order_safety: PASS / fresh-module / return=None
+test_v167_order_engine_safety: PASS / fresh-module / return=True
+test_v168_manual_sell_ledger_helpers: PASS / fresh-module / return=True
+========================================================================================
+OVERALL: PASS
+NOTE: Independent new-chat candidate is comparison-only and does not gate this release.
+NOTE: No broker/API live orders were submitted; regression helpers only.
