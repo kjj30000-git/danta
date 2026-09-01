@@ -4,10 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/tools/compare_v168_variants.py'
-      - '.github/workflows/compare_v168_variants.yml'
-      - '014_260901_v1.6.8.ipynb'
-      - '014_260901_v1.6.8(새채팅).ipynb'
+      - '.github/triggers/compare_v168.txt'
 
 permissions:
   contents: write
@@ -22,13 +19,12 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Compare notebooks
-        run: python .github/tools/compare_v168_variants.py
+      - run: python .github/tools/compare_v168_variants.py
       - name: Commit comparison report
         run: |
           git config user.name 'chatgpt-v168-compare'
           git config user.email 'chatgpt-v168-compare@users.noreply.github.com'
-          git add v1.6.8_comparison_report_260901.txt
+          git add reports/comparison/2026-09-01_v1.6.8_github_vs_새채팅.txt
           if git diff --cached --quiet; then
             echo 'No report changes.'
           else

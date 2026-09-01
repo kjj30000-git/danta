@@ -4,10 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/tools/inspect_v168_critical.py'
-      - '.github/workflows/inspect_v168_critical.yml'
-      - '014_260901_v1.6.8.ipynb'
-      - '014_260901_v1.6.8(새채팅).ipynb'
+      - '.github/triggers/inspect_v168.txt'
 
 permissions:
   contents: write
@@ -21,13 +18,13 @@ jobs:
         with:
           python-version: '3.11'
       - run: python .github/tools/inspect_v168_critical.py
-      - name: Commit extract
+      - name: Commit inspection report
         run: |
           git config user.name 'chatgpt-v168-inspect'
           git config user.email 'chatgpt-v168-inspect@users.noreply.github.com'
-          git add v1.6.8_critical_implementation_extract_260901.txt
+          git add reports/inspection/2026-09-01_v1.6.8_critical_impl.txt
           if git diff --cached --quiet; then
-            echo 'No extract changes.'
+            echo 'No report changes.'
           else
             git commit -m 'Inspect critical v1.6.8 implementation differences'
             git push

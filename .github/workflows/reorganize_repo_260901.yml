@@ -1,4 +1,4 @@
-name: Reorganize repository structure 2026-09-01
+name: Finalize repository helper paths 2026-09-01
 
 on:
   push:
@@ -9,22 +9,22 @@ permissions:
   contents: write
 
 jobs:
-  reorganize:
+  finalize:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Reorganize repository
+      - name: Update helper paths
         run: bash .github/tools/reorganize_repo_260901.sh
-      - name: Commit reorganized structure
+      - name: Commit helper path updates
         run: |
           git config user.name 'chatgpt-repo-organizer'
           git config user.email 'chatgpt-repo-organizer@users.noreply.github.com'
-          git add -A
+          git add .github/tools
           if git diff --cached --quiet; then
-            echo 'No structure changes to commit.'
+            echo 'No helper changes.'
           else
-            git commit -m 'Organize code reports handoff and data structure'
+            git commit -m 'Update validation helpers for organized paths'
             git push
           fi

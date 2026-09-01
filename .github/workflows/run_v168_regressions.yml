@@ -4,10 +4,7 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/tools/run_v168_regressions.py'
-      - '.github/workflows/run_v168_regressions.yml'
-      - '014_260901_v1.6.8.ipynb'
-      - '014_260901_v1.6.8(새채팅).ipynb'
+      - '.github/triggers/regression_v168.txt'
 
 permissions:
   contents: write
@@ -28,7 +25,7 @@ jobs:
         run: |
           git config user.name 'chatgpt-v168-regression'
           git config user.email 'chatgpt-v168-regression@users.noreply.github.com'
-          git add v1.6.8_regression_run_report_260901.txt
+          git add reports/regression/2026-09-01_v1.6.8_regression.txt
           if git diff --cached --quiet; then
             echo 'No report changes.'
           else
