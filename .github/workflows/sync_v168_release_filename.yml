@@ -1,0 +1,34 @@
+name: Sync v1.6.8 release filename
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/triggers/sync_v168_release_filename.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Sync builder and comparison paths
+        run: python .github/tools/sync_v168_release_filename.py
+      - name: Commit synced paths
+        run: |
+          git config user.name 'chatgpt-v168-filename-sync'
+          git config user.email 'chatgpt-v168-filename-sync@users.noreply.github.com'
+          git add .github/tools/build_v1_6_8.py .github/tools/compare_v168_variants.py
+          if git diff --cached --quiet; then
+            echo 'No filename changes.'
+          else
+            git commit -m 'Sync v1.6.8 release filename to 014_260902'
+            git push
+          fi
