@@ -1,0 +1,764 @@
+====================================================================================================
+A_GITHUB: 014_260901_v1.6.8.ipynb
+====================================================================================================
+
+### save_live_state (chars=2641)
+0006:     - LIVE_STATE_FILE_LOCK으로 동일 프로세스 내 동시 save를 직렬화
+0007:     - 매 저장마다 고유 tmp 파일 사용
+0008:     - os.replace() atomic replace 유지
+0009:     - Windows 일시적 파일 점유를 고려해 짧은 제한적 retry
+0027:             "live_daily_realized_pnl": live_daily_realized_pnl,
+0038:     with LIVE_STATE_FILE_LOCK:
+0039:         for attempt in range(1, LIVE_STATE_SAVE_RETRY_COUNT + 1):
+0040:             tmp_file = None
+0044:                 fd, tmp_file = tempfile.mkstemp(
+0046:                     suffix=".tmp",
+0058:                 os.replace(tmp_file, LIVE_STATE_FILE)
+0059:                 tmp_file = None
+0064:                 if tmp_file:
+0066:                         os.remove(tmp_file)
+0070:                 if attempt < LIVE_STATE_SAVE_RETRY_COUNT:
+0071:                     time.sleep(LIVE_STATE_SAVE_RETRY_DELAY_SEC)
+0075:         f"{LIVE_STATE_SAVE_RETRY_COUNT}회 시도 후 실패"
+
+### _normalize_live_position_state (chars=1726)
+0006:     auto_qty = safe_int(position.get("auto_managed_qty", legacy_qty))
+0007:     position["auto_managed_qty"] = max(0, auto_qty)
+0008:     position["qty"] = position["auto_managed_qty"]  # legacy compatibility mirror
+0009:     position.setdefault("initial_qty", position["auto_managed_qty"])
+0010:     position.setdefault("external_qty", 0)
+0024:     position.setdefault("external_sell_order_progress", {})
+0025:     position.setdefault("external_sell_fill_lots", [])
+0028:     position.setdefault("broker_precheck_start_time", "")
+0029:     position.setdefault("broker_precheck_end_time", "")
+0030:     position.setdefault("broker_precheck_sec", "")
+0031:     position.setdefault("sell_order_time", position.get("live_exit_order_time", ""))
+0032:     position.setdefault("sell_fill_time", position.get("live_exit_fill_time", ""))
+0033:     position.setdefault("trigger_to_order_sec", "")
+0034:     position.setdefault("order_to_fill_sec", "")
+0035:     position.setdefault("trigger_to_fill_sec", "")
+
+### _track_external_sell_execution (chars=3312)
+0001: def _track_external_sell_execution(position, values):
+0005:     broker_filled_qty = requested_qty - unfilled_qty
+0006:     delta_qty = broker_filled_qty - prev_filled_qty
+0008:     FID 911은 참고용이며 이벤트마다 단순 누적하지 않습니다.
+0012:             "requested_qty": 0,
+0013:             "broker_filled_qty": 0,
+0014:             "delta_qty": 0,
+0015:             "unfilled_qty": 0,
+0027:     unfilled_qty = max(0, safe_int(values.get("902", 0)))
+0030:     progress_map = position.setdefault("external_sell_order_progress", {})
+0032:         "requested_qty": 0,
+0035:         "last_unfilled_qty": "",
+0039:     requested_qty = requested_from_event or max(
+0040:         0, safe_int(progress.get("requested_qty", 0))
+0044:     if requested_qty <= 0:
+0046:         progress["last_unfilled_qty"] = unfilled_qty
+0049:             "requested_qty": 0,
+0050:             "broker_filled_qty": prev_filled_qty,
+0051:             "delta_qty": 0,
+0052:             "unfilled_qty": unfilled_qty,
+0059:     requested_qty = max(requested_qty, prev_filled_qty)
+0060:     progress["requested_qty"] = requested_qty
+0062:     raw_broker_filled = requested_qty - unfilled_qty
+0063:     broker_filled_qty = min(requested_qty, max(0, raw_broker_filled))
+0065:     if broker_filled_qty < prev_filled_qty:
+0067:         delta_qty = 0
+0068:         broker_filled_qty = prev_filled_qty
+0070:         delta_qty = broker_filled_qty - prev_filled_qty
+0072:     progress["filled_qty"] = broker_filled_qty
+0073:     progress["last_unfilled_qty"] = unfilled_qty
+0082:     if delta_qty > 0 and fill_price > 0:
+0083:         position.setdefault("external_sell_fill_lots", []).append({
+0086:             "qty_total": delta_qty,
+0087:             "qty_remaining": delta_qty,
+0093:         "requested_qty": requested_qty,
+0094:         "broker_filled_qty": broker_filled_qty,
+0095:         "delta_qty": delta_qty,
+0096:         "unfilled_qty": unfilled_qty,
+
+### _consume_external_sell_lots (chars=1193)
+0001: def _consume_external_sell_lots(position, qty):
+0007:     lots = position.setdefault("external_sell_fill_lots", [])
+0037:     position["external_sell_fill_lots"] = [
+
+### _apply_external_auto_realized_pnl (chars=2800)
+0001: def _apply_external_auto_realized_pnl(
+0007:     external_order_nos=None,
+0010:     수동매도로 실제 감소한 auto_managed_qty만 gross 실현손익에 반영합니다.
+0013:     global live_daily_realized_pnl
+0025:         str(x).strip() for x in (external_order_nos or []) if str(x).strip()
+0027:     external_order_no = ",".join(dict.fromkeys(order_nos))
+0031:     p["auto_managed_qty_before_exit"] = exit_qty
+0032:     p["external_auto_exit_qty"] = exit_qty
+0033:     p["external_exit_price"] = exit_price
+0034:     p["external_order_no"] = external_order_no
+0035:     p["external_fill_time"] = fill_time
+0036:     p["exit_order_no"] = external_order_no
+0041:     # 자동청산 지연통계와 섞이지 않도록 broker_precheck 계측은 비워둡니다.
+0045:     p["sell_order_time"] = fill_time
+0047:     p["sell_fill_time"] = fill_time
+0048:     p["trigger_to_order_sec"] = 0.0
+0049:     p["order_to_fill_sec"] = 0.0
+0050:     p["trigger_to_fill_sec"] = 0.0
+0052:     pnl, ret = save_live_trade_result(p, exit_price, result)
+0055:         live_daily_realized_pnl += pnl
+0058:             and live_daily_realized_pnl <= -LIVE_DAILY_MAX_LOSS_WON
+0064:         "event": "EXTERNAL_REALIZED_PNL",
+0068:         "order_no": external_order_no,
+0069:         "requested_qty": exit_qty,
+0070:         "broker_filled_qty": exit_qty,
+0071:         "delta_qty": exit_qty,
+0074:         "auto_managed_qty": exit_qty,
+0075:         "external_auto_exit_qty": exit_qty,
+0076:         "external_exit_price": exit_price,
+0077:         "external_order_no": external_order_no,
+0078:         "external_fill_time": _csv_datetime(fill_time),
+
+### _sync_position_from_broker (chars=8393)
+0001: def _sync_position_from_broker(code, balance, source="PERIODIC", external_event=False):
+0002:     """broker 총보유를 auto/external 원장에 반영합니다."""
+0005:     full_external_exit = False
+0007:     unresolved_external_auto_qty = 0
+0008:     external_realized_payload = None
+0011:     pending_sell = bool(_pending_internal_sell_for_code(code))
+0018:         or pending_sell
+0019:         or (not external_event and source in ["AUTO_BUY_FILL", "AUTO_SELL_FILL"])
+0029:         has_external_sell_lots = any(
+0031:             for lot in p.get("external_sell_fill_lots", [])
+0034:         external_reconcile = external_event or has_external_sell_lots
+0036:         old_auto = safe_int(p.get("auto_managed_qty", 0))
+0037:         old_external = safe_int(p.get("external_qty", 0))
+0047:         expected = old_auto + old_external
+0049:             new_auto, new_external = reconcile_managed_quantities(
+0050:                 old_auto, old_external, held
+0053:             # 감소분 배분은 기존 합의대로 external_qty -> auto_managed_qty 순서.
+0054:             external_qty_reduced = max(0, old_external - new_external)
+0058:             if external_reconcile and (external_qty_reduced > 0 or auto_qty_reduced > 0):
+0059:                 if external_qty_reduced > 0:
+0060:                     _consume_external_sell_lots(p, external_qty_reduced)
+0064:                         _consume_external_sell_lots(p, auto_qty_reduced)
+0066:                     unresolved_external_auto_qty = max(
+0071:                         external_realized_payload = {
+0077:                                 "EXTERNAL_EXIT"
+0079:                                 else "EXTERNAL_PARTIAL_EXIT"
+0081:                             "external_order_nos": used_order_nos,
+0084:             p["auto_managed_qty"] = new_auto
+0086:             p["external_qty"] = new_external
+0097:                 "auto_managed_qty": new_auto,
+0098:                 "external_qty": new_external,
+0101:             if held == 0 and old_auto > 0 and not pending_sell:
+0102:                 full_external_exit = True
+0107:                 safe_int(o.get("requested_qty", 0))
+0113:             and o.get("status") in ["SUBMITTED", "PARTIAL", "CANCEL_PENDING"]
+0118:                 safe_int(o.get("requested_qty", 0))
+0127:         if external_reconcile and pending_sell:
+0128:             p["status"] = "MANUAL_INTERVENTION_REQUIRED"
+0130:                 "reason": "MANUAL_INTERVENTION_REQUIRED",
+0135:             external_reconcile
+0136:             and not full_external_exit
+0137:             and safe_int(p.get("auto_managed_qty", 0)) > 0
+0141:             if current_block.get("reason") == "EXTERNAL_ORDER_DETECTED":
+0147:             "old_external": old_external,
+0149:             "new_auto": safe_int(p.get("auto_managed_qty", 0)),
+0150:             "new_external": safe_int(p.get("external_qty", 0)),
+0153:             "full_external_exit": full_external_exit,
+0155:             "pending_sell": pending_sell,
+0163:     if external_realized_payload:
+0164:         realized = _apply_external_auto_realized_pnl(**external_realized_payload)
+0166:     if unresolved_external_auto_qty > 0:
+0170:                 "reason": "EXTERNAL_PNL_UNRESOLVED",
+0172:                     f"자동관리 감소 {unresolved_external_auto_qty}주 체결가 lot 확인불가"
+0178:             "event": "EXTERNAL_PNL_UNRESOLVED",
+0184:                 f"수동매도로 자동관리 {unresolved_external_auto_qty}주 감소했으나 "
+0187:             "auto_managed_qty": result.get("new_auto", 0),
+0188:             "external_qty": result.get("new_external", 0),
+0194:             f"자동관리 감소 {unresolved_external_auto_qty}주의 실제 외부 체결가를 "
+0199:     if full_external_exit and unresolved_external_auto_qty == 0:
+0201:         _finalize_external_exit(code, source=source)
+0207:         action_text = "전량" if realized.get("result") == "EXTERNAL_EXIT" else "부분"
+0216:             f"오늘 누적(비용전) : {live_daily_realized_pnl:+,.0f}원"
+
+### handle_external_order_event (chars=2475)
+0001: def handle_external_order_event(values):
+0007:     - 자동관리 종목의 외부 BUY는 기존 정책대로 external_qty 동기화 대상으로만 처리.
+0021:         "requested_qty": max(0, safe_int(values.get("900", 0))),
+0022:         "broker_filled_qty": "",
+0023:         "delta_qty": "",
+0024:         "unfilled_qty": max(0, safe_int(values.get("902", 0))),
+0047:             tracking = _track_external_sell_execution(p, values)
+0049:         p["status"] = "EXTERNAL_ORDER_DETECTED"
+0051:             "reason": "EXTERNAL_ORDER_DETECTED",
+0057:         "event": "EXTERNAL_ORDER_DETECTED",
+0063:         "requested_qty": tracking.get("requested_qty", ""),
+0064:         "broker_filled_qty": tracking.get("broker_filled_qty", ""),
+0065:         "delta_qty": tracking.get("delta_qty", ""),
+0066:         "unfilled_qty": tracking.get("unfilled_qty", ""),
+0069:         "reason": "EXTERNAL_ORDER_DETECTED",
+0074:     # broker 잔고를 기준으로 external_qty -> auto_managed_qty 순서로 실제 감소분 확정.
+0077:         reason="EXTERNAL_ORDER_DETECTED",
+0078:         external_event=True,
+
+### save_live_trade_result (chars=5496)
+0001: def save_live_trade_result(position, exit_price, result):
+0007:             position.get("auto_managed_qty_before_exit", position.get("initial_qty", 0))
+0019:     order_time = position.get("sell_order_time", position.get("live_exit_order_time", ""))
+0020:     fill_time = position.get("sell_fill_time", position.get("live_exit_fill_time", datetime.now()))
+0022:     trigger_to_order_sec = position.get("trigger_to_order_sec", "")
+0023:     if trigger_to_order_sec in ["", None]:
+0024:         trigger_to_order_sec = _elapsed_seconds_v168(trigger_time, order_time)
+0026:     order_to_fill_sec = position.get("order_to_fill_sec", "")
+0027:     if order_to_fill_sec in ["", None]:
+0028:         order_to_fill_sec = _elapsed_seconds_v168(order_time, fill_time)
+0030:     trigger_to_fill_sec = position.get("trigger_to_fill_sec", "")
+0031:     if trigger_to_fill_sec in ["", None]:
+0032:         trigger_to_fill_sec = _elapsed_seconds_v168(trigger_time, fill_time)
+0062:         "sell_order_time": _csv_datetime(order_time),
+0063:         "broker_precheck_start_time": _csv_datetime(position.get("broker_precheck_start_time", "")),
+0064:         "broker_precheck_end_time": _csv_datetime(position.get("broker_precheck_end_time", "")),
+0065:         "broker_precheck_sec": position.get("broker_precheck_sec", ""),
+0066:         "sell_fill_time": _csv_datetime(fill_time),
+0067:         "trigger_to_order_sec": trigger_to_order_sec,
+0068:         "order_to_fill_sec": order_to_fill_sec,
+0070:         "trigger_to_fill_sec": trigger_to_fill_sec,
+0092:         "auto_managed_qty": position.get("auto_managed_qty_before_exit", qty),
+0093:         "external_qty": position.get("external_qty", 0),
+0096:         "external_auto_exit_qty": position.get("external_auto_exit_qty", ""),
+0097:         "external_exit_price": position.get("external_exit_price", ""),
+0098:         "external_order_no": position.get("external_order_no", ""),
+0099:         "external_fill_time": _csv_datetime(position.get("external_fill_time", "")),
+
+### _submit_live_exit_worker (chars=8484)
+0018:     broker_precheck_start_time = datetime.now()
+0022:             p["broker_precheck_start_time"] = broker_precheck_start_time
+0026:             positions = get_broker_positions()
+0027:             pending = get_broker_pending_orders()
+0044:     broker_precheck_end_time = datetime.now()
+0045:     broker_precheck_sec = _elapsed_seconds_v168(
+0046:         broker_precheck_start_time, broker_precheck_end_time
+0051:             p["broker_precheck_end_time"] = broker_precheck_end_time
+0052:             p["broker_precheck_sec"] = broker_precheck_sec
+0063:     external_pending_sell = _find_external_pending_sell(code, pending)
+0064:     if external_pending_sell:
+0068:                 p["status"] = "MANUAL_INTERVENTION_REQUIRED"
+0069:         mark_code_blocked(code, "MANUAL_INTERVENTION_REQUIRED", "broker에 외부 매도 미체결 존재")
+0084:         old_auto = safe_int(p.get("auto_managed_qty", 0))
+0085:         old_external = safe_int(p.get("external_qty", 0))
+0090:         new_auto, new_external = reconcile_managed_quantities(old_auto, old_external, held)
+0091:         quantity_corrected = (new_auto != old_auto) or (new_external != old_external)
+0093:         p["auto_managed_qty"] = new_auto
+0095:         p["external_qty"] = new_external
+0102:             p["status"] = "EXTERNAL_EXIT_CONFIRMED"
+0103:             should_external_close = True
+0105:             should_external_close = False
+0107:     if should_external_close:
+0108:         _finalize_external_exit(code, source="EXIT_PRECHECK_HELD_ZERO")
+0146:         p["auto_managed_qty_before_exit"] = new_auto
+0157:         response = submit_stock_order(
+0161:         sell_order_time = datetime.now()
+0169:             p["live_exit_order_time"] = sell_order_time
+0170:             p["sell_order_time"] = sell_order_time
+0171:             p["trigger_to_order_sec"] = _elapsed_seconds_v168(
+0172:                 p.get("exit_trigger_time", ""), sell_order_time
+0180:                 "requested_qty": qty,
+0182:                 "broker_filled_qty": 0,
+0183:                 "unfilled_qty": qty,
+0193:                 "broker_precheck_start_time": broker_precheck_start_time,
+0194:                 "broker_precheck_end_time": broker_precheck_end_time,
+0195:                 "broker_precheck_sec": broker_precheck_sec,
+0196:                 "sell_order_time": sell_order_time,
+0197:                 "trigger_to_order_sec": _elapsed_seconds_v168(
+0198:                     p.get("exit_trigger_time", ""), sell_order_time
+
+### handle_order_execution (chars=14003)
+0002:     global live_daily_realized_pnl
+0016:     event_fill_qty = safe_int(values.get("911", 0))  # 참고/로그용; 누적에 직접 더하지 않음
+0017:     unfilled_qty = safe_int(values.get("902", 0))
+0039:     if side == "CANCEL" and fill_price <= 0 and "확인" in status_text:
+0040:         _finish_buy_cancel_event(code, ord_no, original_order_no, status_text)
+0060:             if side == "CANCEL" and p and p.get("status") in ["ENTRY_CANCEL_SUBMITTING", "ENTRY_CANCEL_PENDING"]:
+0061:                 p["status"] = "MANUAL_INTERVENTION_REQUIRED"
+0063:                     "reason": "MANUAL_INTERVENTION_REQUIRED",
+0074:             "requested_qty": order.get("requested_qty", ""),
+0075:             "broker_filled_qty": order.get("filled_qty", 0),
+0076:             "unfilled_qty": unfilled_qty,
+0104:     requested_qty = safe_int(order.get("requested_qty", 0))
+0108:         broker_filled_qty, delta_qty = compute_broker_fill_delta(
+0109:             requested_qty, unfilled_qty, prev_filled_qty
+0115:             f"requested={requested_qty}, event911={event_fill_qty}, unfilled={unfilled_qty}, "
+0121:     if delta_qty == 0:
+0125:                 order["broker_filled_qty"] = broker_filled_qty
+0126:                 order["unfilled_qty"] = unfilled_qty
+0127:                 order["status"] = "FILLED" if unfilled_qty == 0 else "PARTIAL"
+0135:             "requested_qty": requested_qty,
+0136:             "broker_filled_qty": broker_filled_qty,
+0137:             "delta_qty": 0,
+0138:             "unfilled_qty": unfilled_qty,
+0145:     fill_key = (ord_no, fill_no, str(broker_filled_qty), str(fill_price))
+0158:         "requested_qty": requested_qty,
+0159:         "broker_filled_qty": broker_filled_qty,
+0160:         "delta_qty": delta_qty,
+0161:         "unfilled_qty": unfilled_qty,
+0169:         "broker_precheck_start_time": _csv_datetime(order.get("broker_precheck_start_time", "")),
+0170:         "broker_precheck_end_time": _csv_datetime(order.get("broker_precheck_end_time", "")),
+0171:         "broker_precheck_sec": order.get("broker_precheck_sec", ""),
+0172:         "sell_order_time": _csv_datetime(order.get("sell_order_time", "")),
+0173:         "trigger_to_order_sec": order.get("trigger_to_order_sec", ""),
+0178:         fully_filled = (unfilled_qty == 0)
+0182:             order["filled_qty"] = broker_filled_qty
+0183:             order["broker_filled_qty"] = broker_filled_qty
+0184:             order["unfilled_qty"] = unfilled_qty
+0185:             order["filled_amount"] = safe_float(order.get("filled_amount", 0)) + fill_price * delta_qty
+0187:             order["pending_auto_buy_qty"] = max(0, requested_qty - broker_filled_qty)
+0195:                     "auto_managed_qty": 0,
+0196:                     "external_qty": 0,
+0220:             p["auto_managed_qty"] = safe_int(p.get("auto_managed_qty", 0)) + delta_qty
+0221:             p["qty"] = p["auto_managed_qty"]
+0222:             p["initial_qty"] = p["auto_managed_qty"]
+0223:             p["filled_amount"] = safe_float(p.get("filled_amount", 0)) + fill_price * delta_qty
+0224:             p["avg_entry_price"] = p["filled_amount"] / p["auto_managed_qty"]
+0226:             p["pending_auto_buy_qty"] = max(0, requested_qty - broker_filled_qty)
+0245:             if fully_filled and p.get("status") in ["ENTRY_CANCEL_SUBMITTING", "ENTRY_CANCEL_PENDING"]:
+0253:         schedule_broker_sync(code, reason="AUTO_BUY_FILL", external_event=False)
+0268:             order["filled_qty"] = broker_filled_qty
+0269:             order["broker_filled_qty"] = broker_filled_qty
+0270:             order["unfilled_qty"] = unfilled_qty
+0271:             order["filled_amount"] = safe_float(order.get("filled_amount", 0)) + fill_price * delta_qty
+0272:             order["status"] = "FILLED" if unfilled_qty == 0 else "PARTIAL"
+0273:             order["pending_auto_sell_qty"] = max(0, requested_qty - broker_filled_qty)
+0280:             p["auto_managed_qty"] = max(0, safe_int(p.get("auto_managed_qty", p.get("qty", 0))) - delta_qty)
+0281:             p["qty"] = p["auto_managed_qty"]
+0282:             p["pending_auto_sell_qty"] = max(0, requested_qty - broker_filled_qty)
+0284:             if unfilled_qty == 0:
+0286:                     safe_float(order.get("filled_amount", 0)) / broker_filled_qty
+0287:                     if broker_filled_qty > 0 else fill_price
+0290:                 sell_fill_time = datetime.now()
+0291:                 p["live_exit_fill_time"] = sell_fill_time
+0292:                 p["sell_fill_time"] = sell_fill_time
+0293:                 p["order_to_fill_sec"] = _elapsed_seconds_v168(
+0294:                     p.get("sell_order_time", p.get("live_exit_order_time", "")),
+0295:                     sell_fill_time,
+0297:                 p["trigger_to_fill_sec"] = _elapsed_seconds_v168(
+0298:                     p.get("exit_trigger_time", ""), sell_fill_time
+0300:                 p["exit_filled_qty"] = broker_filled_qty
+0302:                 if p["auto_managed_qty"] == 0:
+0312:                         "detail": f"SELL 전량체결 후 자동관리 잔량 {p['auto_managed_qty']}주",
+0318:         schedule_broker_sync(code, reason="AUTO_SELL_FILL", external_event=False)
+0321:             pnl, ret = save_live_trade_result(
+0326:                 live_daily_realized_pnl += pnl
+0327:                 if LIVE_DAILY_MAX_LOSS_WON > 0 and live_daily_realized_pnl <= -LIVE_DAILY_MAX_LOSS_WON:
+
+### test_v168_manual_sell_ledger_helpers (chars=1247)
+0006:         "auto_managed_qty": 100,
+0007:         "external_qty": 20,
+0011:     a = _track_external_sell_execution(p, {
+0013:         "910": "10100", "911": "20",
+0015:     assert a["broker_filled_qty"] == 20 and a["delta_qty"] == 20
+0017:     b = _track_external_sell_execution(p, {
+0019:         "910": "10200", "911": "30",
+0021:     assert b["broker_filled_qty"] == 50 and b["delta_qty"] == 30
+0023:     c = _track_external_sell_execution(p, {
+0025:         "910": "10200", "911": "50",
+0027:     assert c["broker_filled_qty"] == 50 and c["delta_qty"] == 0
+0029:     new_auto, new_external = reconcile_managed_quantities(100, 20, 70)
+0030:     assert new_external == 0 and new_auto == 70
+====================================================================================================
+B_NEWCHAT: 014_260901_v1.6.8(새채팅).ipynb
+====================================================================================================
+
+### save_live_state (chars=2416)
+0006:     - 전용 LIVE_STATE_FILE_LOCK으로 동시 저장을 직렬화
+0008:     - os.replace() atomic 교체
+0009:     - 짧은 제한적 retry
+0024:                 "live_external_orders": live_external_orders,
+0026:                 "live_daily_realized_pnl": live_daily_realized_pnl,
+0038:         with LIVE_STATE_FILE_LOCK:
+0040:                 tmp_file = (
+0042:                     f"{threading.get_ident()}.{time.time_ns()}.tmp"
+0045:                     with open(tmp_file, "w", encoding="utf-8") as f:
+0049:                     os.replace(tmp_file, LIVE_STATE_FILE)
+0054:                         if os.path.exists(tmp_file):
+0055:                             os.remove(tmp_file)
+
+### _normalize_live_position_state (chars=1294)
+0006:     auto_qty = safe_int(position.get("auto_managed_qty", legacy_qty))
+0007:     position["auto_managed_qty"] = max(0, auto_qty)
+0008:     position["qty"] = position["auto_managed_qty"]  # legacy compatibility mirror
+0009:     position.setdefault("initial_qty", position["auto_managed_qty"])
+0010:     position.setdefault("external_qty", 0)
+0021:     position.setdefault("broker_precheck_start_time", "")
+0022:     position.setdefault("broker_precheck_end_time", "")
+0023:     position.setdefault("broker_precheck_sec", "")
+0024:     position.setdefault("sell_order_time", "")
+
+### _normalize_external_order_state (chars=751)
+0001: def _normalize_external_order_state(order):
+0010:     order.setdefault("requested_qty", 0)
+0012:     order.setdefault("broker_filled_qty", safe_int(order.get("filled_qty", 0)))
+0013:     order.setdefault("unfilled_qty", max(
+0015:         safe_int(order.get("requested_qty", 0))
+
+### _sync_position_from_broker (chars=4407)
+0001: def _sync_position_from_broker(code, balance, source="PERIODIC", external_event=False):
+0002:     """broker 총보유를 auto/external 원장에 반영합니다."""
+0005:     full_external_exit = False
+0008:     pending_sell = bool(_pending_internal_sell_for_code(code))
+0015:         or pending_sell
+0016:         or (not external_event and source in ["AUTO_BUY_FILL", "AUTO_SELL_FILL"])
+0025:         old_auto = safe_int(p.get("auto_managed_qty", 0))
+0026:         old_external = safe_int(p.get("external_qty", 0))
+0036:         expected = old_auto + old_external
+0038:             new_auto, new_external = reconcile_managed_quantities(old_auto, old_external, held)
+0039:             p["auto_managed_qty"] = new_auto
+0041:             p["external_qty"] = new_external
+0052:                 "auto_managed_qty": new_auto,
+0053:                 "external_qty": new_external,
+0056:             if held == 0 and old_auto > 0 and not pending_sell:
+0057:                 full_external_exit = True
+0060:             max(0, safe_int(o.get("requested_qty", 0)) - safe_int(o.get("filled_qty", 0)))
+0064:             and o.get("status") in ["SUBMITTED", "PARTIAL", "CANCEL_PENDING"]
+0067:             max(0, safe_int(o.get("requested_qty", 0)) - safe_int(o.get("filled_qty", 0)))
+0074:         if external_event and pending_sell:
+0075:             p["status"] = "MANUAL_INTERVENTION_REQUIRED"
+0077:                 "reason": "MANUAL_INTERVENTION_REQUIRED",
+0081:         elif external_event and not full_external_exit and safe_int(p.get("auto_managed_qty", 0)) > 0:
+0084:             if current_block.get("reason") == "EXTERNAL_ORDER_DETECTED":
+0090:             "old_external": old_external,
+0092:             "new_auto": safe_int(p.get("auto_managed_qty", 0)),
+0093:             "new_external": safe_int(p.get("external_qty", 0)),
+0096:             "full_external_exit": full_external_exit,
+0098:             "pending_sell": pending_sell,
+0104:     if full_external_exit:
+0105:         _finalize_external_exit(code, source=source)
+
+### handle_external_order_event (chars=14906)
+0001: def handle_external_order_event(values):
+0007:     - 자동관리 종목의 외부 SELL은 requested_qty-unfilled_qty 누적체결량에서 delta만 계산
+0008:     - 수동매도 delta는 external_qty를 먼저 차감하고 남는 수량만 auto_managed_qty에서 차감
+0009:     - 실제 감소한 auto_managed_qty만 외부 체결가 기준 gross 손익에 반영
+0011:     global live_daily_realized_pnl
+0022:     event_fill_qty = safe_int(values.get("911", 0))  # 참고용; 직접 누적하지 않음
+0023:     unfilled_qty = safe_int(values.get("902", 0))
+0042:             p["status"] = "EXTERNAL_ORDER_DETECTED"
+0044:                 "reason": "EXTERNAL_ORDER_DETECTED",
+0055:             "event": "EXTERNAL_ORDER_DETECTED",
+0060:             "requested_qty": requested_from_event or "",
+0061:             "broker_filled_qty": "",
+0062:             "delta_qty": "",
+0063:             "unfilled_qty": unfilled_qty if requested_from_event else "",
+0066:             "reason": "EXTERNAL_ORDER_DETECTED",
+0071:             reason="EXTERNAL_PERSONAL_TRADE",
+0072:             external_event=False
+0076:     # 관리종목의 수동 BUY는 기존처럼 broker 원장 동기화로 external_qty를 반영합니다.
+0079:             "event": "EXTERNAL_ORDER_DETECTED",
+0084:             "requested_qty": requested_from_event or "",
+0087:             "reason": "EXTERNAL_ORDER_DETECTED",
+0098:             reason="EXTERNAL_ORDER",
+0099:             external_event=True
+0105:         ledger = live_external_orders.get(ord_no)
+0108:             ledger = _normalize_external_order_state({
+0113:                 "requested_qty": max(0, requested_from_event),
+0115:                 "broker_filled_qty": 0,
+0116:                 "unfilled_qty": max(0, requested_from_event),
+0120:             live_external_orders[ord_no] = ledger
+0122:             _normalize_external_order_state(ledger)
+0125:             old_requested = safe_int(ledger.get("requested_qty", 0))
+0129:                 ledger["requested_qty"] = requested_from_event
+0131:         requested_qty = safe_int(ledger.get("requested_qty", 0))
+0145:             "event": "EXTERNAL_ORDER_DETECTED" if first_detection else "EXTERNAL_ORDER_UPDATE",
+0150:             "requested_qty": requested_qty or "",
+0151:             "broker_filled_qty": prev_filled_qty,
+0152:             "delta_qty": 0,
+0153:             "unfilled_qty": unfilled_qty if requested_qty else "",
+0156:             "reason": "EXTERNAL_ORDER_DETECTED",
+0161:             reason="EXTERNAL_ORDER",
+0162:             external_event=True
+0168:     if requested_qty <= 0:
+0170:             "event": "EXTERNAL_FILL_QTY_UNKNOWN",
+0176:             "requested_qty": "",
+0177:             "broker_filled_qty": "",
+0178:             "delta_qty": "",
+0179:             "unfilled_qty": unfilled_qty,
+0182:             "reason": "MANUAL_INTERVENTION_REQUIRED",
+0183:             "error": f"외부 SELL broker 주문수량(900) 확인불가 / event911={event_fill_qty}",
+0187:             "MANUAL_INTERVENTION_REQUIRED",
+0193:             reason="EXTERNAL_SELL_QTY_UNKNOWN",
+0194:             external_event=True
+0199:         broker_filled_qty, delta_qty = compute_broker_fill_delta(
+0200:             requested_qty,
+0201:             unfilled_qty,
+0206:             "event": "EXTERNAL_FILL_QTY_MISMATCH",
+0212:             "requested_qty": requested_qty,
+0213:             "broker_filled_qty": "",
+0214:             "delta_qty": "",
+0215:             "unfilled_qty": unfilled_qty,
+0218:             "reason": "MANUAL_INTERVENTION_REQUIRED",
+0223:             "MANUAL_INTERVENTION_REQUIRED",
+0229:             reason="EXTERNAL_SELL_QTY_MISMATCH",
+0230:             external_event=True
+0235:     if delta_qty == 0:
+0237:             ledger = live_external_orders.get(ord_no)
+0239:                 ledger["broker_filled_qty"] = broker_filled_qty
+0240:                 ledger["unfilled_qty"] = unfilled_qty
+0241:                 ledger["status"] = "FILLED" if unfilled_qty == 0 else "PARTIAL"
+0243:             "event": "EXTERNAL_FILL_DUPLICATE_CUMULATIVE",
+0249:             "requested_qty": requested_qty,
+0250:             "broker_filled_qty": broker_filled_qty,
+0251:             "delta_qty": 0,
+0252:             "unfilled_qty": unfilled_qty,
+0255:             "reason": "EXTERNAL_ORDER_DETECTED",
+0261:     external_reduced_qty = 0
+0262:     full_external_exit = False
+0266:         ledger = live_external_orders[ord_no]
+0267:         ledger["filled_qty"] = broker_filled_qty
+0268:         ledger["broker_filled_qty"] = broker_filled_qty
+0269:         ledger["unfilled_qty"] = unfilled_qty
+0272:             + fill_price * delta_qty
+0274:         ledger["status"] = "FILLED" if unfilled_qty == 0 else "PARTIAL"
+0280:             old_auto = safe_int(p.get("auto_managed_qty", 0))
+0281:             old_external = safe_int(p.get("external_qty", 0))
+0283:             external_reduced_qty = min(old_external, delta_qty)
+0284:             remain_delta = max(0, delta_qty - external_reduced_qty)
+0287:             new_external = max(0, old_external - external_reduced_qty)
+0290:             p["external_qty"] = new_external
+0291:             p["auto_managed_qty"] = new_auto
+0293:             p["external_last_sell_order_no"] = ord_no
+0294:             p["external_last_sell_fill_time"] = fill_time
+0298:                 position_copy["auto_managed_qty_before_exit"] = old_auto
+0302:                 position_copy["external_exit_price"] = fill_price
+0303:                 position_copy["external_auto_exit_qty"] = auto_exit_qty
+0304:                 position_copy["external_order_no"] = ord_no
+0305:                 position_copy["external_fill_time"] = fill_time
+0307:                     "EXTERNAL_EXIT"
+0309:                     else "EXTERNAL_PARTIAL_EXIT"
+0311:                 full_external_exit = new_auto == 0
+0314:         "event": "EXTERNAL_FILL",
+0320:         "requested_qty": requested_qty,
+0321:         "broker_filled_qty": broker_filled_qty,
+0322:         "delta_qty": delta_qty,
+0323:         "unfilled_qty": unfilled_qty,
+0326:         "reason": "EXTERNAL_ORDER_DETECTED",
+0327:         "auto_managed_qty": (
+0328:             safe_int(position_copy.get("auto_managed_qty", 0))
+0331:         "external_qty": (
+0332:             safe_int(position_copy.get("external_qty", 0))
+0339:             "EXTERNAL_EXIT"
+0340:             if full_external_exit
+0341:             else "EXTERNAL_PARTIAL_EXIT"
+0343:         pnl, ret = save_live_trade_result(
+0350:             live_daily_realized_pnl += pnl
+0353:                 and live_daily_realized_pnl <= -LIVE_DAILY_MAX_LOSS_WON
+0359:             "event": "EXTERNAL_AUTO_QTY_REALIZED",
+0365:             "requested_qty": requested_qty,
+0366:             "broker_filled_qty": broker_filled_qty,
+0367:             "delta_qty": auto_exit_qty,
+0368:             "unfilled_qty": unfilled_qty,
+0371:             "auto_managed_qty": safe_int(
+0372:                 position_copy.get("auto_managed_qty", 0)
+0374:             "external_qty": safe_int(
+0375:                 position_copy.get("external_qty", 0)
+0383:             f"이번 외부체결 : {delta_qty}주\n"
+0384:             f"개인추가물량 차감 : {external_reduced_qty}주\n"
+0390:     if full_external_exit:
+0398:             # auto_managed_qty=0이므로 추가 전략 SELL은 발생하지 않습니다.
+0402:                     p["status"] = "MANUAL_INTERVENTION_REQUIRED"
+0403:                     p["external_exit_confirmed_pending_order"] = True
+0406:                 "event": "EXTERNAL_EXIT_WAITING_AUTO_ORDER",
+0411:                 "requested_qty": requested_qty,
+0412:                 "broker_filled_qty": broker_filled_qty,
+0413:                 "delta_qty": auto_exit_qty,
+0414:                 "unfilled_qty": unfilled_qty,
+0416:                 "reason": "MANUAL_INTERVENTION_REQUIRED",
+0421:                 reason="EXTERNAL_EXIT_WAITING_AUTO_ORDER",
+0422:                 external_event=True
+0425:             _finalize_external_exit(
+0427:                 source="EXTERNAL_SELL_FILL"
+0433:             reason="EXTERNAL_SELL_FILL",
+0434:             external_event=True
+
+### save_live_trade_result (chars=6072)
+0001: def save_live_trade_result(position, exit_price, result):
+0007:             position.get("auto_managed_qty_before_exit", position.get("initial_qty", 0))
+0019:     precheck_start = position.get("broker_precheck_start_time", "")
+0020:     precheck_end = position.get("broker_precheck_end_time", "")
+0021:     sell_order_time = position.get(
+0022:         "sell_order_time",
+0027:     broker_precheck_sec = position.get("broker_precheck_sec", "")
+0029:         broker_precheck_sec == ""
+0033:         broker_precheck_sec = max(
+0038:     trigger_to_order_sec = ""
+0039:     if isinstance(trigger_time, datetime) and isinstance(sell_order_time, datetime):
+0040:         trigger_to_order_sec = max(
+0042:             (sell_order_time - trigger_time).total_seconds()
+0045:     order_to_fill_sec = ""
+0046:     if isinstance(sell_order_time, datetime) and isinstance(fill_time, datetime):
+0047:         order_to_fill_sec = max(
+0049:             (fill_time - sell_order_time).total_seconds()
+0052:     trigger_to_fill_sec = ""
+0054:         trigger_to_fill_sec = max(
+0084:         "broker_precheck_start_time": _csv_datetime(precheck_start),
+0085:         "broker_precheck_end_time": _csv_datetime(precheck_end),
+0086:         "broker_precheck_sec": broker_precheck_sec,
+0090:         "sell_order_time": _csv_datetime(sell_order_time),
+0091:         "sell_fill_time": _csv_datetime(fill_time),
+0093:         "trigger_to_order_sec": trigger_to_order_sec,
+0094:         "order_to_fill_sec": order_to_fill_sec,
+0095:         "trigger_to_fill_sec": trigger_to_fill_sec,
+0110:         "external_exit_price": position.get("external_exit_price", ""),
+0111:         "external_auto_exit_qty": position.get("external_auto_exit_qty", ""),
+0112:         "external_order_no": position.get("external_order_no", ""),
+0113:         "external_fill_time": _csv_datetime(position.get("external_fill_time", "")),
+0121:         "auto_managed_qty": position.get("auto_managed_qty_before_exit", qty),
+0122:         "external_qty": position.get("external_qty", 0),
+
+### _submit_live_exit_worker (chars=8578)
+0019:             p["broker_precheck_start_time"] = datetime.now()
+0020:             p["broker_precheck_end_time"] = ""
+0021:             p["broker_precheck_sec"] = ""
+0027:             positions = get_broker_positions()
+0028:             pending = get_broker_pending_orders()
+0035:                 p["broker_precheck_end_time"] = precheck_end
+0036:                 precheck_start = p.get("broker_precheck_start_time", "")
+0038:                     p["broker_precheck_sec"] = max(
+0047:                 p["broker_precheck_end_time"] = precheck_end
+0048:                 precheck_start = p.get("broker_precheck_start_time", "")
+0050:                     p["broker_precheck_sec"] = max(
+0073:     external_pending_sell = _find_external_pending_sell(code, pending)
+0074:     if external_pending_sell:
+0078:                 p["status"] = "MANUAL_INTERVENTION_REQUIRED"
+0079:         mark_code_blocked(code, "MANUAL_INTERVENTION_REQUIRED", "broker에 외부 매도 미체결 존재")
+0094:         old_auto = safe_int(p.get("auto_managed_qty", 0))
+0095:         old_external = safe_int(p.get("external_qty", 0))
+0100:         new_auto, new_external = reconcile_managed_quantities(old_auto, old_external, held)
+0101:         quantity_corrected = (new_auto != old_auto) or (new_external != old_external)
+0103:         p["auto_managed_qty"] = new_auto
+0105:         p["external_qty"] = new_external
+0112:             p["status"] = "EXTERNAL_EXIT_CONFIRMED"
+0113:             should_external_close = True
+0115:             should_external_close = False
+0117:     if should_external_close:
+0118:         _finalize_external_exit(code, source="EXIT_PRECHECK_HELD_ZERO")
+0156:         p["auto_managed_qty_before_exit"] = new_auto
+0167:         sell_order_time = datetime.now()
+0171:                 p["sell_order_time"] = sell_order_time
+0173:         response = submit_stock_order(
+0191:                 "requested_qty": qty,
+0193:                 "broker_filled_qty": 0,
+0194:                 "unfilled_qty": qty,
+
+### handle_order_execution (chars=15206)
+0002:     global live_daily_realized_pnl
+0016:     event_fill_qty = safe_int(values.get("911", 0))  # 참고/로그용; 누적에 직접 더하지 않음
+0017:     unfilled_qty = safe_int(values.get("902", 0))
+0039:     if side == "CANCEL" and fill_price <= 0 and "확인" in status_text:
+0040:         _finish_buy_cancel_event(code, ord_no, original_order_no, status_text)
+0060:             if side == "CANCEL" and p and p.get("status") in ["ENTRY_CANCEL_SUBMITTING", "ENTRY_CANCEL_PENDING"]:
+0061:                 p["status"] = "MANUAL_INTERVENTION_REQUIRED"
+0063:                     "reason": "MANUAL_INTERVENTION_REQUIRED",
+0074:             "requested_qty": order.get("requested_qty", ""),
+0075:             "broker_filled_qty": order.get("filled_qty", 0),
+0076:             "unfilled_qty": unfilled_qty,
+0104:     requested_qty = safe_int(order.get("requested_qty", 0))
+0108:         broker_filled_qty, delta_qty = compute_broker_fill_delta(
+0109:             requested_qty, unfilled_qty, prev_filled_qty
+0115:             f"requested={requested_qty}, event911={event_fill_qty}, unfilled={unfilled_qty}, "
+0121:     if delta_qty == 0:
+0125:                 order["broker_filled_qty"] = broker_filled_qty
+0126:                 order["unfilled_qty"] = unfilled_qty
+0127:                 order["status"] = "FILLED" if unfilled_qty == 0 else "PARTIAL"
+0135:             "requested_qty": requested_qty,
+0136:             "broker_filled_qty": broker_filled_qty,
+0137:             "delta_qty": 0,
+0138:             "unfilled_qty": unfilled_qty,
+0145:     fill_key = (ord_no, fill_no, str(broker_filled_qty), str(fill_price))
+0158:         "requested_qty": requested_qty,
+0159:         "broker_filled_qty": broker_filled_qty,
+0160:         "delta_qty": delta_qty,
+0161:         "unfilled_qty": unfilled_qty,
+0173:         fully_filled = (unfilled_qty == 0)
+0177:             order["filled_qty"] = broker_filled_qty
+0178:             order["broker_filled_qty"] = broker_filled_qty
+0179:             order["unfilled_qty"] = unfilled_qty
+0180:             order["filled_amount"] = safe_float(order.get("filled_amount", 0)) + fill_price * delta_qty
+0182:             order["pending_auto_buy_qty"] = max(0, requested_qty - broker_filled_qty)
+0190:                     "auto_managed_qty": 0,
+0191:                     "external_qty": 0,
+0215:             p["auto_managed_qty"] = safe_int(p.get("auto_managed_qty", 0)) + delta_qty
+0216:             p["qty"] = p["auto_managed_qty"]
+0217:             p["initial_qty"] = p["auto_managed_qty"]
+0218:             p["filled_amount"] = safe_float(p.get("filled_amount", 0)) + fill_price * delta_qty
+0219:             p["avg_entry_price"] = p["filled_amount"] / p["auto_managed_qty"]
+0221:             p["pending_auto_buy_qty"] = max(0, requested_qty - broker_filled_qty)
+0240:             if fully_filled and p.get("status") in ["ENTRY_CANCEL_SUBMITTING", "ENTRY_CANCEL_PENDING"]:
+0248:         schedule_broker_sync(code, reason="AUTO_BUY_FILL", external_event=False)
+0263:             order["filled_qty"] = broker_filled_qty
+0264:             order["broker_filled_qty"] = broker_filled_qty
+0265:             order["unfilled_qty"] = unfilled_qty
+0266:             order["filled_amount"] = safe_float(order.get("filled_amount", 0)) + fill_price * delta_qty
+0267:             order["status"] = "FILLED" if unfilled_qty == 0 else "PARTIAL"
+0268:             order["pending_auto_sell_qty"] = max(0, requested_qty - broker_filled_qty)
+0276:                 p.get("auto_managed_qty", p.get("qty", 0))
+0278:             managed_delta_qty = min(auto_before_fill, delta_qty)
+0280:             p["auto_managed_qty"] = max(
+0282:                 auto_before_fill - managed_delta_qty
+0284:             p["qty"] = p["auto_managed_qty"]
+0287:                 requested_qty - broker_filled_qty
+0294:                 + managed_delta_qty
+0298:                 + fill_price * managed_delta_qty
+0301:             if unfilled_qty == 0:
+0315:                 if p["auto_managed_qty"] == 0:
+0325:                         "detail": f"SELL 전량체결 후 자동관리 잔량 {p['auto_managed_qty']}주",
+0331:         schedule_broker_sync(code, reason="AUTO_SELL_FILL", external_event=False)
+0339:                 pnl, ret = save_live_trade_result(
+0349:                     live_daily_realized_pnl += pnl
+0352:                         and live_daily_realized_pnl <= -LIVE_DAILY_MAX_LOSS_WON
+0373:                     "requested_qty": requested_qty,
+0374:                     "broker_filled_qty": broker_filled_qty,
+0375:                     "delta_qty": 0,
+0376:                     "unfilled_qty": unfilled_qty,
+0378:                     "reason": "MANUAL_INTERVENTION_REQUIRED",
+
+### test_v168_live_ledger_and_timing (chars=7457)
+0005:     - external_qty 우선 차감 후 auto 손익반영
+0011:     global live_orders, live_positions, live_external_orders
+0013:     global live_daily_realized_pnl, live_trading_halted, live_system_halt_reason
+0023:         "live_external_orders": live_external_orders,
+0026:         "live_daily_realized_pnl": live_daily_realized_pnl,
+0040:     import tempfile
+0042:     temp_dir = tempfile.mkdtemp(prefix="v168_test_")
+0047:         live_external_orders = {}
+0050:         live_daily_realized_pnl = 0.0
+0068:                 "auto_managed_qty": 100,
+0070:                 "external_qty": 20,
+0083:         # 첫 20주는 external_qty만 제거, 다음 30주만 auto 손익 처리.
+0084:         handle_external_order_event({
+0086:             "900": "50", "902": "30", "911": "20", "910": "10100",
+0089:         assert live_positions["TST001"]["external_qty"] == 0
+0090:         assert live_positions["TST001"]["auto_managed_qty"] == 100
+0091:         assert live_daily_realized_pnl == 0
+0093:         handle_external_order_event({
+0095:             "900": "50", "902": "0", "911": "50", "910": "10100",
+0098:         assert live_external_orders["EXT1"]["filled_qty"] == 50
+0099:         assert live_positions["TST001"]["auto_managed_qty"] == 70
+0100:         assert live_positions["TST001"]["external_qty"] == 0
+0101:         assert round(live_daily_realized_pnl, 0) == 3000
+0104:         handle_external_order_event({
+0106:             "900": "50", "902": "0", "911": "50", "910": "10100",
+0109:         assert live_positions["TST001"]["auto_managed_qty"] == 70
+0110:         assert round(live_daily_realized_pnl, 0) == 3000
+0114:         before_pnl = live_daily_realized_pnl
+0116:         handle_external_order_event({
+0118:             "900": "10", "902": "0", "911": "10", "910": "5000",
+0122:         assert live_daily_realized_pnl == before_pnl
+0126:         handle_external_order_event({
+0128:             "900": "70", "902": "0", "911": "70", "910": "9900",
+0135:         assert round(live_daily_realized_pnl, 0) == -4000
+0140:             "EXTERNAL_PARTIAL_EXIT",
+0141:             "EXTERNAL_EXIT",
+0143:         assert "external_auto_exit_qty" in trades.columns
+0144:         assert trades["external_auto_exit_qty"].sum() == 100
+0146:         # live_state 동시저장: 동일 tmp 충돌 없이 최종 JSON 정상.
+0160:             if name.endswith(".tmp")
+0171:         live_external_orders = backups["live_external_orders"]
+0174:         live_daily_realized_pnl = backups["live_daily_realized_pnl"]
