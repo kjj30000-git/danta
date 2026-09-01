@@ -4,7 +4,7 @@ import ast, json
 from pathlib import Path
 
 FILES = [
-    ("A_GITHUB", Path("code/releases/014_260901_v1.6.8.ipynb")),
+    ("A_GITHUB", Path("code/releases/014_260902_v1.6.8.ipynb")),
     ("B_NEWCHAT", Path("code/candidates/v1.6.8/014_260901_v1.6.8(새채팅).ipynb")),
 ]
 TARGETS = [
