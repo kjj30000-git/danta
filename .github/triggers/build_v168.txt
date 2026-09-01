@@ -1,1 +1,1 @@
-2026-09-01 final rebuild with normalized v1.6.8 header
+2026-09-02 verify build after release filename sync
