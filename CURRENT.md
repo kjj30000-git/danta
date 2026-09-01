@@ -2,7 +2,8 @@
 
 ## Current validated release
 - Version: **v1.6.8**
-- Path: `code/releases/014_260901_v1.6.8.ipynb`
+- Path: `code/releases/014_260902_v1.6.8.ipynb`
+- Execution date: **2026-09-02**
 - Default live mode: `AUTO_TRADE_ENABLED = False`
 - Status: **validated by syntax/static checks and isolated regression helpers**
 
@@ -28,6 +29,7 @@
 
 ## Release convention
 - `code/releases/` contains **final/base `.ipynb` notebooks directly**.
+- Release filename date is the **intended execution date**.
 - Do not create release `.txt` or `.py` copies unless explicitly requested.
 
 ## Latest handoff
