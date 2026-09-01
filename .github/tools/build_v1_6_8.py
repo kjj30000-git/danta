@@ -1348,7 +1348,7 @@ def validate_output(nb: dict) -> list[str]:
     for marker in RESEARCH_MARKERS:
         assert marker in full, marker
     messages.append("PASS: research-system marker regression preserved")
-    assert "\nimport tempfile\n" in body, "top-level tempfile import missing"
+    assert "\nimport tempfile\n" in cell_source(cells[1]), "top-level tempfile import missing"
     assert "LIVE_STATE_FILE_LOCK = threading.Lock()" in full
     assert "tempfile.mkstemp" in full
     assert "os.replace(tmp_file, LIVE_STATE_FILE)" in full
