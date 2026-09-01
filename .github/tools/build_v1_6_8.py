@@ -961,6 +961,12 @@ DECISION_APPEND = r'''
 
 
 def patch_settings_and_globals(body: str) -> str:
+    body = replace_once(
+        body,
+        "# 단타 자동 스크리너 v1.6.7\n",
+        "# 단타 자동 스크리너 v1.6.8\n",
+        "program header version",
+    )
     if "\nimport tempfile\n" not in body:
         body = replace_once(body, "import threading\n", "import threading\nimport tempfile\n", "add tempfile import")
     lock_anchor = "LIVE_CSV_LOCK = threading.Lock()\n"
@@ -1349,6 +1355,7 @@ def validate_output(nb: dict) -> list[str]:
         assert marker in full, marker
     messages.append("PASS: research-system marker regression preserved")
     assert "\nimport tempfile\n" in cell_source(cells[1]), "top-level tempfile import missing"
+    assert "# 단타 자동 스크리너 v1.6.8" in cell_source(cells[1]), "program header version mismatch"
     assert "LIVE_STATE_FILE_LOCK = threading.Lock()" in full
     assert "tempfile.mkstemp" in full
     assert "os.replace(tmp_file, LIVE_STATE_FILE)" in full
