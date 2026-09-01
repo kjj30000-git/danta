@@ -6,7 +6,7 @@ import hashlib
 import json
 from pathlib import Path
 
-A = Path("code/releases/014_260901_v1.6.8.ipynb")
+A = Path("code/releases/014_260902_v1.6.8.ipynb")
 B = Path("code/candidates/v1.6.8/014_260901_v1.6.8(새채팅).ipynb")
 OUT = Path("reports/comparison/2026-09-01_v1.6.8_github_vs_새채팅.txt")
 
