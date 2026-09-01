@@ -1,5 +1,5 @@
 ========================================================================================
-GITHUB_RELEASE: code/releases/014_260901_v1.6.8.ipynb
+GITHUB_RELEASE: code/releases/014_260902_v1.6.8.ipynb
 ========================================================================================
 STATIC_NOTEBOOK: PASS / 4 code cells, live OFF, strategy markers, tempfile import, principle before history
 test_v166_core_logic: PASS / fresh-module / return=None
