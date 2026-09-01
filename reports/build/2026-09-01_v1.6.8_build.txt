@@ -1,11 +1,11 @@
 v1.6.8 BUILD REPORT — 2026-09-01
 ============================================================
-base: /home/runner/work/danta/danta/013_260830_v1.6.7_startmsg_fix.ipynb
+base: /home/runner/work/danta/danta/code/releases/013_260830_v1.6.7_startmsg_fix.ipynb
 base_sha256: 60afbcdd826607a62a23ddf57637d9bafb395a1a3f1e4fe001efb23289c78972
 original_notebook_cells: 3
-output_notebook: /home/runner/work/danta/danta/014_260901_v1.6.8.ipynb
-output_text_copy: /home/runner/work/danta/danta/014_260901_v1.6.8.txt
-output_python: /home/runner/work/danta/danta/stock_scanner_v1_6_8.py
+output_notebook: /home/runner/work/danta/danta/.build/v168/014_260901_v1.6.8.ipynb
+output_text_copy: /home/runner/work/danta/danta/.build/v168/014_260901_v1.6.8.txt
+output_python: /home/runner/work/danta/danta/.build/v168/stock_scanner_v1_6_8.py
 
 PASS: exact 4-code-cell notebook structure; continuity is final cell
 PASS: all four notebook cells compile independently
@@ -15,7 +15,7 @@ PASS: live_state dedicated lock + unique tmp + atomic replace + limited retry
 PASS: external SELL cumulative-delta/manual realized-PnL ledger present
 PASS: exit trigger -> precheck -> order -> fill timing fields present
 PASS: broker sellable/precheck safety path preserved
-PASS: continuity principle + 2026-09-01 decision history appended
+PASS: continuity principle first + isolated broker-precheck test + strengthened v1.6.8 regression
 PASS: concatenated .py source compiles
 
 Runtime note:
