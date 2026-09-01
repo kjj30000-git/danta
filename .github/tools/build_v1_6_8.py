@@ -961,7 +961,7 @@ DECISION_APPEND = r'''
 
 
 def patch_settings_and_globals(body: str) -> str:
-    if "import tempfile" not in body:
+    if "\nimport tempfile\n" not in body:
         body = replace_once(body, "import threading\n", "import threading\nimport tempfile\n", "add tempfile import")
     lock_anchor = "LIVE_CSV_LOCK = threading.Lock()\n"
     require(body, lock_anchor, "existing LIVE_CSV_LOCK")
@@ -1348,6 +1348,7 @@ def validate_output(nb: dict) -> list[str]:
     for marker in RESEARCH_MARKERS:
         assert marker in full, marker
     messages.append("PASS: research-system marker regression preserved")
+    assert "\nimport tempfile\n" in body, "top-level tempfile import missing"
     assert "LIVE_STATE_FILE_LOCK = threading.Lock()" in full
     assert "tempfile.mkstemp" in full
     assert "os.replace(tmp_file, LIVE_STATE_FILE)" in full
