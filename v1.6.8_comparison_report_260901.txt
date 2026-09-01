@@ -1,0 +1,107 @@
+v1.6.8 TWO-VARIANT COMPARISON — 2026-09-01
+============================================================================
+A GitHub-built : 014_260901_v1.6.8.ipynb
+B 새채팅-built : 014_260901_v1.6.8(새채팅).ipynb
+A file SHA256  : 21aee7daa2cc39bec316a765ea75125bd22c996c97507286e89dcc1b8f750564
+B file SHA256  : da0c2b954f6782086e7e621a9ba4ce1c45736b6464f8fd43f983c449be49f566
+Exact file same: False
+
+[1] NOTEBOOK STRUCTURE
+A cells=4 / code_cells=4 / types=['code', 'code', 'code', 'code']
+B cells=4 / code_cells=4 / types=['code', 'code', 'code', 'code']
+cell1: A chars=2,073, B chars=2,075, source_equal=False, A_sha=5ea40a8d9d73, B_sha=8266ff3eda29
+cell2: A chars=318,891, B chars=328,412, source_equal=False, A_sha=e3a57a94a144, B_sha=20162d07a624
+cell3: A chars=2,768, B chars=2,913, source_equal=False, A_sha=17230d7b8d7e, B_sha=66c09312e722
+cell4: A chars=6,812, B chars=8,674, source_equal=False, A_sha=c3231501a417, B_sha=0cf0a97b0dd4
+
+[2] SYNTAX
+A code cell 1: PASS 
+A code cell 2: PASS 
+A code cell 3: PASS 
+A code cell 4: PASS 
+B code cell 1: PASS 
+B code cell 2: PASS 
+B code cell 3: PASS 
+B code cell 4: PASS 
+
+[3] FUNCTION-LEVEL COMPARISON (AST ignores comments/formatting)
+A functions=191, B functions=188, common=186
+Only A (5): _apply_external_auto_realized_pnl, _consume_external_sell_lots, _elapsed_seconds_v168, _track_external_sell_execution, test_v168_manual_sell_ledger_helpers
+Only B (2): _normalize_external_order_state, test_v168_live_ledger_and_timing
+Changed AST (14): _normalize_live_order_state, _normalize_live_position_state, _submit_live_exit_worker, _sync_position_from_broker, check_new_day, handle_external_order_event, handle_order_execution, load_live_state, run_scanner, save_live_state, save_live_trade_result, test_v166_core_logic, test_v166_live_order_safety, validate_live_trading_config
+Same AST (172), of which source/comment/format-only differs (0): -
+
+[4] SAFETY/ORDER-ENGINE FOCUS
+save_live_state: DIFFERENT_AST
+_normalize_live_position_state: DIFFERENT_AST
+_sync_position_from_broker: DIFFERENT_AST
+handle_external_order_event: DIFFERENT_AST
+_submit_live_exit_worker: DIFFERENT_AST
+handle_order_execution: DIFFERENT_AST
+save_live_trade_result: DIFFERENT_AST
+submit_live_exit: SAME_AST
+compute_broker_fill_delta: SAME_AST
+reconcile_managed_quantities: SAME_AST
+can_open_live_trade: SAME_AST
+submit_live_entry: MISSING_BOTH
+run_scanner: DIFFERENT_AST
+test_v168_manual_sell_ledger_helpers: ONLY_A
+
+[5] TOP-LEVEL LITERAL ASSIGNMENT DIFFERENCES
+LIVE_ORDER_COLUMNS: A=['datetime', 'version', 'event', 'side', 'stock_code', 'stock_name', 'order_no', 'original_order_no', 'fill_no', 'requested_qty', 'broker_filled_qty', 'delta_qty', 'unfilled_qty', 'fill_price', 'broker_status', 'paper_trade_id', 'entry_mode', 'pre_entry_type', 'watch_episode_id', 'exchange', 'order_type', 'reason', 'error', 'response', 'broker_held_qty', 'broker_sellable_qty', 'broker_avg_price', 'auto_managed_qty', 'external_qty', 'pending_auto_buy_qty', 'pending_auto_sell_qty', 'signal_time', 'signal_price', 'live_order_time', 'entry_seq', 'broker_precheck_start_time', 'broker_precheck_end_time', 'broker_precheck_sec', 'sell_order_time', 'sell_fill_time', 'trigger_to_order_sec', 'order_to_fill_sec', 'trigger_to_fill_sec', 'external_auto_exit_qty', 'external_exit_price', 'external_order_no', 'external_fill_time'] / B=['datetime', 'version', 'event', 'side', 'stock_code', 'stock_name', 'order_no', 'original_order_no', 'fill_no', 'requested_qty', 'broker_filled_qty', 'delta_qty', 'unfilled_qty', 'fill_price', 'broker_status', 'paper_trade_id', 'entry_mode', 'pre_entry_type', 'watch_episode_id', 'exchange', 'order_type', 'reason', 'error', 'response', 'broker_held_qty', 'broker_sellable_qty', 'broker_avg_price', 'auto_managed_qty', 'external_qty', 'pending_auto_buy_qty', 'pending_auto_sell_qty', 'signal_time', 'signal_price', 'live_order_time', 'entry_seq']
+LIVE_STATE_SAVE_RETRY_COUNT: A=3 / B='<MISSING>'
+LIVE_STATE_SAVE_RETRY_DELAY_SEC: A=0.05 / B='<MISSING>'
+live_external_orders: A='<MISSING>' / B={}
+
+[6] v1.6.8 REQUIREMENT CHECKLIST
+requirement | A GitHub | B 새채팅
+exact_4_cells | PASS | PASS
+all_4_code_cells | PASS | PASS
+auto_trade_default_false | PASS | PASS
+strategy_v168 | PASS | PASS
+first75_live | PASS | PASS
+t200_s150 | PASS | PASS
+watch_score_60 | PASS | PASS
+signal_score_75 | PASS | PASS
+169_grid_guard | PASS | PASS
+watch_episode | PASS | PASS
+entry_path | PASS | PASS
+post_exit | PASS | PASS
+live_filter_shadow | PASS | PASS
+shadow_70_74 | PASS | PASS
+live_state_lock | PASS | PASS
+unique_tmp | PASS | FAIL
+atomic_replace | PASS | PASS
+save_retry | PASS | FAIL
+external_order_progress | PASS | FAIL
+external_fill_lots | PASS | FAIL
+external_track_helper | PASS | FAIL
+external_consume_helper | PASS | FAIL
+external_pnl_helper | PASS | FAIL
+timing_trigger | PASS | PASS
+timing_precheck_start | PASS | PASS
+timing_precheck_end | PASS | PASS
+timing_precheck_sec | PASS | PASS
+timing_sell_order | PASS | PASS
+timing_sell_fill | PASS | PASS
+timing_trigger_to_order | PASS | PASS
+timing_order_to_fill | PASS | PASS
+timing_trigger_to_fill | PASS | PASS
+broker_positions_precheck | PASS | PASS
+broker_pending_precheck | PASS | PASS
+v168_regression_helper | PASS | FAIL
+quick_reference_title | PASS | PASS
+quick_reference_mfe_mae | PASS | PASS
+continuity_final | PASS | PASS
+continuity_principle | PASS | PASS
+continuity_exact_base | PASS | PASS
+continuity_not_manual_fix_base | PASS | PASS
+future_market_research | PASS | FAIL
+
+[7] SUMMARY
+A all checklist PASS: True
+B all checklist PASS: False
+Exact body source same: False
+Function AST changes count: 14
+Core preserved-function sample same: True
+Interpretation rule: checklist PASS means required v1.6.8 features are present; it does NOT by itself prove two implementations are behaviorally identical. DIFFERENT_AST on order/sync/PnL functions requires manual review.
