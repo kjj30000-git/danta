@@ -20,29 +20,32 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Build and validate v1.6.8
+      - name: Build and validate v1.6.8 in temporary directory
         run: |
+          rm -rf .build/v168
+          mkdir -p .build/v168 reports/build code/releases
           python .github/tools/build_v1_6_8.py \
-            code/releases/v1.6.7/013_260830_v1.6.7_startmsg_fix.ipynb \
-            --output-dir code/releases/v1.6.8
-          mkdir -p reports/build
-          mv code/releases/v1.6.8/v1.6.8_build_report_260901.txt \
+            code/releases/013_260830_v1.6.7_startmsg_fix.ipynb \
+            --output-dir .build/v168
+          python -m py_compile .build/v168/stock_scanner_v1_6_8.py
+          cp .build/v168/014_260901_v1.6.8.ipynb \
+            code/releases/014_260901_v1.6.8.ipynb
+          cp .build/v168/v1.6.8_build_report_260901.txt \
             reports/build/2026-09-01_v1.6.8_build.txt
-      - name: Verify requested outputs exist
+      - name: Verify release layout
         run: |
-          test -s code/releases/v1.6.8/014_260901_v1.6.8.ipynb
-          test -s code/releases/v1.6.8/014_260901_v1.6.8.txt
-          test -s code/releases/v1.6.8/stock_scanner_v1_6_8.py
+          test -s code/releases/014_260901_v1.6.8.ipynb
           test -s reports/build/2026-09-01_v1.6.8_build.txt
-          python -m py_compile code/releases/v1.6.8/stock_scanner_v1_6_8.py
-      - name: Commit generated outputs
+          test ! -e code/releases/014_260901_v1.6.8.txt
+          test ! -e code/releases/stock_scanner_v1_6_8.py
+      - name: Commit ipynb release and build report only
         run: |
           git config user.name 'chatgpt-v168-builder'
           git config user.email 'chatgpt-v168-builder@users.noreply.github.com'
-          git add code/releases/v1.6.8 reports/build/2026-09-01_v1.6.8_build.txt
+          git add code/releases/014_260901_v1.6.8.ipynb reports/build/2026-09-01_v1.6.8_build.txt
           if git diff --cached --quiet; then
             echo 'No generated changes to commit.'
           else
-            git commit -m 'Build v1.6.8 from exact startmsg_fix base'
+            git commit -m 'Build v1.6.8 ipynb from exact startmsg_fix base'
             git push
           fi
