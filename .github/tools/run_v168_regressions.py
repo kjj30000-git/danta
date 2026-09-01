@@ -69,7 +69,6 @@ for file_idx, (label, path, tests) in enumerate(FILES, 1):
     lines.append(f"{label}: {path}")
     lines.append("=" * 88)
 
-    # Notebook/static checks are independent of runtime helper state.
     try:
         nb = json.loads(path.read_text(encoding="utf-8-sig"))
         assert len(nb.get("cells", [])) == 4
@@ -81,15 +80,15 @@ for file_idx, (label, path, tests) in enumerate(FILES, 1):
         assert "FIRST_75_PASS" in body
         assert "T200_S150" in body
         assert "PROJECT CONTINUITY PRINCIPLE" in continuity
-        lines.append("STATIC_NOTEBOOK: PASS / 4 code cells, live OFF, strategy markers, continuity marker")
+        principle_at = continuity.find("# PROJECT CONTINUITY PRINCIPLE")
+        first_dated = continuity.find("# 2026-")
+        assert principle_at >= 0 and first_dated >= 0 and principle_at < first_dated
+        lines.append("STATIC_NOTEBOOK: PASS / 4 code cells, live OFF, strategy markers, principle before history")
     except Exception as e:
         overall_ok = False
         lines.append(f"STATIC_NOTEBOOK: FAIL / {type(e).__name__}: {e}")
         lines.append(traceback.format_exc())
 
-    # IMPORTANT: every helper test gets a fresh module. The legacy helpers were
-    # written as isolated tests and may mutate globals such as live_trade_count.
-    # Reusing one module can create false failures unrelated to production code.
     for test_idx, name in enumerate(tests, 1):
         try:
             mod, _ = load_fresh_module(path, f"{file_idx}_{test_idx}")
@@ -108,8 +107,10 @@ for file_idx, (label, path, tests) in enumerate(FILES, 1):
 lines.append("=" * 88)
 lines.append(f"OVERALL: {'PASS' if overall_ok else 'FAIL'}")
 lines.append("NOTE: No broker/API live orders were submitted; regression helpers only.")
+text = "\n".join(lines) + "\n"
 OUT.parent.mkdir(parents=True, exist_ok=True)
-OUT.write_text("\n".join(lines) + "\n", encoding="utf-8")
+OUT.write_text(text, encoding="utf-8")
+print(text)
 
 if not overall_ok:
     raise SystemExit(1)
