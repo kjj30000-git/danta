@@ -19,6 +19,7 @@ TARGETS = [
     "save_live_trade_result",
     "_submit_live_exit_worker",
     "handle_order_execution",
+    "test_v166_live_order_safety",
     "test_v168_manual_sell_ledger_helpers",
     "test_v168_live_ledger_and_timing",
 ]
@@ -43,7 +44,8 @@ def keylines(text):
         "broker_filled_qty","delta_qty","911","external","auto_managed_qty","live_daily_realized_pnl",
         "save_live_trade_result","MANUAL_INTERVENTION_REQUIRED","pending_sell","cancel","broker_precheck",
         "sell_order_time","sell_fill_time","trigger_to_order_sec","order_to_fill_sec","trigger_to_fill_sec",
-        "get_broker_positions","get_broker_pending_orders","submit_stock_order",
+        "get_broker_positions","get_broker_pending_orders","submit_stock_order","live_entered_today",
+        "maybe_open_live_trade","AUTO_TRADE_ENABLED","calls","already","이미 실제진입/주문시도",
     ]
     rows=[]
     for i,line in enumerate(text.splitlines(),1):
