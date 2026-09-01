@@ -1,0 +1,34 @@
+name: Inspect v1.6.8 critical implementations
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/tools/inspect_v168_critical.py'
+      - '.github/workflows/inspect_v168_critical.yml'
+      - '014_260901_v1.6.8.ipynb'
+      - '014_260901_v1.6.8(새채팅).ipynb'
+
+permissions:
+  contents: write
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python .github/tools/inspect_v168_critical.py
+      - name: Commit extract
+        run: |
+          git config user.name 'chatgpt-v168-inspect'
+          git config user.email 'chatgpt-v168-inspect@users.noreply.github.com'
+          git add v1.6.8_critical_implementation_extract_260901.txt
+          if git diff --cached --quiet; then
+            echo 'No extract changes.'
+          else
+            git commit -m 'Inspect critical v1.6.8 implementation differences'
+            git push
+          fi
