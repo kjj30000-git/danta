@@ -1,1 +1,1 @@
-2026-09-01 final release-only v1.6.8 regression
+2026-09-01 final regression after v1.6.8 header normalization
