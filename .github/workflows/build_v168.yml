@@ -28,24 +28,24 @@ jobs:
             code/releases/013_260830_v1.6.7_startmsg_fix.ipynb \
             --output-dir .build/v168
           python -m py_compile .build/v168/stock_scanner_v1_6_8.py
-          cp .build/v168/014_260901_v1.6.8.ipynb \
-            code/releases/014_260901_v1.6.8.ipynb
+          cp .build/v168/014_260902_v1.6.8.ipynb \
+            code/releases/014_260902_v1.6.8.ipynb
           cp .build/v168/v1.6.8_build_report_260901.txt \
             reports/build/2026-09-01_v1.6.8_build.txt
       - name: Verify release layout
         run: |
-          test -s code/releases/014_260901_v1.6.8.ipynb
+          test -s code/releases/014_260902_v1.6.8.ipynb
           test -s reports/build/2026-09-01_v1.6.8_build.txt
-          test ! -e code/releases/014_260901_v1.6.8.txt
+          test ! -e code/releases/014_260902_v1.6.8.txt
           test ! -e code/releases/stock_scanner_v1_6_8.py
       - name: Commit ipynb release and build report only
         run: |
           git config user.name 'chatgpt-v168-builder'
           git config user.email 'chatgpt-v168-builder@users.noreply.github.com'
-          git add code/releases/014_260901_v1.6.8.ipynb reports/build/2026-09-01_v1.6.8_build.txt
+          git add code/releases/014_260902_v1.6.8.ipynb reports/build/2026-09-01_v1.6.8_build.txt
           if git diff --cached --quiet; then
             echo 'No generated changes to commit.'
           else
-            git commit -m 'Build v1.6.8 ipynb from exact startmsg_fix base'
+            git commit -m 'Build 014_260902_v1.6.8 from exact startmsg_fix base'
             git push
           fi
