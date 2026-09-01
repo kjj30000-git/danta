@@ -1,0 +1,25 @@
+v1.6.8 BUILD REPORT — 2026-09-01
+============================================================
+base: /home/runner/work/danta/danta/013_260830_v1.6.7_startmsg_fix.ipynb
+base_sha256: 60afbcdd826607a62a23ddf57637d9bafb395a1a3f1e4fe001efb23289c78972
+original_notebook_cells: 3
+output_notebook: /home/runner/work/danta/danta/014_260901_v1.6.8.ipynb
+output_text_copy: /home/runner/work/danta/danta/014_260901_v1.6.8.txt
+output_python: /home/runner/work/danta/danta/stock_scanner_v1_6_8.py
+
+PASS: exact 4-code-cell notebook structure; continuity is final cell
+PASS: all four notebook cells compile independently
+PASS: live strategy unchanged; AUTO_TRADE default remains False
+PASS: research-system marker regression preserved
+PASS: live_state dedicated lock + unique tmp + atomic replace + limited retry
+PASS: external SELL cumulative-delta/manual realized-PnL ledger present
+PASS: exit trigger -> precheck -> order -> fill timing fields present
+PASS: broker sellable/precheck safety path preserved
+PASS: continuity principle + 2026-09-01 decision history appended
+PASS: concatenated .py source compiles
+
+Runtime note:
+- Broker/API live execution is NOT performed by this builder.
+- The generated notebook includes test_v168_manual_sell_ledger_helpers()
+  in addition to the preserved v1.6.7 order-engine regression tests.
+- AUTO_TRADE_ENABLED remains False in the generated first cell.
