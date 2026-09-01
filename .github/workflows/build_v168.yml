@@ -1,13 +1,10 @@
 name: Build v1.6.8 from exact v1.6.7 base
 
-# trigger revision: 2026-09-01
 on:
   workflow_dispatch:
   push:
     paths:
-      - '.github/tools/build_v1_6_8.py'
-      - '.github/workflows/build_v168.yml'
-      - '013_260830_v1.6.7_startmsg_fix.ipynb'
+      - '.github/triggers/build_v168.txt'
 
 permissions:
   contents: write
@@ -20,29 +17,29 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
       - name: Build and validate v1.6.8
         run: |
-          python .github/tools/build_v1_6_8.py 013_260830_v1.6.7_startmsg_fix.ipynb
-
+          python .github/tools/build_v1_6_8.py \
+            code/releases/v1.6.7/013_260830_v1.6.7_startmsg_fix.ipynb \
+            --output-dir code/releases/v1.6.8
+          mkdir -p reports/build
+          mv code/releases/v1.6.8/v1.6.8_build_report_260901.txt \
+            reports/build/2026-09-01_v1.6.8_build.txt
       - name: Verify requested outputs exist
         run: |
-          test -s 014_260901_v1.6.8.ipynb
-          test -s 014_260901_v1.6.8.txt
-          test -s stock_scanner_v1_6_8.py
-          test -s v1.6.8_build_report_260901.txt
-          python -m py_compile stock_scanner_v1_6_8.py
-
+          test -s code/releases/v1.6.8/014_260901_v1.6.8.ipynb
+          test -s code/releases/v1.6.8/014_260901_v1.6.8.txt
+          test -s code/releases/v1.6.8/stock_scanner_v1_6_8.py
+          test -s reports/build/2026-09-01_v1.6.8_build.txt
+          python -m py_compile code/releases/v1.6.8/stock_scanner_v1_6_8.py
       - name: Commit generated outputs
         run: |
           git config user.name 'chatgpt-v168-builder'
           git config user.email 'chatgpt-v168-builder@users.noreply.github.com'
-          git add 014_260901_v1.6.8.ipynb 014_260901_v1.6.8.txt stock_scanner_v1_6_8.py v1.6.8_build_report_260901.txt
+          git add code/releases/v1.6.8 reports/build/2026-09-01_v1.6.8_build.txt
           if git diff --cached --quiet; then
             echo 'No generated changes to commit.'
           else
