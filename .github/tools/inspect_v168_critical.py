@@ -4,8 +4,8 @@ import ast, json
 from pathlib import Path
 
 FILES = [
-    ("A_GITHUB", Path("014_260901_v1.6.8.ipynb")),
-    ("B_NEWCHAT", Path("014_260901_v1.6.8(새채팅).ipynb")),
+    ("A_GITHUB", Path("code/releases/v1.6.8/014_260901_v1.6.8.ipynb")),
+    ("B_NEWCHAT", Path("code/candidates/v1.6.8/014_260901_v1.6.8(새채팅).ipynb")),
 ]
 TARGETS = [
     "save_live_state",
@@ -69,4 +69,4 @@ for label,path in FILES:
         for line in keylines(text):
             out.append(line)
 
-Path("v1.6.8_critical_implementation_extract_260901.txt").write_text("\n".join(out)+"\n",encoding="utf-8")
+Path("reports/inspection/2026-09-01_v1.6.8_critical_impl.txt").write_text("\n".join(out)+"\n",encoding="utf-8")

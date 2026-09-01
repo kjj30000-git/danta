@@ -6,9 +6,9 @@ import hashlib
 import json
 from pathlib import Path
 
-A = Path("014_260901_v1.6.8.ipynb")
-B = Path("014_260901_v1.6.8(새채팅).ipynb")
-OUT = Path("v1.6.8_comparison_report_260901.txt")
+A = Path("code/releases/v1.6.8/014_260901_v1.6.8.ipynb")
+B = Path("code/candidates/v1.6.8/014_260901_v1.6.8(새채팅).ipynb")
+OUT = Path("reports/comparison/2026-09-01_v1.6.8_github_vs_새채팅.txt")
 
 
 def load_nb(path):

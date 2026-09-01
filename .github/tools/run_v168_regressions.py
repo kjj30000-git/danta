@@ -7,10 +7,10 @@ import traceback
 from pathlib import Path
 
 FILES = [
-    ("A_GITHUB", Path("014_260901_v1.6.8.ipynb"), "test_v168_manual_sell_ledger_helpers"),
-    ("B_NEWCHAT", Path("014_260901_v1.6.8(새채팅).ipynb"), "test_v168_live_ledger_and_timing"),
+    ("A_GITHUB", Path("code/releases/v1.6.8/014_260901_v1.6.8.ipynb"), "test_v168_manual_sell_ledger_helpers"),
+    ("B_NEWCHAT", Path("code/candidates/v1.6.8/014_260901_v1.6.8(새채팅).ipynb"), "test_v168_live_ledger_and_timing"),
 ]
-OUT = Path("v1.6.8_regression_run_report_260901.txt")
+OUT = Path("reports/regression/2026-09-01_v1.6.8_regression.txt")
 
 Path(".env").write_text(
     "KIWOOM_APP_KEY=dummy\n"
