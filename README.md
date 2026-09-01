@@ -5,7 +5,7 @@
 ## 폴더 구조
 
 - `CURRENT.md` — 현재 검증 기준본과 다음 작업
-- `code/releases/` — 버전별 기준/릴리스 코드
+- `code/releases/` — **최종/기준 `.ipynb` 코드를 바로 보관**
 - `code/candidates/` — 비교·독립검증용 후보 코드
 - `handoff/` — 날짜별 인수인계서
 - `reports/build/` — 빌드 검증 보고서
@@ -14,6 +14,20 @@
 - `reports/inspection/` — 핵심 구현 점검 보고서
 - `data/` — 날짜별 장 결과 CSV
 - `.github/` — 자동 빌드/비교/검증 도구와 workflow
+
+## Release 규칙
+
+`code/releases/`에 들어가면 버전 폴더를 다시 거치지 않고 `.ipynb` 파일을 바로 볼 수 있게 관리합니다.
+
+예:
+
+```text
+code/releases/
+├─ 013_260830_v1.6.7_startmsg_fix.ipynb
+└─ 014_260901_v1.6.8.ipynb
+```
+
+기본적으로 release에는 `.ipynb`만 보관합니다. `.txt`와 `.py` 복사본은 별도 요청이 있을 때만 만듭니다.
 
 ## 일일 CSV 업로드 규칙
 
