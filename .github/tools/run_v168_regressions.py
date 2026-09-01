@@ -6,27 +6,12 @@ import sys
 import traceback
 from pathlib import Path
 
-FILES = [
-    (
-        "A_GITHUB",
-        Path("code/releases/014_260901_v1.6.8.ipynb"),
-        [
-            "test_v166_core_logic",
-            "test_v166_live_order_safety",
-            "test_v167_order_engine_safety",
-            "test_v168_manual_sell_ledger_helpers",
-        ],
-    ),
-    (
-        "B_NEWCHAT",
-        Path("code/candidates/v1.6.8/014_260901_v1.6.8(새채팅).ipynb"),
-        [
-            "test_v166_core_logic",
-            "test_v166_live_order_safety",
-            "test_v167_order_engine_safety",
-            "test_v168_live_ledger_and_timing",
-        ],
-    ),
+RELEASE = Path("code/releases/014_260901_v1.6.8.ipynb")
+TESTS = [
+    "test_v166_core_logic",
+    "test_v166_live_order_safety",
+    "test_v167_order_engine_safety",
+    "test_v168_manual_sell_ledger_helpers",
 ]
 OUT = Path("reports/regression/2026-09-01_v1.6.8_regression.txt")
 
@@ -62,50 +47,51 @@ def load_fresh_module(path, suffix):
     return mod, nb
 
 
-lines = []
+lines = ["=" * 88, f"GITHUB_RELEASE: {RELEASE}", "=" * 88]
 overall_ok = True
-for file_idx, (label, path, tests) in enumerate(FILES, 1):
-    lines.append("=" * 88)
-    lines.append(f"{label}: {path}")
-    lines.append("=" * 88)
 
+try:
+    nb = json.loads(RELEASE.read_text(encoding="utf-8-sig"))
+    assert len(nb.get("cells", [])) == 4
+    assert all(c.get("cell_type") == "code" for c in nb["cells"])
+    settings = src(nb["cells"][0])
+    body = src(nb["cells"][1])
+    continuity = src(nb["cells"][3])
+    assert "AUTO_TRADE_ENABLED = False" in settings
+    assert "FIRST_75_PASS" in body
+    assert "T200_S150" in body
+    assert "import tempfile" in body
+    assert "PROJECT CONTINUITY PRINCIPLE" in continuity
+    principle_at = continuity.find("# PROJECT CONTINUITY PRINCIPLE")
+    first_dated = continuity.find("# 2026-")
+    assert principle_at >= 0 and first_dated >= 0 and principle_at < first_dated
+    lines.append(
+        "STATIC_NOTEBOOK: PASS / 4 code cells, live OFF, strategy markers, "
+        "tempfile import, principle before history"
+    )
+except Exception as e:
+    overall_ok = False
+    lines.append(f"STATIC_NOTEBOOK: FAIL / {type(e).__name__}: {e}")
+    lines.append(traceback.format_exc())
+
+for test_idx, name in enumerate(TESTS, 1):
     try:
-        nb = json.loads(path.read_text(encoding="utf-8-sig"))
-        assert len(nb.get("cells", [])) == 4
-        assert all(c.get("cell_type") == "code" for c in nb["cells"])
-        settings = src(nb["cells"][0])
-        body = src(nb["cells"][1])
-        continuity = src(nb["cells"][3])
-        assert "AUTO_TRADE_ENABLED = False" in settings
-        assert "FIRST_75_PASS" in body
-        assert "T200_S150" in body
-        assert "PROJECT CONTINUITY PRINCIPLE" in continuity
-        principle_at = continuity.find("# PROJECT CONTINUITY PRINCIPLE")
-        first_dated = continuity.find("# 2026-")
-        assert principle_at >= 0 and first_dated >= 0 and principle_at < first_dated
-        lines.append("STATIC_NOTEBOOK: PASS / 4 code cells, live OFF, strategy markers, principle before history")
+        mod, _ = load_fresh_module(RELEASE, f"release_{test_idx}")
+        fn = getattr(mod, name, None)
+        if not callable(fn):
+            overall_ok = False
+            lines.append(f"{name}: MISSING")
+            continue
+        result = fn()
+        lines.append(f"{name}: PASS / fresh-module / return={result!r}")
     except Exception as e:
         overall_ok = False
-        lines.append(f"STATIC_NOTEBOOK: FAIL / {type(e).__name__}: {e}")
+        lines.append(f"{name}: FAIL / fresh-module / {type(e).__name__}: {e}")
         lines.append(traceback.format_exc())
-
-    for test_idx, name in enumerate(tests, 1):
-        try:
-            mod, _ = load_fresh_module(path, f"{file_idx}_{test_idx}")
-            fn = getattr(mod, name, None)
-            if not callable(fn):
-                overall_ok = False
-                lines.append(f"{name}: MISSING")
-                continue
-            result = fn()
-            lines.append(f"{name}: PASS / fresh-module / return={result!r}")
-        except Exception as e:
-            overall_ok = False
-            lines.append(f"{name}: FAIL / fresh-module / {type(e).__name__}: {e}")
-            lines.append(traceback.format_exc())
 
 lines.append("=" * 88)
 lines.append(f"OVERALL: {'PASS' if overall_ok else 'FAIL'}")
+lines.append("NOTE: Independent new-chat candidate is comparison-only and does not gate this release.")
 lines.append("NOTE: No broker/API live orders were submitted; regression helpers only.")
 text = "\n".join(lines) + "\n"
 OUT.parent.mkdir(parents=True, exist_ok=True)
