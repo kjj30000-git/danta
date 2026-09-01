@@ -1,1 +1,1 @@
-2026-09-01 fix top-level tempfile import
+2026-09-01 correct tempfile builder validation target
