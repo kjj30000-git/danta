@@ -1,0 +1,37 @@
+name: Run v1.6.8 regressions
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/tools/run_v168_regressions.py'
+      - '.github/workflows/run_v168_regressions.yml'
+      - '014_260901_v1.6.8.ipynb'
+      - '014_260901_v1.6.8(새채팅).ipynb'
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install runtime imports
+        run: pip install requests pandas websockets
+      - name: Run embedded regression helpers only
+        run: python .github/tools/run_v168_regressions.py
+      - name: Commit regression report
+        run: |
+          git config user.name 'chatgpt-v168-regression'
+          git config user.email 'chatgpt-v168-regression@users.noreply.github.com'
+          git add v1.6.8_regression_run_report_260901.txt
+          if git diff --cached --quiet; then
+            echo 'No report changes.'
+          else
+            git commit -m 'Run embedded v1.6.8 regression helpers'
+            git push
+          fi
