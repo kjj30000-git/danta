@@ -1,5 +1,6 @@
 name: Build v1.6.8 from exact v1.6.7 base
 
+# trigger revision: 2026-09-01
 on:
   workflow_dispatch:
   push:
