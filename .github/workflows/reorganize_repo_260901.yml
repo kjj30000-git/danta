@@ -1,0 +1,30 @@
+name: Reorganize repository structure 2026-09-01
+
+on:
+  push:
+    paths:
+      - '.github/workflows/reorganize_repo_260901.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  reorganize:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Reorganize repository
+        run: bash .github/tools/reorganize_repo_260901.sh
+      - name: Commit reorganized structure
+        run: |
+          git config user.name 'chatgpt-repo-organizer'
+          git config user.email 'chatgpt-repo-organizer@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No structure changes to commit.'
+          else
+            git commit -m 'Organize code reports handoff and data structure'
+            git push
+          fi
