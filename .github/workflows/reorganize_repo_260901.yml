@@ -1,4 +1,4 @@
-name: Finalize repository helper paths 2026-09-01
+name: Update helper paths for flat releases 2026-09-01
 
 on:
   push:
@@ -25,6 +25,6 @@ jobs:
           if git diff --cached --quiet; then
             echo 'No helper changes.'
           else
-            git commit -m 'Update validation helpers for organized paths'
+            git commit -m 'Update validation helpers for flat release paths'
             git push
           fi
