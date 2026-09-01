@@ -1,0 +1,36 @@
+name: Patch final v1.6.8 builder
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/triggers/patch_v168_final.txt'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Patch reproducible v1.6.8 builder
+        run: python .github/tools/patch_v168_final.py
+      - name: Compile builder
+        run: python -m py_compile .github/tools/build_v1_6_8.py
+      - name: Commit builder supplementation
+        run: |
+          git config user.name 'chatgpt-v168-final'
+          git config user.email 'chatgpt-v168-final@users.noreply.github.com'
+          git add .github/tools/build_v1_6_8.py
+          if git diff --cached --quiet; then
+            echo 'No builder changes.'
+          else
+            git commit -m 'Supplement v1.6.8 safety tests and continuity layout'
+            git push
+          fi
