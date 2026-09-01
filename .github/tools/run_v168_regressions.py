@@ -6,7 +6,7 @@ import sys
 import traceback
 from pathlib import Path
 
-RELEASE = Path("code/releases/014_260901_v1.6.8.ipynb")
+RELEASE = Path("code/releases/014_260902_v1.6.8.ipynb")
 TESTS = [
     "test_v166_core_logic",
     "test_v166_live_order_safety",
