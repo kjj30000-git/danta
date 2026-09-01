@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+import importlib.util
 import json
-import os
+import sys
 import traceback
 from pathlib import Path
 
@@ -11,8 +12,6 @@ FILES = [
 ]
 OUT = Path("v1.6.8_regression_run_report_260901.txt")
 
-# Dummy env only satisfies module-level config validation prerequisites.
-# No scanner/main function is executed and no live API call is intentionally made.
 Path(".env").write_text(
     "KIWOOM_APP_KEY=dummy\n"
     "KIWOOM_SECRET_KEY=dummy\n"
@@ -28,18 +27,22 @@ def src(cell):
     return "".join(s) if isinstance(s,list) else str(s)
 
 lines=[]
-for label,path,v168_test in FILES:
+for idx,(label,path,v168_test) in enumerate(FILES,1):
     lines.append("="*80)
     lines.append(f"{label}: {path}")
     lines.append("="*80)
     try:
         nb=json.loads(path.read_text(encoding="utf-8-sig"))
-        ns={"__name__":"v168_regression_module","__file__":str(path.resolve())}
-        exec(compile(src(nb["cells"][0]), f"{path}:cell1", "exec"),ns,ns)
-        exec(compile(src(nb["cells"][1]), f"{path}:cell2", "exec"),ns,ns)
+        module_path=Path(f"_tmp_v168_{idx}.py")
+        module_path.write_text(src(nb["cells"][0])+"\n"+src(nb["cells"][1]),encoding="utf-8")
+        mod_name=f"v168_regression_module_{idx}"
+        spec=importlib.util.spec_from_file_location(mod_name,module_path)
+        mod=importlib.util.module_from_spec(spec)
+        sys.modules[mod_name]=mod
+        spec.loader.exec_module(mod)
         tests=["test_v166_core_logic","test_v166_live_order_safety",v168_test]
         for name in tests:
-            fn=ns.get(name)
+            fn=getattr(mod,name,None)
             if not callable(fn):
                 lines.append(f"{name}: MISSING")
                 continue
