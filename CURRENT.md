@@ -33,7 +33,15 @@
 - Do not create release `.txt` or `.py` copies unless explicitly requested.
 
 ## Latest handoff
-- `handoff/2026-09-01/v1.6.7_to_v1.6.8_인수인계서_최종.md`
+- `handoff/2026-09-02/v1.6.8_to_v1.6.9_인수인계서_최종.md`
+
+## Next planned v1.6.9 changes
+- Live amount per stock: **3,000,000 KRW**
+- Total live budget safety cap: **18,000,000 KRW**
+- Daily max loss: **300,000 KRW**
+- Keep FIRST_75_PASS / 09:05~09:30 / T200_S150 / max 5 stocks / same stock once per day
+- Add BUY latency/slippage instrumentation
+- Add research-only `WIDE_HIGH_GAP_SHADOW` and `PRE_FAIL_PULLBACK_SHADOW`
 
 ## Data convention
 Daily scanner/live CSV files go under:
