@@ -1,0 +1,138 @@
+{
+  "trade_date": "2026-09-01",
+  "live_orders": {
+    "0158187": {
+      "order_no": "0158187",
+      "side": "BUY",
+      "stock_code": "090460",
+      "stock_name": "비에이치",
+      "requested_qty": 48,
+      "filled_qty": 48,
+      "broker_filled_qty": 48,
+      "unfilled_qty": 0,
+      "filled_amount": 979200.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 20375.0,
+      "planned_amount": 987780.0,
+      "signal_price": 20450.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-01T09:25:00.013918"
+      },
+      "signal_time_str": "2026-09-01 09:25:00.013",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-01T09:25:04.408998"
+      },
+      "score": 76,
+      "paper_trade_id": "20260901_090460_PRE_HISTORY_E003_092500135411",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260901_090460_E003",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "broker_status": "체결"
+    },
+    "0167544": {
+      "order_no": "0167544",
+      "side": "SELL",
+      "stock_code": "090460",
+      "stock_name": "비에이치",
+      "requested_qty": 48,
+      "filled_qty": 48,
+      "broker_filled_qty": 48,
+      "unfilled_qty": 0,
+      "filled_amount": 964800.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260901_090460_PRE_HISTORY_E003_092500135411",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260901_090460_E003",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {},
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "090460"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0158187",
+          "25949",
+          "48",
+          "20400.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0167544",
+          "98792",
+          "48",
+          "20100.0"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 1,
+  "live_daily_realized_pnl": -14400.0,
+  "live_trading_halted": false,
+  "live_system_halt_reason": "",
+  "live_recovery_mode": false,
+  "live_blocked_codes": {},
+  "live_execution_issue_codes": {
+    "__type__": "set",
+    "value": []
+  },
+  "broker_balances": {
+    "080220": {
+      "stock_code": "080220",
+      "stock_name": "제주반도체",
+      "held_qty": 1,
+      "sellable_qty": 1,
+      "avg_price": 89493.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-01T19:59:36.816634"
+      },
+      "qty": 1,
+      "tradable_qty": 1
+    },
+    "445680": {
+      "stock_code": "445680",
+      "stock_name": "큐리옥스바이오시스템즈",
+      "held_qty": 52,
+      "sellable_qty": 52,
+      "avg_price": 59874.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-01T19:59:36.816634"
+      },
+      "qty": 52,
+      "tradable_qty": 52
+    }
+  },
+  "broker_startup_holdings": {
+    "__type__": "set",
+    "value": [
+      "445680",
+      "080220"
+    ]
+  }
+}

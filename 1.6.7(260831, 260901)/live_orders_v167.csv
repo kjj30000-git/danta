@@ -1,0 +1,18 @@
+﻿datetime,version,event,side,stock_code,stock_name,order_no,original_order_no,fill_no,requested_qty,broker_filled_qty,delta_qty,unfilled_qty,fill_price,broker_status,paper_trade_id,entry_mode,pre_entry_type,watch_episode_id,exchange,order_type,reason,error,response,broker_held_qty,broker_sellable_qty,broker_avg_price,auto_managed_qty,external_qty,pending_auto_buy_qty,pending_auto_sell_qty,signal_time,signal_price,live_order_time,entry_seq
+2026-08-31 09:08:46.645,v1.6.7,ORDER_ACCEPTED,BUY,001210,금호전기,0115815,,,83,,,,,,,,,,SOR,3,,,"{'ord_no': '0115815', 'dmst_stex_tp': 'SOR', 'return_code': 0, 'return_msg': 'SOR 매수주문이 완료되었습니다.'}",,,,,,,,,,,
+2026-08-31 09:08:46.655,v1.6.7,LIVE_ENTRY_LINK,BUY,001210,금호전기,0115815,,,83,,,,,,20260831_001210_PRE_HISTORY_E001_090840402604,PRE_HISTORY,FIRST_75_PASS,20260831_001210_E001,,,,,,,,,,,,,2026-08-31 09:08:40.331,11900.0,2026-08-31 09:08:44.960,1
+2026-08-31 09:08:46.686,v1.6.7,FILL,BUY,001210,금호전기,0115815,,55958,83,83,83,0,11910.0,체결,20260831_001210_PRE_HISTORY_E001_090840402604,PRE_HISTORY,FIRST_75_PASS,20260831_001210_E001,,,,,,,,,,,,,,,,1
+2026-08-31 09:09:05.254,v1.6.7,ORDER_ACCEPTED,SELL,001210,금호전기,0117206,,,83,,,,,,,,,,SOR,3,,,"{'ord_no': '0117206', 'dmst_stex_tp': 'SOR', 'return_code': 0, 'return_msg': 'SOR 매도주문이 완료되었습니다.'}",,,,,,,,,,,
+2026-08-31 09:11:01.178,v1.6.7,FILL,SELL,001210,금호전기,0117206,,58421,83,83,83,0,12180.0,체결,20260831_001210_PRE_HISTORY_E001_090840402604,PRE_HISTORY,FIRST_75_PASS,20260831_001210_E001,,,,,,,,,,,,,,,,1
+2026-08-31 09:24:18.983,v1.6.7,ORDER_ACCEPTED,BUY,096770,SK이노베이션,0165945,,,8,,,,,,,,,,SOR,3,,,"{'ord_no': '0165945', 'dmst_stex_tp': 'SOR', 'return_code': 0, 'return_msg': 'SOR 매수주문이 완료되었습니다.'}",,,,,,,,,,,
+2026-08-31 09:24:18.989,v1.6.7,LIVE_ENTRY_LINK,BUY,096770,SK이노베이션,0165945,,,8,,,,,,20260831_096770_PRE_HISTORY_E002_092416306391,PRE_HISTORY,FIRST_75_PASS,20260831_096770_E002,,,,,,,,,,,,,2026-08-31 09:24:16.282,123400.0,2026-08-31 09:24:18.499,2
+2026-08-31 09:24:19.071,v1.6.7,FILL,BUY,096770,SK이노베이션,0165945,,38302,8,8,8,0,123600.0,체결,20260831_096770_PRE_HISTORY_E002_092416306391,PRE_HISTORY,FIRST_75_PASS,20260831_096770_E002,,,,,,,,,,,,,,,,2
+2026-08-31 09:52:20.129,v1.6.7,EXTERNAL_ORDER_DETECTED,SELL,096770,SK이노베이션,0228478,,,,,,,0.0,접수,,,,,,,EXTERNAL_ORDER_DETECTED,,,,,,,,,,,,,
+2026-08-31 09:52:21.777,v1.6.7,EXTERNAL_ORDER_DETECTED,SELL,096770,SK이노베이션,0228478,,,,,,,123800.0,체결,,,,,,,EXTERNAL_ORDER_DETECTED,,,,,,,,,,,,,
+2026-08-31 09:52:24.013,v1.6.7,BROKER_POSITION_RECONCILED,,096770,SK이노베이션,,,,,,,,,,,,,,,,EXTERNAL_ORDER,,,0,0,0,0,0,,,,,,
+2026-08-31 09:52:24.014,v1.6.7,EXTERNAL_EXIT_CONFIRMED,SELL,096770,SK이노베이션,,,,,,,,,,,,,,,,EXTERNAL_ORDER,,,0,,,0,0,,,,,,
+2026-09-01 09:25:06.074,v1.6.7,ORDER_ACCEPTED,BUY,090460,비에이치,0158187,,,48,,,,,,,,,,SOR,3,,,"{'ord_no': '0158187', 'dmst_stex_tp': 'SOR', 'return_code': 0, 'return_msg': 'SOR 매수주문이 완료되었습니다.'}",,,,,,,,,,,
+2026-09-01 09:25:06.093,v1.6.7,LIVE_ENTRY_LINK,BUY,090460,비에이치,0158187,,,48,,,,,,20260901_090460_PRE_HISTORY_E003_092500135411,PRE_HISTORY,FIRST_75_PASS,20260901_090460_E003,,,,,,,,,,,,,2026-09-01 09:25:00.013,20450.0,2026-09-01 09:25:04.408,1
+2026-09-01 09:25:06.156,v1.6.7,FILL,BUY,090460,비에이치,0158187,,25949,48,48,48,0,20400.0,체결,20260901_090460_PRE_HISTORY_E003_092500135411,PRE_HISTORY,FIRST_75_PASS,20260901_090460_E003,,,,,,,,,,,,,,,,1
+2026-09-01 09:28:34.735,v1.6.7,ORDER_ACCEPTED,SELL,090460,비에이치,0167544,,,48,,,,,,,,,,SOR,3,,,"{'ord_no': '0167544', 'dmst_stex_tp': 'SOR', 'return_code': 0, 'return_msg': 'SOR 매도주문이 완료되었습니다.'}",,,,,,,,,,,
+2026-09-01 09:28:34.765,v1.6.7,FILL,SELL,090460,비에이치,0167544,,98792,48,48,48,0,20100.0,체결,20260901_090460_PRE_HISTORY_E003_092500135411,PRE_HISTORY,FIRST_75_PASS,20260901_090460_E003,,,,,,,,,,,,,,,,1
