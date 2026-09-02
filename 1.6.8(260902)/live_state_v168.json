@@ -1,0 +1,241 @@
+{
+  "trade_date": "2026-09-02",
+  "live_orders": {
+    "0106930": {
+      "order_no": "0106930",
+      "side": "BUY",
+      "stock_code": "024060",
+      "stock_name": "흥구석유",
+      "requested_qty": 82,
+      "filled_qty": 82,
+      "broker_filled_qty": 82,
+      "unfilled_qty": 0,
+      "filled_amount": 979080.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 11960.0,
+      "planned_amount": 990527.2000000001,
+      "signal_price": 11990.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:05:36.999622"
+      },
+      "signal_time_str": "2026-09-02 09:05:36.999",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:05:41.818579"
+      },
+      "score": 77,
+      "paper_trade_id": "20260902_024060_PRE_HISTORY_E001_090537121658",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260902_024060_E001",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "broker_status": "체결"
+    },
+    "0138907": {
+      "order_no": "0138907",
+      "side": "SELL",
+      "stock_code": "024060",
+      "stock_name": "흥구석유",
+      "requested_qty": 82,
+      "filled_qty": 82,
+      "broker_filled_qty": 82,
+      "unfilled_qty": 0,
+      "filled_amount": 963500.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260902_024060_PRE_HISTORY_E001_090537121658",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260902_024060_E001",
+      "entry_seq": 1,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:13:58.473051"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:14:01.261247"
+      },
+      "broker_precheck_sec": 2.788196,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:14:02.585490"
+      },
+      "trigger_to_order_sec": 4.149467,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "broker_status": "체결"
+    },
+    "0147621": {
+      "order_no": "0147621",
+      "side": "BUY",
+      "stock_code": "249420",
+      "stock_name": "일동제약",
+      "requested_qty": 57,
+      "filled_qty": 57,
+      "broker_filled_qty": 57,
+      "unfilled_qty": 0,
+      "filled_amount": 985530.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 17290.0,
+      "planned_amount": 995385.3,
+      "signal_price": 17280.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:16:40.769876"
+      },
+      "signal_time_str": "2026-09-02 09:16:40.769",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:16:43.127771"
+      },
+      "score": 76,
+      "paper_trade_id": "20260902_249420_PRE_HISTORY_E006_091640811124",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260902_249420_E006",
+      "entry_seq": 2,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "broker_status": "체결"
+    },
+    "0150647": {
+      "order_no": "0150647",
+      "side": "SELL",
+      "stock_code": "249420",
+      "stock_name": "일동제약",
+      "requested_qty": 57,
+      "filled_qty": 57,
+      "broker_filled_qty": 57,
+      "unfilled_qty": 0,
+      "filled_amount": 1008330.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "TAKE_PROFIT",
+      "paper_trade_id": "20260902_249420_PRE_HISTORY_E006_091640811124",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260902_249420_E006",
+      "entry_seq": 2,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:17:35.251941"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:17:39.260293"
+      },
+      "broker_precheck_sec": 4.008352,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-02T09:17:40.455526"
+      },
+      "trigger_to_order_sec": 5.237499,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {},
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "024060",
+      "249420"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0147621",
+          "115467",
+          "57",
+          "17290.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0106930",
+          "28520",
+          "82",
+          "11940.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0150647",
+          "17776",
+          "57",
+          "17690.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0138907",
+          "51562",
+          "82",
+          "11750.0"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 2,
+  "live_daily_realized_pnl": 7220.0,
+  "live_trading_halted": false,
+  "live_system_halt_reason": "",
+  "live_recovery_mode": false,
+  "live_blocked_codes": {},
+  "live_execution_issue_codes": {
+    "__type__": "set",
+    "value": []
+  },
+  "broker_balances": {
+    "080220": {
+      "stock_code": "080220",
+      "stock_name": "제주반도체",
+      "held_qty": 1,
+      "sellable_qty": 1,
+      "avg_price": 89493.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-02T19:59:48.260472"
+      },
+      "qty": 1,
+      "tradable_qty": 1
+    },
+    "445680": {
+      "stock_code": "445680",
+      "stock_name": "큐리옥스바이오시스템즈",
+      "held_qty": 52,
+      "sellable_qty": 52,
+      "avg_price": 59874.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-02T19:59:48.260472"
+      },
+      "qty": 52,
+      "tradable_qty": 52
+    }
+  },
+  "broker_startup_holdings": {
+    "__type__": "set",
+    "value": [
+      "080220",
+      "445680"
+    ]
+  }
+}
