@@ -1,7 +1,20 @@
-# Daily CSV Data
+# Execution Data
 
-장 종료 후 CSV를 `data/YYYY-MM-DD/vX.Y.Z/` 아래에 업로드합니다.
+장 종료 후 생성된 CSV와 상태 JSON은 `data/X.Y.Z(YYMMDD[, YYMMDD...])/` 아래에 업로드합니다.
 
-예: `data/2026-09-02/v1.6.8/`
+예:
 
-가능하면 해당 날짜에 생성된 scanner / paper / live CSV를 한 폴더에 함께 올립니다.
+```text
+data/
+├─ 1.6.7(260831, 260901)/
+└─ 1.6.8(260902)/
+```
+
+- 버전은 `X.Y.Z` 형식으로 적습니다.
+- 날짜는 `YYMMDD` 형식으로 적습니다.
+- 같은 버전으로 여러 날짜를 실행했다면 날짜를 쉼표로 구분합니다.
+- scanner / paper / live CSV와 `live_state` JSON은 같은 버전·날짜 폴더에 함께 둡니다.
+- 생성되지 않은 파일 종류는 억지로 만들 필요가 없습니다.
+- 실행 결과 폴더는 저장소 루트가 아니라 항상 `data/` 아래에 둡니다.
+
+기존 `data/YYYY-MM-DD/vX.Y.Z/` 중첩 형식은 더 이상 사용하지 않습니다.
