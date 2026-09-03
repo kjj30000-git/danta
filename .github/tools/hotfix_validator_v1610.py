@@ -18,5 +18,10 @@ if s.count(anchor) != 1:
     raise SystemExit(f'entry-gate validator anchor mismatch: {s.count(anchor)}')
 s = s.replace(anchor, insert, 1)
 
+old_lock = '        "LIVE_STATE_SAVE_LOCK",\n'
+if s.count(old_lock) != 1:
+    raise SystemExit(f'live-state lock marker mismatch: {s.count(old_lock)}')
+s = s.replace(old_lock, '        "os.replace",\n', 1)
+
 p.write_text(s, encoding='utf-8')
 print('VALIDATOR_ACTIVE_ENTRY_GATE_HOTFIX_OK')
