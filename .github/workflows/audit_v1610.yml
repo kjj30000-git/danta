@@ -1,0 +1,24 @@
+name: Audit v1.6.10 integrity
+
+on:
+  push:
+    branches:
+      - chatgpt/v1610-audit
+    paths:
+      - '.github/triggers/audit_v1610.txt'
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: chatgpt/v1610-audit
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Run integrity audit
+        run: python .github/tools/audit_v1610_integrity.py
