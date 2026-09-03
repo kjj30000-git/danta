@@ -3,6 +3,7 @@ from __future__ import annotations
 import ast
 import builtins
 import json
+import symtable
 from pathlib import Path
 
 BASE = Path('code/releases/015_260903_v1.6.9.ipynb')
@@ -82,8 +83,9 @@ for n in missing_from_base:
 class ImmediateLoadVisitor(ast.NodeVisitor):
     def __init__(self):
         self.loads = set()
+        self.comp_locals = [set()]
     def visit_Name(self, node):
-        if isinstance(node.ctx, ast.Load):
+        if isinstance(node.ctx, ast.Load) and node.id not in self.comp_locals[-1]:
             self.loads.add(node.id)
     def visit_FunctionDef(self, node):
         for d in node.decorator_list:
@@ -108,6 +110,26 @@ class ImmediateLoadVisitor(ast.NodeVisitor):
             self.visit(d)
     def visit_Lambda(self, node):
         pass
+    def _visit_comp(self, node, value_nodes):
+        local = set(self.comp_locals[-1])
+        for gen in node.generators:
+            self.visit(gen.iter)
+            local |= target_names(gen.target)
+            self.comp_locals.append(local)
+            for cond in gen.ifs:
+                self.visit(cond)
+            self.comp_locals.pop()
+        self.comp_locals.append(local)
+        for v in value_nodes:
+            self.visit(v)
+        self.comp_locals.pop()
+    def visit_DictComp(self, node):
+        self._visit_comp(node, [node.key, node.value])
+    def visit_ListComp(self, node):
+        self._visit_comp(node, [node.elt])
+    visit_SetComp = visit_ListComp
+    def visit_GeneratorExp(self, node):
+        self._visit_comp(node, [node.elt])
 
 predefined = set(dir(builtins)) | {'__name__', '__file__'} | settings_defs
 sequential = set(predefined)
@@ -124,51 +146,22 @@ for line, typ, names in use_before_def:
     print('TOP_LEVEL_USE_BEFORE_DEF', line, typ, ','.join(names))
 
 all_available = cur_defs | settings_defs | set(dir(builtins)) | {'__name__', '__file__'}
-class FunctionGlobalVisitor(ast.NodeVisitor):
-    def __init__(self):
-        self.issues=[]
-    def visit_FunctionDef(self,node):
-        params=set(a.arg for a in node.args.args+node.args.kwonlyargs)
-        if node.args.vararg: params.add(node.args.vararg.arg)
-        if node.args.kwarg: params.add(node.args.kwarg.arg)
-        assigned=set(); imported=set(); globals_decl=set(); nonlocals=set()
-        class LocalCollector(ast.NodeVisitor):
-            def visit_Name(self,s,n):
-                if isinstance(n.ctx,(ast.Store,ast.Del)): assigned.add(n.id)
-            def visit_Import(self,s,n):
-                for a in n.names: imported.add(a.asname or a.name.split('.')[0])
-            def visit_ImportFrom(self,s,n):
-                for a in n.names: imported.add(a.asname or a.name)
-            def visit_Global(self,s,n): globals_decl.update(n.names)
-            def visit_Nonlocal(self,s,n): nonlocals.update(n.names)
-            def visit_FunctionDef(self,s,n): assigned.add(n.name)
-            visit_AsyncFunctionDef=visit_FunctionDef
-            def visit_ClassDef(self,s,n): assigned.add(n.name)
-            def visit_Lambda(self,s,n): pass
-        lc=LocalCollector()
-        for s in node.body: lc.visit(s)
-        local=params|assigned|imported
-        loads=set()
-        class LoadCollector(ast.NodeVisitor):
-            def visit_Name(self,s,n):
-                if isinstance(n.ctx,ast.Load): loads.add(n.id)
-            def visit_FunctionDef(self,s,n): pass
-            visit_AsyncFunctionDef=visit_FunctionDef
-            def visit_ClassDef(self,s,n): pass
-            def visit_Lambda(self,s,n): pass
-        lcv=LoadCollector()
-        for s in node.body: lcv.visit(s)
-        unresolved=sorted(x for x in loads if x not in nonlocals and (x not in local or x in globals_decl) and x not in all_available)
-        if unresolved:
-            self.issues.append((node.lineno,node.name,unresolved))
-        for s in node.body:
-            if isinstance(s,(ast.FunctionDef,ast.AsyncFunctionDef)):
-                self.visit(s)
-    visit_AsyncFunctionDef=visit_FunctionDef
+root_st = symtable.symtable(cur_program, 'v1610-program', 'exec')
+function_global_issues = []
 
-fg=FunctionGlobalVisitor(); fg.visit(cur_tree)
-print('FUNCTION_UNRESOLVED_GLOBAL_COUNT', len(fg.issues))
-for line,name,names in fg.issues:
+def walk_table(tab, prefix=''):
+    for child in tab.get_children():
+        qname = f'{prefix}.{child.get_name()}' if prefix else child.get_name()
+        missing = []
+        for sym in child.get_symbols():
+            if sym.is_referenced() and sym.is_global() and sym.get_name() not in all_available:
+                missing.append(sym.get_name())
+        if missing:
+            function_global_issues.append((child.get_lineno(), qname, sorted(set(missing))))
+        walk_table(child, qname)
+walk_table(root_st)
+print('FUNCTION_UNRESOLVED_GLOBAL_COUNT', len(function_global_issues))
+for line,name,names in function_global_issues:
     print('FUNCTION_UNRESOLVED_GLOBAL', line, name, ','.join(names))
 
 main_marker='if __name__ == "__main__":\n    run_scanner()'
@@ -185,6 +178,5 @@ for marker in [
 ]:
     print('MARKER', marker, marker in cur_program)
 
-# Strong failures: any parent module definition lost, or any top-level use-before-def.
-if missing_from_base or use_before_def:
+if missing_from_base or use_before_def or function_global_issues:
     raise SystemExit(2)
