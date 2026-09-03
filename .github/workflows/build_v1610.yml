@@ -1,0 +1,81 @@
+name: Build and validate v1.6.10
+
+on:
+  push:
+    branches:
+      - 'chatgpt/v1.6.10-build'
+    paths:
+      - '.github/workflows/build_v1610.yml'
+      - '.github/tools/build_v1_6_10.py'
+      - '.github/triggers/build_v1610.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout build branch
+        uses: actions/checkout@v4
+        with:
+          ref: chatgpt/v1.6.10-build
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Build exact v1.6.9 parent into v1.6.10
+        run: |
+          python .github/tools/build_v1_6_10.py \
+            code/releases/015_260903_v1.6.9.ipynb \
+            code/releases/016_260904_v1.6.10.ipynb
+
+      - name: Validate notebook structure and compile every code cell
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('code/releases/016_260904_v1.6.10.ipynb')
+          nb=json.loads(p.read_text(encoding='utf-8'))
+          assert len(nb['cells']) == 4
+          assert [c.get('id') for c in nb['cells']] == ['v1610-settings','v1610-program','v1610-quick-reference','v1610-continuity']
+          for i,c in enumerate(nb['cells']):
+              if c.get('cell_type') == 'code':
+                  compile(''.join(c.get('source',[])), f'cell-{i+1}', 'exec')
+              assert c.get('execution_count') is None
+              assert c.get('outputs') == []
+          settings=''.join(nb['cells'][0]['source'])
+          program=''.join(nb['cells'][1]['source'])
+          for token in [
+              'AUTO_TRADE_ENABLED = False',
+              'LIVE_PROFIT_PROTECT_ENABLED = True',
+              'LIVE_TRADE_AMOUNT_WON = 1_000_000',
+              'LIVE_MAX_STOCKS = 5',
+              'LIVE_TOTAL_BUDGET_WON = 6_000_000',
+              'STRATEGY_VERSION = "v1.6.10"',
+              'LIVE_STRATEGY = "T250_S150"',
+              'PROFIT_PROTECT', 'NOON_RECOVERY', 'STARTUP_CONNECTIVITY_WAIT',
+              'compute_broker_fill_delta', 'request_entry_cancel_for_exit',
+              'WIDE_HIGH_GAP_SHADOW_ENABLED', 'PRE_FAIL_PULLBACK_SHADOW_ENABLED',
+              'policy_followup_state_v1610.json',
+          ]:
+              assert token in settings+program, token
+          assert 'scanner_signals_v1610.csv' in program
+          assert 'live_state_v1610.json' in program
+          print('STATIC_VALIDATION_OK')
+          PY
+
+      - name: Commit validated release notebook
+        run: |
+          git config user.name 'chatgpt-v1610-builder'
+          git config user.email 'chatgpt-v1610-builder@users.noreply.github.com'
+          git add code/releases/016_260904_v1.6.10.ipynb
+          if git diff --cached --quiet; then
+            echo 'No generated release changes.'
+          else
+            git commit -m 'Build validated 016_260904_v1.6.10 from exact v1.6.9 parent'
+            git push origin chatgpt/v1.6.10-build
+          fi
