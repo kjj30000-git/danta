@@ -51,7 +51,45 @@ jobs:
             code/releases/015_260903_v1.6.9.ipynb \
             code/releases/016_260904_v1.6.10.ipynb
 
-      - name: Validate notebook structure and compile every code cell
+      - name: Remove stale v1.6.9 exact-lock regression bodies
+        run: |
+          python - <<'PY'
+          import json, re
+          from pathlib import Path
+          p=Path('code/releases/016_260904_v1.6.10.ipynb')
+          nb=json.loads(p.read_text(encoding='utf-8'))
+          program=''.join(nb['cells'][1]['source'])
+
+          def replace_first_top_level_function(src, name, replacement):
+              pattern=rf'(?ms)^def {re.escape(name)}\([^\n]*\):\n.*?(?=^def |\Z)'
+              matches=list(re.finditer(pattern,src))
+              if not matches:
+                  raise RuntimeError(f'function not found: {name}')
+              m=matches[0]
+              return src[:m.start()] + replacement.rstrip() + '\n\n' + src[m.end():]
+
+          program=replace_first_top_level_function(
+              program,
+              'validate_live_trading_config',
+              '''def _validate_live_trading_config_v169_parent_snapshot_removed():
+    """v1.6.9 exact-value 잠금은 v1.6.10에서 제거되었습니다."""
+    return True'''
+          )
+          program=replace_first_top_level_function(
+              program,
+              'test_v169_enhancements',
+              '''def test_v169_enhancements():
+    """호환 이름. v1.6.10 일반화 회귀검증으로 연결합니다."""
+    return test_v1610_enhancements()'''
+          )
+
+          compile(program,'v1610-program-postprocessed','exec')
+          nb['cells'][1]['source']=program.splitlines(keepends=True)
+          p.write_text(json.dumps(nb,ensure_ascii=False,indent=1),encoding='utf-8')
+          print('LEGACY_EXACT_LOCKS_REMOVED')
+          PY
+
+      - name: Static notebook validation
         run: |
           python - <<'PY'
           import json
@@ -75,7 +113,8 @@ jobs:
               'LIVE_MAX_STOCKS = 5',
               'LIVE_TOTAL_BUDGET_WON = 6_000_000',
           ]
-          assert [settings.index(x) for x in first_values] == sorted(settings.index(x) for x in first_values)
+          pos=[settings.index(x) for x in first_values]
+          assert pos == sorted(pos)
           for token in first_values + [
               'STRATEGY_VERSION = "v1.6.10"',
               'POST_EXIT_REFERENCE_STRATEGY = "T250_S150"',
@@ -89,9 +128,108 @@ jobs:
           assert 'scanner_signals_v1610.csv' in program
           assert 'live_state_v1610.json' in program
           assert 'def is_live_entry_time_allowed' in program
-          assert 'LIVE_ENTRY_START <= now_hhmm <= LIVE_ENTRY_END' not in program
+          forbidden=[
+              'LIVE_ENTRY_START <= now_hhmm <= LIVE_ENTRY_END',
+              'if LIVE_TRADE_AMOUNT_WON != 3_000_000:',
+              'if LIVE_TOTAL_BUDGET_WON != 18_000_000:',
+              'if LIVE_MAX_STOCKS != 5:',
+              'assert LIVE_TRADE_AMOUNT_WON == 3_000_000',
+              'assert LIVE_TOTAL_BUDGET_WON == 18_000_000',
+              'assert LIVE_DAILY_MAX_LOSS_WON == 300_000',
+              'assert LIVE_STRATEGY == "T200_S150"',
+          ]
+          for token in forbidden:
+              assert token not in program, token
           print('STATIC_VALIDATION_OK')
           PY
+
+      - name: Behavioral regression for v1.6.10 policy logic
+        run: |
+          python - <<'PY'
+          import ast, json
+          from pathlib import Path
+          from datetime import datetime, time as dt_time
+
+          p=Path('code/releases/016_260904_v1.6.10.ipynb')
+          nb=json.loads(p.read_text(encoding='utf-8'))
+          settings=''.join(nb['cells'][0]['source'])
+          program=''.join(nb['cells'][1]['source'])
+
+          ns={'datetime':datetime,'dt_time':dt_time}
+          exec(compile(settings,'settings','exec'),ns)
+          ns['EXIT_STRATEGIES']={'T250_S150':{'tp':2.5,'sl':-1.5}}
+          def safe_float(x, default=0.0):
+              try: return float(x)
+              except Exception: return default
+          ns['safe_float']=safe_float
+
+          needed={
+              '_parse_hhmm','is_live_entry_time_allowed','_logical_live_config_check',
+              'validate_live_trading_config','_ensure_v1610_position_fields',
+              '_current_gross_return_pct','_evaluate_v1610_live_exit_state'
+          }
+          tree=ast.parse(program)
+          body=[n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name in needed]
+          found={n.name for n in body}
+          assert needed <= found, needed-found
+          exec(compile(ast.Module(body=body,type_ignores=[]),'pure-v1610','exec'),ns)
+
+          allowed=ns['is_live_entry_time_allowed']
+          assert not allowed(datetime(2026,9,4,9,4,59))
+          assert allowed(datetime(2026,9,4,9,5,0))
+          assert allowed(datetime(2026,9,4,9,29,59,999000))
+          assert not allowed(datetime(2026,9,4,9,30,0))
+          assert not allowed(datetime(2026,9,4,9,30,42))
+
+          original={k:ns[k] for k in ['LIVE_TRADE_AMOUNT_WON','LIVE_MAX_STOCKS','LIVE_MAX_TRADES_PER_DAY','LIVE_MAX_CONCURRENT_POSITIONS','LIVE_TOTAL_BUDGET_WON','LIVE_DAILY_MAX_LOSS_WON']}
+          for amount,stocks,total in [(1_000_000,5,6_000_000),(2_000_000,3,7_000_000)]:
+              ns['LIVE_TRADE_AMOUNT_WON']=amount; ns['LIVE_MAX_STOCKS']=stocks
+              ns['LIVE_MAX_TRADES_PER_DAY']=stocks; ns['LIVE_MAX_CONCURRENT_POSITIONS']=stocks
+              ns['LIVE_TOTAL_BUDGET_WON']=total; ns['LIVE_DAILY_MAX_LOSS_WON']=100_000
+              assert ns['validate_live_trading_config']() is True
+          for amount,stocks,total,loss in [(0,5,6_000_000,100_000),(1_000_000,0,6_000_000,100_000),(1_000_000,2.5,6_000_000,100_000),(2_000_000,3,1_000_000,100_000),(1_000_000,5,6_000_000,0)]:
+              ns['LIVE_TRADE_AMOUNT_WON']=amount; ns['LIVE_MAX_STOCKS']=stocks
+              ns['LIVE_MAX_TRADES_PER_DAY']=stocks; ns['LIVE_MAX_CONCURRENT_POSITIONS']=stocks
+              ns['LIVE_TOTAL_BUDGET_WON']=total; ns['LIVE_DAILY_MAX_LOSS_WON']=loss
+              try:
+                  ns['validate_live_trading_config']()
+                  raise AssertionError(('invalid config accepted',amount,stocks,total,loss))
+              except ValueError:
+                  pass
+          ns.update(original)
+
+          def pos():
+              return {'avg_entry_price':10000.0,'target_price':10250.0,'stop_price':9850.0,'status':'OPEN','entry_complete':True,'auto_managed_qty':1}
+          ev=ns['_evaluate_v1610_live_exit_state']
+
+          q=pos(); r,_,_=ev(q,10100,datetime(2026,9,4,10,0)); assert r is None and q['profit_protect_armed']
+          r,_,_=ev(q,10040,datetime(2026,9,4,10,1)); assert r=='PROFIT_PROTECT'
+
+          q=pos(); ev(q,10099,datetime(2026,9,4,11,0)); r,_,_=ev(q,10040,datetime(2026,9,4,12,0)); assert r=='NOON_RECOVERY'
+          q=pos(); ev(q,10099,datetime(2026,9,4,11,0)); r,_,_=ev(q,9970,datetime(2026,9,4,12,0)); assert r is None and q['noon_recovery_waiting']
+          r,_,_=ev(q,10040,datetime(2026,9,4,13,0)); assert r=='NOON_RECOVERY'
+
+          q=pos(); ev(q,10100,datetime(2026,9,4,11,0)); r,_,_=ev(q,10050,datetime(2026,9,4,12,0)); assert r is None and not q['noon_recovery_eligible']
+          q=pos(); r,_,_=ev(q,10250,datetime(2026,9,4,10,0)); assert r=='TAKE_PROFIT'
+          q=pos(); r,_,_=ev(q,9850,datetime(2026,9,4,10,0)); assert r=='STOP_LOSS'
+
+          # 재시작 복구를 흉내낸 armed 상태도 floor에서 즉시 보호판정.
+          q=pos(); q['profit_protect_armed']=True; q['max_return_pct']=1.25
+          r,_,_=ev(q,10040,datetime(2026,9,4,10,5)); assert r=='PROFIT_PROTECT'
+
+          # protect OFF여도 armed 상태는 연구용으로 유지하되 실제 보호 reason은 내지 않음.
+          ns['LIVE_PROFIT_PROTECT_ENABLED']=False
+          q=pos(); r,_,_=ev(q,10100,datetime(2026,9,4,10,0)); assert r is None and q['profit_protect_armed']
+          r,_,_=ev(q,10040,datetime(2026,9,4,10,1)); assert r is None
+          print('BEHAVIORAL_REGRESSION_OK')
+          PY
+
+      - name: Upload validated notebook artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: v1610-notebook
+          path: code/releases/016_260904_v1.6.10.ipynb
+          if-no-files-found: error
 
       - name: Commit validated release notebook
         run: |
