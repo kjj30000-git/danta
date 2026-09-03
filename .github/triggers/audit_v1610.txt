@@ -1,1 +1,1 @@
-run v1.6.10 integrity audit
+rerun v1.6.10 integrity audit after checker fix
