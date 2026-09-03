@@ -1,0 +1,68 @@
+name: Repair v1.6.10 quick reference and run order
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/triggers/fix_v1610_quickref_run_order.txt'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Repair notebook
+        run: python .github/tools/fix_v1610_quickref_and_run_order.py
+
+      - name: Validate notebook structure
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          base=json.loads(Path('code/releases/015_260903_v1.6.9.ipynb').read_text(encoding='utf-8'))
+          nb=json.loads(Path('code/releases/016_260904_v1.6.10.ipynb').read_text(encoding='utf-8'))
+          assert [c.get('id') for c in nb['cells']] == ['v1610-settings','v1610-program','v1610-quick-reference','v1610-continuity']
+          for c in nb['cells']:
+              if c.get('cell_type')=='code':
+                  compile(''.join(c['source']), c['id'], 'exec')
+          bq=''.join(next(c for c in base['cells'] if c.get('id')=='v169-quick-reference')['source'])
+          q=''.join(next(c for c in nb['cells'] if c.get('id')=='v1610-quick-reference')['source'])
+          p=''.join(next(c for c in nb['cells'] if c.get('id')=='v1610-program')['source'])
+          c=''.join(next(c for c in nb['cells'] if c.get('id')=='v1610-continuity')['source'])
+          assert q.startswith(bq)
+          assert '# v1.6.10 QUICK REFERENCE ADDENDUM' in q
+          main='if __name__ == "__main__":\n    run_scanner()'
+          assert p.count(main)==1
+          assert p.index('# 39-A. v1.6.10 최소 통합 패치') < p.index(main)
+          assert p.rstrip().endswith(main)
+          assert 'v1.6.10 QUICK REFERENCE / 실행순서 후속 수정' in c
+          print('QUICK_REFERENCE_PARENT_PREFIX_OK')
+          print('PROGRAM_RUN_ORDER_OK')
+          PY
+
+      - name: Commit repaired notebook
+        run: |
+          git config user.name chatgpt-v1610-repair
+          git config user.email chatgpt-v1610-repair@users.noreply.github.com
+          git add code/releases/016_260904_v1.6.10.ipynb
+          if git diff --cached --quiet; then
+            echo No notebook changes.
+          else
+            git commit -m 'Restore v1.6.9 quick reference and fix v1.6.10 run order'
+            git push origin main
+          fi
