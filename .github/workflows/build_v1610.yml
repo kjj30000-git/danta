@@ -7,6 +7,7 @@ on:
     paths:
       - .github/workflows/build_v1610.yml
       - .github/tools/build_v1_6_10.py
+      - .github/tools/hotfix_builder_v1610.py
       - .github/tools/validate_v1_6_10.py
       - .github/triggers/build_v1610.txt
   workflow_dispatch:
@@ -30,9 +31,7 @@ jobs:
           python-version: '3.11'
 
       - name: Hotfix builder quoting
-        shell: bash
-        run: |
-          python -c "from pathlib import Path; p=Path('.github/tools/build_v1_6_10.py'); s=p.read_text(encoding='utf-8'); a=r'EXIT_STRATEGIES[LIVE_STRATEGY][\"tp\"]'; b=r'EXIT_STRATEGIES[LIVE_STRATEGY][\"sl\"]'; assert s.count(a)+s.count(b)==2; s=s.replace(a,r\"EXIT_STRATEGIES[LIVE_STRATEGY][\\'tp\\']\").replace(b,r\"EXIT_STRATEGIES[LIVE_STRATEGY][\\'sl\\']\"); p.write_text(s,encoding='utf-8')"
+        run: python .github/tools/hotfix_builder_v1610.py
 
       - name: Build notebook
         run: >-
