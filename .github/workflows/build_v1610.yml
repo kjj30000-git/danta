@@ -27,6 +27,24 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Apply builder quoting hotfix
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('.github/tools/build_v1_6_10.py')
+          s=p.read_text(encoding='utf-8')
+          old_tp=r'EXIT_STRATEGIES[LIVE_STRATEGY][\"tp\"]'
+          old_sl=r'EXIT_STRATEGIES[LIVE_STRATEGY][\"sl\"]'
+          new_tp=r"EXIT_STRATEGIES[LIVE_STRATEGY][\'tp\']"
+          new_sl=r"EXIT_STRATEGIES[LIVE_STRATEGY][\'sl\']"
+          n=s.count(old_tp)+s.count(old_sl)
+          if n != 2:
+              raise SystemExit(f'expected two quoting hotfix targets, found {n}')
+          s=s.replace(old_tp,new_tp).replace(old_sl,new_sl)
+          p.write_text(s,encoding='utf-8')
+          print('BUILDER_QUOTING_HOTFIX_OK')
+          PY
+
       - name: Build exact v1.6.9 parent into v1.6.10
         run: |
           python .github/tools/build_v1_6_10.py \
@@ -49,22 +67,29 @@ jobs:
               assert c.get('outputs') == []
           settings=''.join(nb['cells'][0]['source'])
           program=''.join(nb['cells'][1]['source'])
-          for token in [
+          combined=settings+program
+          first_values=[
               'AUTO_TRADE_ENABLED = False',
               'LIVE_PROFIT_PROTECT_ENABLED = True',
               'LIVE_TRADE_AMOUNT_WON = 1_000_000',
               'LIVE_MAX_STOCKS = 5',
               'LIVE_TOTAL_BUDGET_WON = 6_000_000',
+          ]
+          assert [settings.index(x) for x in first_values] == sorted(settings.index(x) for x in first_values)
+          for token in first_values + [
               'STRATEGY_VERSION = "v1.6.10"',
-              'LIVE_STRATEGY = "T250_S150"',
+              'POST_EXIT_REFERENCE_STRATEGY = "T250_S150"',
               'PROFIT_PROTECT', 'NOON_RECOVERY', 'STARTUP_CONNECTIVITY_WAIT',
               'compute_broker_fill_delta', 'request_entry_cancel_for_exit',
               'WIDE_HIGH_GAP_SHADOW_ENABLED', 'PRE_FAIL_PULLBACK_SHADOW_ENABLED',
               'policy_followup_state_v1610.json',
+              'def test_v1610_enhancements():',
           ]:
-              assert token in settings+program, token
+              assert token in combined, token
           assert 'scanner_signals_v1610.csv' in program
           assert 'live_state_v1610.json' in program
+          assert 'def is_live_entry_time_allowed' in program
+          assert 'LIVE_ENTRY_START <= now_hhmm <= LIVE_ENTRY_END' not in program
           print('STATIC_VALIDATION_OK')
           PY
 
