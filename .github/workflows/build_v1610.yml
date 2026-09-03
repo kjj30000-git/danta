@@ -8,6 +8,7 @@ on:
       - .github/workflows/build_v1610.yml
       - .github/tools/build_v1_6_10.py
       - .github/tools/hotfix_builder_v1610.py
+      - .github/tools/hotfix_validator_v1610.py
       - .github/tools/validate_v1_6_10.py
       - .github/triggers/build_v1610.txt
   workflow_dispatch:
@@ -32,6 +33,9 @@ jobs:
 
       - name: Hotfix builder quoting
         run: python .github/tools/hotfix_builder_v1610.py
+
+      - name: Hotfix validator active gates
+        run: python .github/tools/hotfix_validator_v1610.py
 
       - name: Build notebook
         run: >-
