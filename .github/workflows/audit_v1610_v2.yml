@@ -1,0 +1,20 @@
+name: Audit v1.6.10 integrity v2
+
+on:
+  push:
+    branches:
+      - chatgpt/v1610-audit
+    paths:
+      - '.github/triggers/audit_v1610_v2.txt'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chatgpt/v1610-audit
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: python .github/tools/audit_v1610_integrity.py
