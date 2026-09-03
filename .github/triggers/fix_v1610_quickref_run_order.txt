@@ -1,0 +1,1 @@
+restore v1.6.9 quick reference and move run_scanner call after v1.6.10 patch
