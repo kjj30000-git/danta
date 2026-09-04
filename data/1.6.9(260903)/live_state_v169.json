@@ -1,0 +1,474 @@
+{
+  "trade_date": "2026-09-03",
+  "live_orders": {
+    "0117323": {
+      "order_no": "0117323",
+      "side": "BUY",
+      "stock_code": "067290",
+      "stock_name": "JW신약",
+      "requested_qty": 881,
+      "filled_qty": 881,
+      "broker_filled_qty": 881,
+      "unfilled_qty": 0,
+      "filled_amount": 2964751.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 3370.0,
+      "planned_amount": 2998659.6999999997,
+      "signal_price": 3365.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:13:55.415337"
+      },
+      "signal_time_str": "2026-09-03 09:13:55.415",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:13:59.761247"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:13:55.415337"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:13:55.518615"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:13:59.738082"
+      },
+      "buy_precheck_sec": 4.219467,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:13:59.761247"
+      },
+      "signal_to_order_sec": 4.34591,
+      "score": 79,
+      "paper_trade_id": "20260903_067290_PRE_HISTORY_E001_091355513144",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260903_067290_E001",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:14:01.489829"
+      },
+      "order_to_fill_sec": 1.728582,
+      "signal_to_fill_sec": 6.074492,
+      "signal_to_fill_slippage_pct": 0.006274107668402529,
+      "reference_to_fill_slippage_pct": -0.14210315361893322,
+      "avg_fill_price": 3365.211123723042,
+      "broker_status": "체결"
+    },
+    "0122435": {
+      "order_no": "0122435",
+      "side": "SELL",
+      "stock_code": "067290",
+      "stock_name": "JW신약",
+      "requested_qty": 881,
+      "filled_qty": 881,
+      "broker_filled_qty": 881,
+      "unfilled_qty": 0,
+      "filled_amount": 3016745.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "TAKE_PROFIT",
+      "paper_trade_id": "20260903_067290_PRE_HISTORY_E001_091355513144",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260903_067290_E001",
+      "entry_seq": 1,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:15:46.222526"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:15:53.651917"
+      },
+      "broker_precheck_sec": 7.429391,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:15:55.717924"
+      },
+      "trigger_to_order_sec": 9.528679,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    },
+    "0144909": {
+      "order_no": "0144909",
+      "side": "BUY",
+      "stock_code": "004310",
+      "stock_name": "현대약품",
+      "requested_qty": 338,
+      "filled_qty": 338,
+      "broker_filled_qty": 338,
+      "unfilled_qty": 0,
+      "filled_amount": 2971020.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 8780.0,
+      "planned_amount": 2997316.4,
+      "signal_price": 8760.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:16.570396"
+      },
+      "signal_time_str": "2026-09-03 09:23:16.570",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:20.300735"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:16.570396"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:16.613760"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:20.296225"
+      },
+      "buy_precheck_sec": 3.682465,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:20.300735"
+      },
+      "signal_to_order_sec": 3.730339,
+      "score": 78,
+      "paper_trade_id": "20260903_004310_PRE_HISTORY_E003_092316612760",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260903_004310_E003",
+      "entry_seq": 2,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:21.654624"
+      },
+      "order_to_fill_sec": 1.353889,
+      "signal_to_fill_sec": 5.084228,
+      "signal_to_fill_slippage_pct": 0.3424657534246478,
+      "reference_to_fill_slippage_pct": 0.1138952164009055,
+      "avg_fill_price": 8790.0,
+      "broker_status": "체결"
+    },
+    "0145875": {
+      "order_no": "0145875",
+      "side": "SELL",
+      "stock_code": "004310",
+      "stock_name": "현대약품",
+      "requested_qty": 338,
+      "filled_qty": 338,
+      "broker_filled_qty": 338,
+      "unfilled_qty": 0,
+      "filled_amount": 2933910.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260903_004310_PRE_HISTORY_E003_092316612760",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260903_004310_E003",
+      "entry_seq": 2,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:35.916427"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:39.314912"
+      },
+      "broker_precheck_sec": 3.398485,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:23:40.265442"
+      },
+      "trigger_to_order_sec": 4.434494,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    },
+    "0165978": {
+      "order_no": "0165978",
+      "side": "BUY",
+      "stock_code": "105560",
+      "stock_name": "KB금융",
+      "requested_qty": 16,
+      "filled_qty": 16,
+      "broker_filled_qty": 16,
+      "unfilled_qty": 0,
+      "filled_amount": 2859200.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 178600.0,
+      "planned_amount": 2886176.0,
+      "signal_price": 178700.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:30:42.422060"
+      },
+      "signal_time_str": "2026-09-03 09:30:42.422",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:30:47.351252"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:30:42.422060"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:30:42.475680"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:30:47.321871"
+      },
+      "buy_precheck_sec": 4.846191,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:30:47.351252"
+      },
+      "signal_to_order_sec": 4.929192,
+      "score": 78,
+      "paper_trade_id": "20260903_105560_PRE_HISTORY_E001_093042474668",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260903_105560_E001",
+      "entry_seq": 3,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T09:30:48.846770"
+      },
+      "order_to_fill_sec": 1.495518,
+      "signal_to_fill_sec": 6.42471,
+      "signal_to_fill_slippage_pct": 0.0,
+      "reference_to_fill_slippage_pct": 0.05599104143336753,
+      "avg_fill_price": 178700.0,
+      "broker_status": "체결"
+    },
+    "0506451": {
+      "order_no": "0506451",
+      "side": "SELL",
+      "stock_code": "105560",
+      "stock_name": "KB금융",
+      "requested_qty": 16,
+      "filled_qty": 16,
+      "broker_filled_qty": 16,
+      "unfilled_qty": 0,
+      "filled_amount": 2814400.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260903_105560_PRE_HISTORY_E001_093042474668",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260903_105560_E001",
+      "entry_seq": 3,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T14:19:33.687810"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T14:19:45.796049"
+      },
+      "broker_precheck_sec": 12.108239,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-03T14:19:48.064579"
+      },
+      "trigger_to_order_sec": 14.423182,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {},
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "067290",
+      "004310",
+      "105560"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0122435",
+          "56364",
+          "881",
+          "3423.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0165978",
+          "5542",
+          "16",
+          "178700.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0117323",
+          "44076",
+          "881",
+          "3366.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0144909",
+          "95768",
+          "338",
+          "8790.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0122435",
+          "56363",
+          "541",
+          "3425.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0506451",
+          "17774",
+          "16",
+          "175900.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0145875",
+          "97376",
+          "338",
+          "8680.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0117323",
+          "44075",
+          "695",
+          "3365.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0145875",
+          "97373",
+          "14",
+          "8685.0"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 3,
+  "live_daily_realized_pnl": -29915.999999999724,
+  "live_trading_halted": false,
+  "live_system_halt_reason": "",
+  "live_recovery_mode": false,
+  "live_blocked_codes": {},
+  "live_execution_issue_codes": {
+    "__type__": "set",
+    "value": []
+  },
+  "broker_balances": {
+    "080220": {
+      "stock_code": "080220",
+      "stock_name": "제주반도체",
+      "held_qty": 1,
+      "sellable_qty": 1,
+      "avg_price": 89493.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-03T19:59:40.211234"
+      },
+      "qty": 1,
+      "tradable_qty": 1
+    },
+    "445680": {
+      "stock_code": "445680",
+      "stock_name": "큐리옥스바이오시스템즈",
+      "held_qty": 52,
+      "sellable_qty": 52,
+      "avg_price": 59874.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-03T19:59:40.211234"
+      },
+      "qty": 52,
+      "tradable_qty": 52
+    }
+  },
+  "broker_startup_holdings": {
+    "__type__": "set",
+    "value": [
+      "445680",
+      "080220"
+    ]
+  }
+}

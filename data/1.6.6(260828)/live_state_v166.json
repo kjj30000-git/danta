@@ -1,0 +1,380 @@
+{
+  "trade_date": "2026-08-28",
+  "live_orders": {
+    "0123395": {
+      "order_no": "0123395",
+      "side": "BUY",
+      "stock_code": "032820",
+      "stock_name": "우리기술",
+      "requested_qty": 71,
+      "filled_qty": 71,
+      "filled_amount": 981930.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 13830.0,
+      "planned_amount": 991749.2999999999,
+      "signal_price": 13810.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:09:41.668488"
+      },
+      "signal_time_str": "2026-08-28 09:09:41.668",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:09:41.753768"
+      },
+      "score": 77,
+      "paper_trade_id": "20260828_032820_PRE_HISTORY_E001_090941750176",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260828_032820_E001",
+      "counted_trade": true,
+      "broker_status": "체결"
+    },
+    "0126255": {
+      "order_no": "0126255",
+      "side": "SELL",
+      "stock_code": "032820",
+      "stock_name": "우리기술",
+      "requested_qty": 71,
+      "filled_qty": 117,
+      "filled_amount": 1593256.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "broker_status": "체결"
+    },
+    "0128088": {
+      "order_no": "0128088",
+      "side": "BUY",
+      "stock_code": "222800",
+      "stock_name": "심텍",
+      "requested_qty": 7,
+      "filled_qty": 7,
+      "filled_amount": 942900.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 134600.0,
+      "planned_amount": 951622.0,
+      "signal_price": 134600.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:10:59.834062"
+      },
+      "signal_time_str": "2026-08-28 09:10:59.834",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:10:59.869229"
+      },
+      "score": 82,
+      "paper_trade_id": "20260828_222800_PRE_HISTORY_E004_091059864471",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260828_222800_E004",
+      "counted_trade": true,
+      "broker_status": "체결"
+    },
+    "0135681": {
+      "order_no": "0135681",
+      "side": "BUY",
+      "stock_code": "0155E0",
+      "stock_name": "해치텍",
+      "requested_qty": 52,
+      "filled_qty": 52,
+      "filled_amount": 973440.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 18750.0,
+      "planned_amount": 984750.0,
+      "signal_price": 18750.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:13:04.781592"
+      },
+      "signal_time_str": "2026-08-28 09:13:04.781",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:13:04.839294"
+      },
+      "score": 77,
+      "paper_trade_id": "20260828_0155E0_PRE_HISTORY_E001_091304834004",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260828_0155E0_E001",
+      "counted_trade": true,
+      "broker_status": "체결"
+    },
+    "0143556": {
+      "order_no": "0143556",
+      "side": "SELL",
+      "stock_code": "0155E0",
+      "stock_name": "해치텍",
+      "requested_qty": 52,
+      "filled_qty": 52,
+      "filled_amount": 992160.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "TAKE_PROFIT",
+      "broker_status": "체결"
+    },
+    "0151628": {
+      "order_no": "0151628",
+      "side": "SELL",
+      "stock_code": "222800",
+      "stock_name": "심텍",
+      "requested_qty": 7,
+      "filled_qty": 7,
+      "filled_amount": 929600.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "broker_status": "체결"
+    },
+    "0173419": {
+      "order_no": "0173419",
+      "side": "BUY",
+      "stock_code": "001210",
+      "stock_name": "금호전기",
+      "requested_qty": 107,
+      "filled_qty": 117,
+      "filled_amount": 1080873.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 9220.0,
+      "planned_amount": 996405.4,
+      "signal_price": 9240.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:24:41.305251"
+      },
+      "signal_time_str": "2026-08-28 09:24:41.305",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:24:41.362582"
+      },
+      "score": 77,
+      "paper_trade_id": "20260828_001210_PRE_HISTORY_E001_092441355911",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260828_001210_E001",
+      "counted_trade": true,
+      "broker_status": "체결"
+    },
+    "0184892": {
+      "order_no": "0184892",
+      "side": "BUY",
+      "stock_code": "096770",
+      "stock_name": "SK이노베이션",
+      "requested_qty": 8,
+      "filled_qty": 8,
+      "filled_amount": 943200.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 118000.0,
+      "planned_amount": 953440.0,
+      "signal_price": 118000.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:28:50.479957"
+      },
+      "signal_time_str": "2026-08-28 09:28:50.479",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:28:50.519536"
+      },
+      "score": 79,
+      "paper_trade_id": "20260828_096770_PRE_HISTORY_E003_092850513044",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260828_096770_E003",
+      "counted_trade": true,
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {
+    "001210": {
+      "stock_code": "001210",
+      "stock_name": "금호전기",
+      "qty": 117,
+      "initial_qty": 117,
+      "filled_amount": 1080873.0,
+      "avg_entry_price": 9238.23076923077,
+      "entry_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:24:42.196150"
+      },
+      "entry_order_no": "0173419",
+      "exit_order_no": "",
+      "exchange": "SOR",
+      "status": "OPEN",
+      "entry_complete": true,
+      "signal_price": 9240.0,
+      "signal_time_str": "2026-08-28 09:24:41.305",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:24:41.362582"
+      },
+      "live_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:24:42.196150"
+      },
+      "paper_trade_id": "20260828_001210_PRE_HISTORY_E001_092441355911",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260828_001210_E001",
+      "score": 77,
+      "last_price": 9230.0,
+      "live_entry_delay_sec": 0.890899,
+      "live_vs_signal_pct": -0.019147519147511005,
+      "target_price": 9422.995384615386,
+      "stop_price": 9099.657307692309,
+      "exit_reason": "TAKE_PROFIT"
+    },
+    "096770": {
+      "stock_code": "096770",
+      "stock_name": "SK이노베이션",
+      "qty": 8,
+      "initial_qty": 8,
+      "filled_amount": 943200.0,
+      "avg_entry_price": 117900.0,
+      "entry_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:28:51.605341"
+      },
+      "entry_order_no": "0184892",
+      "exit_order_no": "",
+      "exchange": "SOR",
+      "status": "OPEN",
+      "entry_complete": true,
+      "signal_price": 118000.0,
+      "signal_time_str": "2026-08-28 09:28:50.479",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:28:50.519536"
+      },
+      "live_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-08-28T09:28:51.605341"
+      },
+      "paper_trade_id": "20260828_096770_PRE_HISTORY_E003_092850513044",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260828_096770_E003",
+      "score": 79,
+      "last_price": 117900.0,
+      "live_entry_delay_sec": 1.125384,
+      "live_vs_signal_pct": -0.08474576271186862,
+      "target_price": 120258.0,
+      "stop_price": 116131.5
+    }
+  },
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "001210",
+      "0155E0",
+      "032820",
+      "096770",
+      "222800"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0128088",
+          "35669",
+          "134700.0",
+          "7"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0143556",
+          "44026",
+          "19080.0",
+          "52"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0173419",
+          "30447",
+          "9230.0",
+          "10"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0151628",
+          "31842",
+          "132800.0",
+          "7"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0173419",
+          "30449",
+          "9239.0",
+          "107"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0126255",
+          "31913",
+          "13620.0",
+          "46"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0123395",
+          "27207",
+          "13830.0",
+          "71"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0135681",
+          "33549",
+          "18720.0",
+          "52"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0184892",
+          "16714",
+          "117900.0",
+          "8"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0126255",
+          "31914",
+          "13616.0",
+          "71"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 5,
+  "live_daily_realized_pnl": -9662.341880341826,
+  "live_trading_halted": false,
+  "live_recovery_mode": false
+}
