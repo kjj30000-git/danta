@@ -1,0 +1,584 @@
+{
+  "trade_date": "2026-09-04",
+  "live_orders": {
+    "0110293": {
+      "order_no": "0110293",
+      "side": "BUY",
+      "stock_code": "096770",
+      "stock_name": "SK이노베이션",
+      "requested_qty": 7,
+      "filled_qty": 7,
+      "broker_filled_qty": 7,
+      "unfilled_qty": 0,
+      "filled_amount": 968100.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 138400.0,
+      "planned_amount": 978488.0,
+      "signal_price": 138500.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:10:30.319991"
+      },
+      "signal_time_str": "2026-09-04 09:10:30.319",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:10:35.514583"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:10:30.319991"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:10:30.461773"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:10:35.495027"
+      },
+      "buy_precheck_sec": 5.033254,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:10:35.514583"
+      },
+      "signal_to_order_sec": 5.194592,
+      "score": 82,
+      "paper_trade_id": "20260904_096770_PRE_HISTORY_E001_091030456113",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_096770_E001",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:10:37.146755"
+      },
+      "order_to_fill_sec": 1.632172,
+      "signal_to_fill_sec": 6.826764,
+      "signal_to_fill_slippage_pct": -0.14440433212996595,
+      "reference_to_fill_slippage_pct": -0.07225433526011349,
+      "avg_fill_price": 138300.0,
+      "broker_status": "체결"
+    },
+    "0127979": {
+      "order_no": "0127979",
+      "side": "SELL",
+      "stock_code": "096770",
+      "stock_name": "SK이노베이션",
+      "requested_qty": 7,
+      "filled_qty": 7,
+      "broker_filled_qty": 7,
+      "unfilled_qty": 0,
+      "filled_amount": 954284.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260904_096770_PRE_HISTORY_E001_091030456113",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_096770_E001",
+      "entry_seq": 1,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:15:47.113059"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:15:56.462765"
+      },
+      "broker_precheck_sec": 9.349706,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:15:58.499260"
+      },
+      "trigger_to_order_sec": 11.449514,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    },
+    "0130210": {
+      "order_no": "0130210",
+      "side": "BUY",
+      "stock_code": "010950",
+      "stock_name": "S-Oil",
+      "requested_qty": 6,
+      "filled_qty": 6,
+      "broker_filled_qty": 6,
+      "unfilled_qty": 0,
+      "filled_amount": 975600.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 162500.0,
+      "planned_amount": 984750.0,
+      "signal_price": 162500.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:16:29.655023"
+      },
+      "signal_time_str": "2026-09-04 09:16:29.655",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:16:34.210788"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:16:29.655023"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:16:29.751340"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:16:34.202165"
+      },
+      "buy_precheck_sec": 4.450825,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:16:34.210788"
+      },
+      "signal_to_order_sec": 4.555765,
+      "score": 78,
+      "paper_trade_id": "20260904_010950_PRE_HISTORY_E001_091629748295",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_010950_E001",
+      "entry_seq": 2,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:16:35.655896"
+      },
+      "order_to_fill_sec": 1.445108,
+      "signal_to_fill_sec": 6.000873,
+      "signal_to_fill_slippage_pct": 0.061538461538468425,
+      "reference_to_fill_slippage_pct": 0.061538461538468425,
+      "avg_fill_price": 162600.0,
+      "broker_status": "체결"
+    },
+    "0152251": {
+      "order_no": "0152251",
+      "side": "SELL",
+      "stock_code": "010950",
+      "stock_name": "S-Oil",
+      "requested_qty": 6,
+      "filled_qty": 6,
+      "broker_filled_qty": 6,
+      "unfilled_qty": 0,
+      "filled_amount": 961200.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260904_010950_PRE_HISTORY_E001_091629748295",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_010950_E001",
+      "entry_seq": 2,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:23:40.569443"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:23:49.665641"
+      },
+      "broker_precheck_sec": 9.096198,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:23:50.645962"
+      },
+      "trigger_to_order_sec": 10.100389,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    },
+    "0154967": {
+      "order_no": "0154967",
+      "side": "BUY",
+      "stock_code": "058610",
+      "stock_name": "에스피지",
+      "requested_qty": 10,
+      "filled_qty": 10,
+      "broker_filled_qty": 10,
+      "unfilled_qty": 0,
+      "filled_amount": 923000.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 92300.0,
+      "planned_amount": 932230.0,
+      "signal_price": 92200.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:24:47.994752"
+      },
+      "signal_time_str": "2026-09-04 09:24:47.994",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:24:50.187617"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:24:47.994752"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:24:48.018671"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:24:50.169573"
+      },
+      "buy_precheck_sec": 2.150902,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:24:50.187617"
+      },
+      "signal_to_order_sec": 2.192865,
+      "score": 78,
+      "paper_trade_id": "20260904_058610_PRE_HISTORY_E003_092448017675",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_058610_E003",
+      "entry_seq": 3,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:24:50.951783"
+      },
+      "order_to_fill_sec": 0.764166,
+      "signal_to_fill_sec": 2.957031,
+      "signal_to_fill_slippage_pct": 0.10845986984815426,
+      "reference_to_fill_slippage_pct": 0.0,
+      "avg_fill_price": 92300.0,
+      "broker_status": "체결"
+    },
+    "0160367": {
+      "order_no": "0160367",
+      "side": "SELL",
+      "stock_code": "058610",
+      "stock_name": "에스피지",
+      "requested_qty": 10,
+      "filled_qty": 10,
+      "broker_filled_qty": 10,
+      "unfilled_qty": 0,
+      "filled_amount": 925000.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "PROFIT_PROTECT",
+      "paper_trade_id": "20260904_058610_PRE_HISTORY_E003_092448017675",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_058610_E003",
+      "entry_seq": 3,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:26:29.450173"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:26:41.748597"
+      },
+      "broker_precheck_sec": 12.298424,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:26:44.204385"
+      },
+      "trigger_to_order_sec": 14.804083,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    },
+    "0168038": {
+      "order_no": "0168038",
+      "side": "BUY",
+      "stock_code": "042700",
+      "stock_name": "한미반도체",
+      "requested_qty": 4,
+      "filled_qty": 4,
+      "broker_filled_qty": 4,
+      "unfilled_qty": 0,
+      "filled_amount": 896000.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 224000.0,
+      "planned_amount": 904960.0,
+      "signal_price": 224000.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:29:22.998042"
+      },
+      "signal_time_str": "2026-09-04 09:29:22.998",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:29:27.497540"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:29:22.998042"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:29:23.096661"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:29:27.467971"
+      },
+      "buy_precheck_sec": 4.37131,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:29:27.497540"
+      },
+      "signal_to_order_sec": 4.499498,
+      "score": 78,
+      "paper_trade_id": "20260904_042700_PRE_HISTORY_E001_092923091130",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_042700_E001",
+      "entry_seq": 4,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:29:28.956788"
+      },
+      "order_to_fill_sec": 1.459248,
+      "signal_to_fill_sec": 5.958746,
+      "signal_to_fill_slippage_pct": 0.0,
+      "reference_to_fill_slippage_pct": 0.0,
+      "avg_fill_price": 224000.0,
+      "broker_status": "체결"
+    },
+    "0232967": {
+      "order_no": "0232967",
+      "side": "SELL",
+      "stock_code": "042700",
+      "stock_name": "한미반도체",
+      "requested_qty": 4,
+      "filled_qty": 4,
+      "broker_filled_qty": 4,
+      "unfilled_qty": 0,
+      "filled_amount": 898000.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "PROFIT_PROTECT",
+      "paper_trade_id": "20260904_042700_PRE_HISTORY_E001_092923091130",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260904_042700_E001",
+      "entry_seq": 4,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:55:07.056176"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:55:12.487660"
+      },
+      "broker_precheck_sec": 5.431484,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-04T09:55:14.687584"
+      },
+      "trigger_to_order_sec": 7.697916,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {},
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "042700",
+      "096770",
+      "010950",
+      "058610"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0127979",
+          "13010",
+          "1",
+          "136400.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0110293",
+          "10474",
+          "7",
+          "138300.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0154967",
+          "26784",
+          "10",
+          "92300.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0160367",
+          "15432",
+          "10",
+          "92500.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0232967",
+          "21852",
+          "4",
+          "224500.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0130210",
+          "6223",
+          "6",
+          "162600.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0152251",
+          "11769",
+          "6",
+          "160200.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0168038",
+          "14868",
+          "4",
+          "224000.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0127979",
+          "13011",
+          "7",
+          "136314.0"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 4,
+  "live_daily_realized_pnl": -24216.00000000003,
+  "live_trading_halted": false,
+  "live_system_halt_reason": "",
+  "live_recovery_mode": false,
+  "live_blocked_codes": {},
+  "live_execution_issue_codes": {
+    "__type__": "set",
+    "value": []
+  },
+  "broker_balances": {
+    "080220": {
+      "stock_code": "080220",
+      "stock_name": "제주반도체",
+      "held_qty": 1,
+      "sellable_qty": 1,
+      "avg_price": 89493.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-04T19:59:45.808846"
+      },
+      "qty": 1,
+      "tradable_qty": 1
+    },
+    "445680": {
+      "stock_code": "445680",
+      "stock_name": "큐리옥스바이오시스템즈",
+      "held_qty": 52,
+      "sellable_qty": 52,
+      "avg_price": 59874.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-04T19:59:45.808846"
+      },
+      "qty": 52,
+      "tradable_qty": 52
+    }
+  },
+  "broker_startup_holdings": {
+    "__type__": "set",
+    "value": [
+      "445680",
+      "080220"
+    ]
+  }
+}
