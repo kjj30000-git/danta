@@ -1,0 +1,472 @@
+{
+  "trade_date": "2026-09-09",
+  "live_orders": {
+    "0119886": {
+      "order_no": "0119886",
+      "side": "BUY",
+      "stock_code": "000500",
+      "stock_name": "가온전선",
+      "requested_qty": 3,
+      "filled_qty": 3,
+      "broker_filled_qty": 3,
+      "unfilled_qty": 0,
+      "filled_amount": 760500.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 253500.0,
+      "planned_amount": 768105.0,
+      "signal_price": 254500.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:05:32.971061"
+      },
+      "signal_time_str": "2026-09-09 09:05:32.971",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:05:36.859784"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:05:32.971061"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:05:33.057555"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:05:36.855306"
+      },
+      "buy_precheck_sec": 3.797751,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:05:36.859784"
+      },
+      "signal_to_order_sec": 3.888723,
+      "score": 82,
+      "paper_trade_id": "20260909_000500_PRE_HISTORY_E001_090533054353",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 1000000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260909_000500_E001",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:05:37.736400"
+      },
+      "order_to_fill_sec": 0.876616,
+      "signal_to_fill_sec": 4.765339,
+      "signal_to_fill_slippage_pct": -0.39292730844793233,
+      "reference_to_fill_slippage_pct": 0.0,
+      "avg_fill_price": 253500.0,
+      "broker_status": "체결"
+    },
+    "0136832": {
+      "order_no": "0136832",
+      "side": "BUY",
+      "stock_code": "119850",
+      "stock_name": "지엔씨에너지",
+      "requested_qty": 20,
+      "filled_qty": 20,
+      "broker_filled_qty": 20,
+      "unfilled_qty": 0,
+      "filled_amount": 952000.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 47650.0,
+      "planned_amount": 962530.0,
+      "signal_price": 47550.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:08:37.682702"
+      },
+      "signal_time_str": "2026-09-09 09:08:37.682",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:08:54.604763"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:08:37.682702"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:08:44.512672"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:08:54.552006"
+      },
+      "buy_precheck_sec": 10.039334,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:08:54.604763"
+      },
+      "signal_to_order_sec": 16.922061,
+      "score": 78,
+      "paper_trade_id": "20260909_119850_PRE_HISTORY_E002_090844402201",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 1000000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260909_119850_E002",
+      "entry_seq": 2,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:08:57.452168"
+      },
+      "order_to_fill_sec": 2.847405,
+      "signal_to_fill_sec": 19.769466,
+      "signal_to_fill_slippage_pct": 0.1051524710830698,
+      "reference_to_fill_slippage_pct": -0.10493179433368471,
+      "avg_fill_price": 47600.0,
+      "broker_status": "체결"
+    },
+    "0160713": {
+      "order_no": "0160713",
+      "side": "BUY",
+      "stock_code": "032820",
+      "stock_name": "우리기술",
+      "requested_qty": 72,
+      "filled_qty": 72,
+      "broker_filled_qty": 72,
+      "unfilled_qty": 0,
+      "filled_amount": 988730.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 13720.0,
+      "planned_amount": 997718.4,
+      "signal_price": 13770.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:13:41.119489"
+      },
+      "signal_time_str": "2026-09-09 09:13:41.119",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:13:49.588206"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:13:41.119489"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:13:41.474743"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:13:49.514669"
+      },
+      "buy_precheck_sec": 8.039926,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:13:49.588206"
+      },
+      "signal_to_order_sec": 8.468717,
+      "score": 76,
+      "paper_trade_id": "20260909_032820_PRE_HISTORY_E002_091341447061",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 1000000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260909_032820_E002",
+      "entry_seq": 3,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:13:53.178315"
+      },
+      "order_to_fill_sec": 3.590109,
+      "signal_to_fill_sec": 12.058826,
+      "signal_to_fill_slippage_pct": -0.27333978859033214,
+      "reference_to_fill_slippage_pct": 0.09009556203434244,
+      "avg_fill_price": 13732.361111111111,
+      "broker_status": "체결"
+    },
+    "0168530": {
+      "order_no": "0168530",
+      "side": "BUY",
+      "stock_code": "017900",
+      "stock_name": "광전자",
+      "requested_qty": 110,
+      "filled_qty": 110,
+      "broker_filled_qty": 110,
+      "unfilled_qty": 0,
+      "filled_amount": 991100.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 9000.0,
+      "planned_amount": 999900.0,
+      "signal_price": 9120.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:25.755755"
+      },
+      "signal_time_str": "2026-09-09 09:15:25.755",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:41.408729"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:25.755755"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:33.488390"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:41.392832"
+      },
+      "buy_precheck_sec": 7.904442,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:41.408729"
+      },
+      "signal_to_order_sec": 15.652974,
+      "score": 85,
+      "paper_trade_id": "20260909_017900_PRE_HISTORY_E001_091533486367",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 1000000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260909_017900_E001",
+      "entry_seq": 4,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:44.262356"
+      },
+      "order_to_fill_sec": 2.853627,
+      "signal_to_fill_sec": 18.506601,
+      "signal_to_fill_slippage_pct": -1.206140350877194,
+      "reference_to_fill_slippage_pct": 0.11111111111110628,
+      "avg_fill_price": 9010.0,
+      "broker_status": "체결"
+    },
+    "0170189": {
+      "order_no": "0170189",
+      "side": "BUY",
+      "stock_code": "403870",
+      "stock_name": "HPSP",
+      "requested_qty": 17,
+      "filled_qty": 17,
+      "broker_filled_qty": 17,
+      "unfilled_qty": 0,
+      "filled_amount": 979200.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 57600.0,
+      "planned_amount": 988992.0,
+      "signal_price": 57200.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:26.072802"
+      },
+      "signal_time_str": "2026-09-09 09:15:26.072",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:16:08.174159"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:26.072802"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:15:58.535834"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:16:07.886129"
+      },
+      "buy_precheck_sec": 9.350295,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:16:08.174159"
+      },
+      "signal_to_order_sec": 42.101357,
+      "score": 77,
+      "paper_trade_id": "20260909_403870_PRE_HISTORY_E003_091558513845",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 1000000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260909_403870_E003",
+      "entry_seq": 5,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:16:14.042667"
+      },
+      "order_to_fill_sec": 5.868508,
+      "signal_to_fill_sec": 47.969865,
+      "signal_to_fill_slippage_pct": 0.6993006993007089,
+      "reference_to_fill_slippage_pct": 0.0,
+      "avg_fill_price": 57600.0,
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {},
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "403870",
+      "119850",
+      "032820",
+      "017900",
+      "000500"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0160713",
+          "62789",
+          "72",
+          "13735.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0170189",
+          "25963",
+          "17",
+          "57600.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0136832",
+          "52372",
+          "20",
+          "47600.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0119886",
+          "31094",
+          "3",
+          "253500.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0168530",
+          "36008",
+          "110",
+          "9010.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0160713",
+          "62788",
+          "38",
+          "13730.0"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 5,
+  "live_daily_realized_pnl": -13500.0,
+  "live_trading_halted": false,
+  "live_system_halt_reason": "",
+  "live_recovery_mode": false,
+  "live_blocked_codes": {},
+  "live_execution_issue_codes": {
+    "__type__": "set",
+    "value": []
+  },
+  "broker_balances": {
+    "080220": {
+      "stock_code": "080220",
+      "stock_name": "제주반도체",
+      "held_qty": 1,
+      "sellable_qty": 1,
+      "avg_price": 89493.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:28:07.781693"
+      },
+      "qty": 1,
+      "tradable_qty": 1
+    },
+    "445680": {
+      "stock_code": "445680",
+      "stock_name": "큐리옥스바이오시스템즈",
+      "held_qty": 52,
+      "sellable_qty": 52,
+      "avg_price": 59874.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-09T09:28:07.781693"
+      },
+      "qty": 52,
+      "tradable_qty": 52
+    }
+  },
+  "broker_startup_holdings": {
+    "__type__": "set",
+    "value": [
+      "445680",
+      "080220"
+    ]
+  }
+}
