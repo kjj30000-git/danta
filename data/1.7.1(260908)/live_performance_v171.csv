@@ -1,5 +1,0 @@
-﻿version,stock_code,stock_name,strategy,result,cache_used,cache_miss_reason,fallback_precheck_used,cache_age_at_trigger_sec,cache_generation,position_version,precheck_call_duration_ms,precheck_queue_wait_ms,trigger_to_worker_submit_ms,trigger_to_order_api_start_ms,order_api_duration_ms,trigger_to_order_sec,order_to_fill_sec,trigger_to_fill_sec,trigger_to_fill_slippage_pct
-v1.7.1,161580,필옵틱스,T250_S150,STOP_LOSS,False,EXIT_IN_PROGRESS,True,4.864,4,1,5974.524,,37.347,6170.238,7454.726,13.624964,0.125736,13.7507,-0.13333333333332975
-v1.7.1,032820,우리기술,T250_S150,STOP_LOSS,False,STALE;EXIT_IN_PROGRESS,True,58.788,6,1,14525.298,,48.201,14922.493,3223.877,18.14637,47.402529,65.548899,-0.08169934640522847
-v1.7.1,386380,스카이랩스,T250_S150,STOP_LOSS,False,BUY_ORDER_SUBMIT:386380;STALE;HELD_QTY;SELLABLE_QTY;EXIT_IN_PROGRESS;POSITION_VERSION,True,221.305,8,1,9223.3,,48.248,9652.94,4662.03,14.31497,102.3623,116.67727,0.7385524372230501
-v1.7.1,036930,주성엔지니어링,T250_S150,TAKE_PROFIT,False,EXIT_IN_PROGRESS,True,17.853,10,1,10289.137,,12.513,10579.928,7631.287,18.211215,0.207201,18.418416,0.3667481662591676
