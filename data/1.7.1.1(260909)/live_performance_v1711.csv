@@ -1,0 +1,2 @@
+﻿version,stock_code,stock_name,strategy,result,cache_used,cache_miss_reason,fallback_precheck_used,cache_age_at_trigger_sec,cache_generation,position_version,precheck_call_duration_ms,precheck_queue_wait_ms,trigger_to_worker_submit_ms,trigger_to_order_api_start_ms,order_api_duration_ms,trigger_to_order_sec,order_to_fill_sec,trigger_to_fill_sec,trigger_to_fill_slippage_pct
+v1.7.1.1,000500,가온전선,T250_S150,EXTERNAL_EXIT,,,,,,1,,,,,,0.0,0.0,0.0,0.0
