@@ -1,0 +1,3 @@
+﻿version,stock_code,stock_name,strategy,result,cache_used,cache_miss_reason,fallback_precheck_used,cache_age_at_trigger_sec,cache_generation,position_version,precheck_call_duration_ms,precheck_queue_wait_ms,trigger_to_worker_submit_ms,trigger_to_order_api_start_ms,order_api_duration_ms,trigger_to_order_sec,order_to_fill_sec,trigger_to_fill_sec,trigger_to_fill_slippage_pct
+v1.7.1.2,032940,원익,T250_S150,STOP_LOSS,True,,False,39.598,4,1,0.0,,0.0,,5573.907,5.592533,0.34935,5.941883,-0.521695719099724
+v1.7.1.2,096770,SK이노베이션,T250_S150,STOP_LOSS,True,,False,1.261,5,1,0.0,,0.0,,2996.169,2.998248,0.163293,3.161541,-0.1877346683354153

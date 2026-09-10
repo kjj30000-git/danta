@@ -1,0 +1,352 @@
+{
+  "trade_date": "2026-09-10",
+  "live_orders": {
+    "0199861": {
+      "order_no": "0199861",
+      "side": "BUY",
+      "stock_code": "096770",
+      "stock_name": "SK이노베이션",
+      "requested_qty": 3,
+      "filled_qty": 3,
+      "broker_filled_qty": 3,
+      "unfilled_qty": 0,
+      "filled_amount": 486900.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 162000.0,
+      "planned_amount": 490860.0,
+      "signal_price": 161900.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:19:50.276815"
+      },
+      "signal_time_str": "2026-09-10 09:19:50.276",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:19:52.989377"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:19:50.276815"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:19:50.291585"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:19:52.970792"
+      },
+      "buy_precheck_sec": 2.679207,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:19:52.989377"
+      },
+      "signal_to_order_sec": 2.712562,
+      "score": 79,
+      "paper_trade_id": "20260910_096770_PRE_HISTORY_E004_091950290074",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 500000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260910_096770_E004",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:19:53.958163"
+      },
+      "order_to_fill_sec": 0.968786,
+      "signal_to_fill_sec": 3.681348,
+      "signal_to_fill_slippage_pct": 0.24706609017912662,
+      "reference_to_fill_slippage_pct": 0.18518518518517713,
+      "avg_fill_price": 162300.0,
+      "broker_status": "체결"
+    },
+    "0204614": {
+      "order_no": "0204614",
+      "side": "BUY",
+      "stock_code": "032940",
+      "stock_name": "원익",
+      "requested_qty": 43,
+      "filled_qty": 43,
+      "broker_filled_qty": 43,
+      "unfilled_qty": 0,
+      "filled_amount": 488480.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 11420.0,
+      "planned_amount": 495970.60000000003,
+      "signal_price": 11320.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:21:11.223809"
+      },
+      "signal_time_str": "2026-09-10 09:21:11.223",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:21:13.789827"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:21:11.223809"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:21:11.238160"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:21:13.779730"
+      },
+      "buy_precheck_sec": 2.54157,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:21:13.789827"
+      },
+      "signal_to_order_sec": 2.566018,
+      "score": 82,
+      "paper_trade_id": "20260910_032940_PRE_HISTORY_E001_092111237136",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 500000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260910_032940_E001",
+      "entry_seq": 2,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:23:27.849483"
+      },
+      "order_to_fill_sec": 134.059656,
+      "signal_to_fill_sec": 136.625674,
+      "signal_to_fill_slippage_pct": 0.35335689045936647,
+      "reference_to_fill_slippage_pct": -0.5253940455341555,
+      "avg_fill_price": 11360.0,
+      "broker_status": "체결"
+    },
+    "0215026": {
+      "order_no": "0215026",
+      "side": "SELL",
+      "stock_code": "032940",
+      "stock_name": "원익",
+      "requested_qty": 43,
+      "filled_qty": 43,
+      "broker_filled_qty": 43,
+      "unfilled_qty": 0,
+      "filled_amount": 478232.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260910_032940_PRE_HISTORY_E001_092111237136",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260910_032940_E001",
+      "entry_seq": 2,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:24:21.377381"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:24:21.377381"
+      },
+      "broker_precheck_sec": 0.0,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:24:26.951288"
+      },
+      "trigger_to_order_sec": 5.592533,
+      "exit_attempt_id": "7d7269ebcb584d03a71e12405f8f206e",
+      "exit_path": "FAST_CACHE_EXIT",
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    },
+    "0249093": {
+      "order_no": "0249093",
+      "side": "SELL",
+      "stock_code": "096770",
+      "stock_name": "SK이노베이션",
+      "requested_qty": 3,
+      "filled_qty": 3,
+      "broker_filled_qty": 3,
+      "unfilled_qty": 0,
+      "filled_amount": 478500.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260910_096770_PRE_HISTORY_E004_091950290074",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260910_096770_E004",
+      "entry_seq": 1,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:36:12.160927"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:36:12.160927"
+      },
+      "broker_precheck_sec": 0.0,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-10T09:36:15.158167"
+      },
+      "trigger_to_order_sec": 2.998248,
+      "exit_attempt_id": "422a6138b41b4ca1b4b46e4a56e6323e",
+      "exit_path": "FAST_CACHE_EXIT",
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {},
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "032940",
+      "096770"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0249093",
+          "125888",
+          "3",
+          "159500.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0215026",
+          "54415",
+          "1",
+          "11150.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0199861",
+          "100423",
+          "3",
+          "162300.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0215026",
+          "54416",
+          "43",
+          "11121.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0204614",
+          "44624",
+          "43",
+          "11360.0"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 2,
+  "live_daily_realized_pnl": -18648.000000000015,
+  "live_trading_halted": true,
+  "live_system_halt_reason": "EXIT_DISPATCHER_UNHEALTHY",
+  "live_recovery_mode": true,
+  "live_blocked_codes": {},
+  "live_execution_issue_codes": {
+    "__type__": "set",
+    "value": [
+      "991205"
+    ]
+  },
+  "broker_balances": {
+    "080220": {
+      "stock_code": "080220",
+      "stock_name": "제주반도체",
+      "held_qty": 1,
+      "sellable_qty": 1,
+      "avg_price": 89493.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-10T19:59:39.756775"
+      },
+      "qty": 1,
+      "tradable_qty": 1
+    },
+    "445680": {
+      "stock_code": "445680",
+      "stock_name": "큐리옥스바이오시스템즈",
+      "held_qty": 52,
+      "sellable_qty": 52,
+      "avg_price": 59874.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-10T19:59:39.756775"
+      },
+      "qty": 52,
+      "tradable_qty": 52
+    }
+  },
+  "broker_startup_holdings": {
+    "__type__": "set",
+    "value": [
+      "445680",
+      "080220"
+    ]
+  }
+}
