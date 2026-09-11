@@ -1,0 +1,457 @@
+{
+  "trade_date": "2026-09-11",
+  "live_orders": {
+    "0151142": {
+      "order_no": "0151142",
+      "side": "BUY",
+      "stock_code": "001820",
+      "stock_name": "삼화콘덴서",
+      "requested_qty": 3,
+      "filled_qty": 3,
+      "broker_filled_qty": 3,
+      "unfilled_qty": 0,
+      "filled_amount": 387600.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 129300.0,
+      "planned_amount": 391779.0,
+      "signal_price": 129400.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:15.378465"
+      },
+      "signal_time_str": "2026-09-11 09:09:15.378",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:18.341523"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:15.378465"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:15.408261"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:18.323284"
+      },
+      "buy_precheck_sec": 2.915023,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:18.341523"
+      },
+      "signal_to_order_sec": 2.963058,
+      "api_slot_requested_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:18.341523+09:00"
+      },
+      "api_slot_acquired_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:18.341523+09:00"
+      },
+      "api_started_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:18.341523+09:00"
+      },
+      "order_accepted_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:19.133408+09:00"
+      },
+      "api_slot_wait_ms": 0.0,
+      "http_duration_ms": 781.0,
+      "buy_timeout_deadline_mono": 157808.64,
+      "score": 82,
+      "paper_trade_id": "20260911_001820_PRE_HISTORY_E001_090915406221",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 500000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260911_001820_E001",
+      "entry_seq": 1,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:19.180507"
+      },
+      "order_to_fill_sec": 0.838984,
+      "signal_to_fill_sec": 3.802042,
+      "signal_to_fill_slippage_pct": -0.1545595054095794,
+      "reference_to_fill_slippage_pct": -0.07733952049496784,
+      "avg_fill_price": 129200.0,
+      "first_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:19.180507+09:00"
+      },
+      "final_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:19.180507+09:00"
+      },
+      "buy_timeout_result": "",
+      "broker_status": "체결",
+      "accepted_to_first_fill_sec": 0.047099,
+      "accepted_to_final_fill_sec": 0.047099
+    },
+    "0151942": {
+      "order_no": "0151942",
+      "side": "SELL",
+      "stock_code": "001820",
+      "stock_name": "삼화콘덴서",
+      "requested_qty": 3,
+      "filled_qty": 3,
+      "broker_filled_qty": 3,
+      "unfilled_qty": 0,
+      "filled_amount": 382200.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260911_001820_PRE_HISTORY_E001_090915406221",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260911_001820_E001",
+      "entry_seq": 1,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:23.696983"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:28.237886"
+      },
+      "broker_precheck_sec": 4.540903,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:29.200443"
+      },
+      "trigger_to_order_sec": 5.50346,
+      "exit_attempt_id": "4d538d9954714f7490151069ed7a76b9",
+      "exit_path": "SAFE_REST_EXIT",
+      "api_slot_requested_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:28.237886+09:00"
+      },
+      "api_slot_acquired_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:28.237886+09:00"
+      },
+      "api_started_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:28.237886+09:00"
+      },
+      "order_accepted_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:29.199425+09:00"
+      },
+      "api_slot_wait_ms": 0.0,
+      "http_duration_ms": 953.0,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "first_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:29.273556+09:00"
+      },
+      "final_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:29.273556+09:00"
+      },
+      "buy_timeout_result": "",
+      "broker_status": "체결"
+    },
+    "0153934": {
+      "order_no": "0153934",
+      "side": "BUY",
+      "stock_code": "064550",
+      "stock_name": "바이오니아",
+      "requested_qty": 45,
+      "filled_qty": 45,
+      "broker_filled_qty": 45,
+      "unfilled_qty": 0,
+      "filled_amount": 489150.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reference_price": 10860.0,
+      "planned_amount": 493587.0,
+      "signal_price": 10860.0,
+      "signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:51.939327"
+      },
+      "signal_time_str": "2026-09-11 09:09:51.939",
+      "live_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:54.798903"
+      },
+      "buy_signal_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:51.939327"
+      },
+      "buy_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:51.955724"
+      },
+      "buy_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:54.793844"
+      },
+      "buy_precheck_sec": 2.83812,
+      "buy_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:54.798903"
+      },
+      "signal_to_order_sec": 2.859576,
+      "api_slot_requested_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:54.798903+09:00"
+      },
+      "api_slot_acquired_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:54.798903+09:00"
+      },
+      "api_started_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:54.798903+09:00"
+      },
+      "order_accepted_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:55.960603+09:00"
+      },
+      "api_slot_wait_ms": 0.0,
+      "http_duration_ms": 1156.0,
+      "buy_timeout_deadline_mono": 157845.468,
+      "score": 77,
+      "paper_trade_id": "20260911_064550_PRE_HISTORY_E003_090951953630",
+      "live_strategy": "T250_S150",
+      "take_profit_pct": 2.5,
+      "stop_loss_pct": -1.5,
+      "entry_amount_limit": 500000,
+      "entry_allowed_start": "09:05",
+      "entry_allowed_end": "09:30",
+      "profit_protect_enabled_at_entry": false,
+      "noon_recovery_enabled_at_entry": false,
+      "position_version": 1,
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260911_064550_E003",
+      "entry_seq": 2,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_fill_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:56.065973"
+      },
+      "order_to_fill_sec": 1.26707,
+      "signal_to_fill_sec": 4.126646,
+      "signal_to_fill_slippage_pct": 0.09208103130755596,
+      "reference_to_fill_slippage_pct": 0.09208103130755596,
+      "avg_fill_price": 10870.0,
+      "first_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:56.065973+09:00"
+      },
+      "final_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:09:56.065973+09:00"
+      },
+      "buy_timeout_result": "",
+      "broker_status": "체결",
+      "accepted_to_first_fill_sec": 0.10537,
+      "accepted_to_final_fill_sec": 0.10537
+    },
+    "0156583": {
+      "order_no": "0156583",
+      "side": "SELL",
+      "stock_code": "064550",
+      "stock_name": "바이오니아",
+      "requested_qty": 45,
+      "filled_qty": 45,
+      "broker_filled_qty": 45,
+      "unfilled_qty": 0,
+      "filled_amount": 481500.0,
+      "status": "FILLED",
+      "exchange": "SOR",
+      "reason": "STOP_LOSS",
+      "paper_trade_id": "20260911_064550_PRE_HISTORY_E003_090951953630",
+      "entry_mode": "PRE_HISTORY",
+      "pre_entry_type": "FIRST_75_PASS",
+      "watch_episode_id": "20260911_064550_E003",
+      "entry_seq": 2,
+      "broker_precheck_start_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:29.878579"
+      },
+      "broker_precheck_end_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:29.878579"
+      },
+      "broker_precheck_sec": 0.0,
+      "sell_order_time": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:31.807115"
+      },
+      "trigger_to_order_sec": 1.933718,
+      "exit_attempt_id": "302a7377c4344528b105295c631a80e3",
+      "exit_path": "FAST_CACHE_EXIT",
+      "api_slot_requested_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:29.879676+09:00"
+      },
+      "api_slot_acquired_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:29.879676+09:00"
+      },
+      "api_started_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:29.879676+09:00"
+      },
+      "order_accepted_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:31.796588+09:00"
+      },
+      "api_slot_wait_ms": 0.0,
+      "http_duration_ms": 1922.0,
+      "pending_auto_buy_qty": 0,
+      "pending_auto_sell_qty": 0,
+      "buy_signal_time": "",
+      "buy_precheck_start_time": "",
+      "buy_precheck_end_time": "",
+      "buy_precheck_sec": "",
+      "buy_order_time": "",
+      "buy_fill_time": "",
+      "signal_to_order_sec": "",
+      "order_to_fill_sec": "",
+      "signal_to_fill_sec": "",
+      "signal_to_fill_slippage_pct": "",
+      "reference_to_fill_slippage_pct": "",
+      "avg_fill_price": "",
+      "first_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:31.876354+09:00"
+      },
+      "final_fill_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T09:10:31.876354+09:00"
+      },
+      "buy_timeout_result": "",
+      "broker_status": "체결"
+    }
+  },
+  "live_positions": {},
+  "live_entered_today": {
+    "__type__": "set",
+    "value": [
+      "001820",
+      "064550"
+    ]
+  },
+  "live_processed_fill_ids": {
+    "__type__": "set",
+    "value": [
+      {
+        "__type__": "tuple",
+        "value": [
+          "0151942",
+          "34542",
+          "3",
+          "127400.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0156583",
+          "61191",
+          "45",
+          "10700.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0151142",
+          "32880",
+          "3",
+          "129200.0"
+        ]
+      },
+      {
+        "__type__": "tuple",
+        "value": [
+          "0153934",
+          "60302",
+          "45",
+          "10870.0"
+        ]
+      }
+    ]
+  },
+  "live_trade_count": 2,
+  "live_daily_realized_pnl": -13050.0,
+  "live_trading_halted": false,
+  "live_system_halt_reason": "",
+  "live_recovery_mode": false,
+  "live_blocked_codes": {},
+  "live_execution_issue_codes": {
+    "__type__": "set",
+    "value": [
+      "991205"
+    ]
+  },
+  "broker_balances": {
+    "080220": {
+      "stock_code": "080220",
+      "stock_name": "제주반도체",
+      "held_qty": 1,
+      "sellable_qty": 1,
+      "avg_price": 89493.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T19:59:33.723283"
+      },
+      "qty": 1,
+      "tradable_qty": 1
+    },
+    "445680": {
+      "stock_code": "445680",
+      "stock_name": "큐리옥스바이오시스템즈",
+      "held_qty": 52,
+      "sellable_qty": 52,
+      "avg_price": 59874.0,
+      "exchange": "KRX",
+      "updated_at": {
+        "__type__": "datetime",
+        "value": "2026-09-11T19:59:33.723283"
+      },
+      "qty": 52,
+      "tradable_qty": 52
+    }
+  },
+  "broker_startup_holdings": {
+    "__type__": "set",
+    "value": [
+      "080220",
+      "445680"
+    ]
+  }
+}

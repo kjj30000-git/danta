@@ -1,0 +1,3 @@
+﻿version,stock_code,stock_name,strategy,result,cache_used,cache_miss_reason,fallback_precheck_used,cache_age_at_trigger_sec,cache_generation,position_version,precheck_call_duration_ms,precheck_queue_wait_ms,trigger_to_worker_submit_ms,trigger_to_order_api_start_ms,order_api_duration_ms,trigger_to_order_sec,order_to_fill_sec,trigger_to_fill_sec,trigger_to_fill_slippage_pct
+v1.7.1.3,001820,삼화콘덴서,T250_S150,STOP_LOSS,False,BUY_ORDER_SUBMIT:001820;STALE;HELD_QTY;SELLABLE_QTY;POSITION_VERSION,True,,3,1,4540.903,,0.0,,962.557,5.50346,0.073113,5.576573,0.15723270440251014
+v1.7.1.3,064550,바이오니아,T250_S150,STOP_LOSS,True,,False,15.959,5,1,0.0,,0.0,,1928.536,1.933718,0.069239,2.002957,0.0
