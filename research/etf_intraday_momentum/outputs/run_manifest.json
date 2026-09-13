@@ -1,0 +1,20 @@
+{
+  "started_at_kst": "2026-09-13T21:10:07.967660+09:00",
+  "finished_at_kst": "2026-09-13T21:28:10.253796+09:00",
+  "run_mode": "AUTO",
+  "kiwoom_env": "REAL",
+  "status": "COMPLETE",
+  "bar_minutes": "1",
+  "start_date": null,
+  "end_date": null,
+  "original_rule_enabled": true,
+  "korean_v20_rule_enabled": true,
+  "cost_model_version": "etf_unconfirmed_v1",
+  "details": {
+    "available_start_date": "2025-09-01",
+    "available_end_date": "2026-09-11",
+    "processed_rows": 1028533,
+    "unique_entries": 1493,
+    "grid_rows": 23888
+  }
+}
