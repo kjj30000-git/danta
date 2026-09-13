@@ -16,6 +16,10 @@
 - Parent: `code/releases/022_260914_v2.0.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
 - Scope: v2.0 전체를 보존하고, 09:00~09:15 등락률 상위 종목의 OPENING_LEADER 관찰·직접돌파·눌림재돌파·시장대비 상대강도 가상연구 추가
+- Generated candidate: `code/releases/023_260914_v2.1.ipynb`
+- Candidate SHA-256: `aae7fb8b06069bfbc19ac44447253180365de408b05bc59118c56a2f3adae56e`
+- Verification: 4개 셀 compile, 부모 정의 316개 보존, 외부연결 차단 cold-start, OPENING_LEADER 시간순 상태·중복·20-grid·주문분리 mock 검증 통과
+- Status: 정적·mock 검증 완료 / 2026-09-14 전향 실행 대기
 
 ## Latest handoff
 
