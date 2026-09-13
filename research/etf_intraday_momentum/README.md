@@ -22,4 +22,4 @@
 
 예정 노트북:
 
-`notebooks/001_ETF_과거분봉_수집백테스트.ipynb`
+`notebooks/RES_001_ETF_과거분봉_수집백테스트.ipynb`
