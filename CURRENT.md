@@ -1,57 +1,42 @@
 # CURRENT PROJECT STATE
 
 ## Current validated release
-- Version: **v1.6.9**
-- Path: `code/releases/015_260903_v1.6.9.ipynb`
-- Intended execution date: **2026-09-03**
-- Default live mode: `AUTO_TRADE_ENABLED = False`
-- Status: **validated by syntax/static checks and isolated regression helpers**
 
-## Direct base / lineage
-- Direct base: `code/releases/014_260902_v1.6.8.ipynb`
-- Base SHA-256: `a0ba5fac45dd7180562cefbed1068affc33604f1d5ea8e0eb31fcb114a82b9e1`
-- Principle: preserve the latest validated code and apply only the required minimum/local changes.
+- Version: **v1.7.1.3**
+- Path: `code/releases/021_260911_v1.7.1.3.ipynb`
+- Execution date: **2026-09-11**
+- SHA-256: `c7d65e6754e8594a815a7cf9c57d4f8fb1950a76998a5a638749ffbbca52bff0`
+- Saved default: `AUTO_TRADE_ENABLED = False`
+- Status: release 실행 및 `data/1.7.1.3(260911)/` 결과 수집 완료
 
-## v1.6.9 final validation
-- 4 code cells / final Continuity cell
-- Notebook cell syntax compilation: PASS
-- v1.6.8 protected execution functions AST equivalence: PASS
-- `test_v166_core_logic`: PASS
-- `test_v166_episode_mode_reentry`: PASS
-- `test_v166_live_order_safety`: PASS
-- `test_v167_order_engine_safety`: PASS
-- `test_v168_manual_sell_ledger_helpers`: PASS
-- `test_v169_handoff_changes`: PASS
-- Actual Kiwoom broker live-order test: **NOT performed**
+## Next target
 
-## Independent review candidate
-- `code/candidates/v1.6.8/014_260901_v1.6.8(새채팅).ipynb`
-- Role: independent comparison / dissenting review only; it does not gate the GitHub release.
-
-## Release convention
-- `code/releases/` contains **final/base `.ipynb` notebooks directly**.
-- Release filename date is the **intended execution date**.
-- Do not create release `.txt` or `.py` copies unless explicitly requested.
+- Version: **v2.0**
+- Intended execution date: **2026-09-14**
+- Parent: `code/releases/021_260911_v1.7.1.3.ipynb`
+- Default mode: `EXECUTION_MODE = "RESEARCH"`
+- Scope: 실제·키움 모의주문 없이 내부 가상매매와 데이터 수집, 유지·신규 전략 병렬연구
 
 ## Latest handoff
-- `handoff/2026-09-02/v1.6.8_to_v1.6.9_인수인계서_최종.md`
 
-## v1.6.9 integrated changes
-- Live amount per stock: **3,000,000 KRW**
-- Total live budget safety cap: **18,000,000 KRW**
-- Daily max loss: **300,000 KRW**
-- Preserve FIRST_75_PASS / 09:05~09:30 / T200_S150 / max 5 stocks / same stock once per day
-- BUY latency/slippage instrumentation
-- Research-only `WIDE_HIGH_GAP_SHADOW` and `PRE_FAIL_PULLBACK_SHADOW`
+- `handoff/2026-09-13/v1.7.1.3_to_v2.0_연구전용_다중전략_최종인수인계서_2026-09-13.md`
+
+## v2.0 fixed decisions
+
+- 단일 실행 모드 문자열 `RESEARCH` / `MOCK` / `LIVE`; 이중차단은 추가하지 않음
+- v2.0 저장·운영 기본값은 `RESEARCH`
+- v1.7.1.3 주문엔진은 시간기록 산식 오류만 수정하고 나머지 개선은 동결
+- 기존 BASE/FIRST_75 대조군과 선택된 Shadow 유지
+- CALM_FIRST_75, CALM 보호청산, ORB 3종, ETF 장후반 모멘텀 신규 수집
+- 기존 169 grid, 신규 주식 20 grid, ETF 16 grid를 서로 구분
+- 전략 함수 바로 위에 유지/중단/폐기/신규 상태 주석
+- Cell 3 QUICK REFERENCE와 Cell 4 CONTINUITY는 부모 구조 보존 후 append-only
+- 구현 후 1차 검증과 독립적인 2차 비판적 리뷰를 자동 수행
 
 ## Data convention
-Scanner / paper / live CSV files and live-state JSON files go under:
+
+Scanner / paper / live CSV와 상태 JSON은 다음 형식으로 저장한다.
 
 `data/X.Y.Z(YYMMDD[, YYMMDD...])/`
 
-Examples:
-
-- `data/1.6.7(260831, 260901)/`
-- `data/1.6.8(260902)/`
-
-Execution-result folders must be stored under `data/`, not at the repository root.
+v2.0 신규 ETF 파일과 연구 파일도 동일한 실행일자 폴더 아래에 둔다.
