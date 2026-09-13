@@ -11,15 +11,28 @@
 
 ## Next target
 
-- Version: **v2.0**
+- Version: **v2.1**
 - Intended execution date: **2026-09-14**
-- Parent: `code/releases/021_260911_v1.7.1.3.ipynb`
+- Parent: `code/releases/022_260914_v2.0.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Scope: 실제·키움 모의주문 없이 내부 가상매매와 데이터 수집, 유지·신규 전략 병렬연구
+- Scope: v2.0 전체를 보존하고, 09:00~09:15 등락률 상위 종목의 OPENING_LEADER 관찰·직접돌파·눌림재돌파·시장대비 상대강도 가상연구 추가
 
 ## Latest handoff
 
-- `handoff/2026-09-13/v1.7.1.3_to_v2.0_연구전용_다중전략_최종인수인계서_2026-09-13.md`
+- `handoff/2026-09-13/v2.0_to_v2.1_OPENING_LEADER_최종인수인계서_2026-09-13.md`
+
+## v2.1 fixed decisions
+
+- 부모 `code/releases/022_260914_v2.0.ipynb` 전체를 복제하고 국소 수정
+- 09:00~09:15 등락률 상위 후보를 동적으로 독립 추적
+- 09:01~09:15에 `OPENING_LEADER_DIRECT`, `OPENING_LEADER_RETEST`, `OPENING_LEADER_RS` 가상진입
+- 등락률 상위는 발견 기준, 실제 거래대금 20억원은 진입 유동성 기준
+- FIRST_75 점수를 신규 전략 진입조건으로 사용하지 않음
+- 기존 거래대금 상위 ORB와 상태·이름·표본을 분리
+- 신규 관찰 파일 `opening_leader_observations_v21.csv`
+- 신규 전략은 `NEW_STOCK_20` grid와 왕복 추정비용 0.24% 사용
+- 저장·운영 기본값 `RESEARCH`, 실제·키움 모의주문 0건
+- 구현 후 1차 검증, 독립 2차 비판적 리뷰, 수정 후 전체 회귀검증
 
 ## v2.0 fixed decisions
 
