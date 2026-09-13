@@ -166,7 +166,9 @@ mock 검증 통과만으로 실전 무결함이나 실전 확대 가능을 선�
 - 기존 BASE, PRE_HISTORY, FIRST_75_PASS, LATER_PASS, CONFIRM, LIVE_FILTER_SHADOW, SHADOW_SCORE_70_74, WIDE_HIGH_GAP_SHADOW, PRE_FAIL_PULLBACK_SHADOW, WATCH Episode, ENTRY_PATH, POST_EXIT, 169개 TP/SL grid 보존
 - 새 진입 연구의 목표는 75점 임계값 미세조정이 아니라 상승 초중반을 포착하는 독립 패턴 탐색
 - 새 전략의 실전 승격 여부는 표본 수, 날짜별 재현성, 비용 후 기대값과 Profit Factor로 결정
-- 릴리스에 저장하는 기본값은 항상 `AUTO_TRADE_ENABLED=False`
+- v2.0부터 릴리스에 저장하는 기본값은 `EXECUTION_MODE="RESEARCH"`로 하며,
+  호환 파생값 `AUTO_TRADE_ENABLED=False`, `USE_MOCK=False`가 되어 실제·모의 주문 없이 내부 가상연구만 실행한다.
+- 향후 예약 모드는 `"MOCK"`, `"LIVE"`이며 사용자 명시적 결정 없이 기본값을 변경하지 않는다.
 
 ### 5. 데이터 병합·성과 분석 원칙
 
@@ -186,7 +188,7 @@ mock 검증 통과만으로 실전 무결함이나 실전 확대 가능을 선�
 
 사용자 설정은 첫 셀에서 명확히 보이고 합리적 범위 안에서 변경 가능해야 합니다.
 
-- 자동매매 ON/OFF
+- 실행 모드: v2.0 이후에는 Boolean 조합 대신 `EXECUTION_MODE` (`RESEARCH` / `MOCK` / `LIVE`)
 - 수익보호 ON/OFF
 - 종목당 투자금액, 최대 진입 횟수, 총예산
 - 실제 진입 전략
@@ -205,7 +207,7 @@ mock 검증 통과만으로 실전 무결함이나 실전 확대 가능을 선�
 
 현재 최종 인수인계서:
 
-`handoff/2026-09-10/v1.7.1.2_to_v1.7.1.3_주문우선권_미체결관리_최종인수인계서_2026-09-10.md`
+`handoff/2026-09-13/v1.7.1.3_to_v2.0_연구전용_다중전략_최종인수인계서_2026-09-13.md`
 
 ## 문서 역할과 충돌 처리 프로세스
 
