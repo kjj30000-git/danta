@@ -1,0 +1,29 @@
+name: Validate latest release notebook
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "code/releases/**.ipynb"
+      - ".github/tools/validate_release_notebook.py"
+      - ".github/workflows/validate_latest_release.yml"
+  pull_request:
+    paths:
+      - "code/releases/**.ipynb"
+      - ".github/tools/validate_release_notebook.py"
+
+jobs:
+  static-release-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pyflakes
+      - name: Select and validate latest release
+        shell: bash
+        run: |
+          release=$(find code/releases -maxdepth 1 -name '*.ipynb' -print | sort -V | tail -n 1)
+          test -n "$release"
+          python .github/tools/validate_release_notebook.py "$release"
