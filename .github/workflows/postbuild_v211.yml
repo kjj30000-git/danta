@@ -1,0 +1,52 @@
+name: Strict post-build approval v2.1.1
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/tools/postbuild_v211.py"
+      - ".github/workflows/postbuild_v211.yml"
+      - ".github/triggers/postbuild_v211.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PARENT: code/releases/023_260914_v2.1.ipynb
+  TARGET: code/releases/024_260915_v2.1.1.ipynb
+  REPORT: reports/validation/2026-09-14_v2.1.1_postbuild_approval.md
+
+jobs:
+  strict-postbuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check pyflakes pandas requests websockets
+      - name: Strict negative-control and runtime fixture checks
+        shell: bash
+        run: |
+          set -o pipefail
+          python .github/tools/postbuild_v211.py --target "$TARGET" --report "$REPORT" | tee /tmp/postbuild_v211.log
+      - name: Independent parent-preservation review
+        run: python .github/tools/review_v211.py "$PARENT" "$TARGET"
+      - name: Repository release validator
+        run: python .github/tools/validate_release_notebook.py "$TARGET"
+      - name: Commit approval report
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$REPORT"
+          if git diff --cached --quiet; then
+            echo "No approval report changes"
+          else
+            git commit -m "test: record strict v2.1.1 post-build approval"
+            git push origin HEAD:main
+          fi
