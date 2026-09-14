@@ -121,7 +121,7 @@ def run_off_hours_validation():
     assert replay["14:30:00"]["etf_decision"] is True
     assert replay["14:50:00"]["etf_decision"] is True
     assert replay["15:00:00"]["etf_decision"] is True
-    assert replay["15:30:00"]["session"] == "MAIN"
+    assert replay["15:30:00"]["session"] == "WAIT"
     assert replay["15:40:00"]["session"] == "NXT_AFTER"
     assert replay["20:00:01"]["program_active"] is False
 

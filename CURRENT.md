@@ -19,7 +19,7 @@
 - Planned release: `code/releases/024_260915_v2.1.1.ipynb`
 - Verification basis: 깨끗한 정적검사, 별도 프로세스 cold-start, 장외 시간경계 replay, 기존 전체 회귀, negative-control
 - Incident: 2026-09-14 장중 실행에서 `copy` import 누락과 `selected_exit_strategies` 미정의 확인. 09:00~09:15 OPENING_LEADER·ORB 수집 실패 및 후처리 오류 발생
-- Status: **v2.1 실행 금지 / v2.1.1 설계 완료·코드 작성 전**. v2.1 결과는 전략 승격·조건 변경 근거로 사용하지 않음
+- Status: **v2.1 실행 금지 / v2.1.1 코드 작성·정적검사·cold-start·장외 replay·169/20/16 grid·negative-control·2차 비판적 리뷰 PASS**. 2026-09-15 장중 첫 실행은 `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`로만 진행
 
 ## Latest handoff
 

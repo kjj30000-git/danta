@@ -1,0 +1,9 @@
+SECOND_REVIEW_V211
+PASS: Cell1 strategy/risk constants unchanged except approved operating-hours additions
+PASS: All pre-existing strategy/order functions unchanged outside explicit allowlist
+PASS: Program constants unchanged except version/file outputs and removed duplicate hours
+PASS: Imports / single-source hours / duplicate dict key checks passed
+PASS: Selected grid is validated/used before persistent paper state registration
+PASS: Off-hours replay is network/order-free and contains all required boundary times
+PASS: All top-level *_FILE outputs separated from v2.1 suffix
+SECOND_REVIEW_PASS

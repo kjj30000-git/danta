@@ -266,3 +266,8 @@ README 확인: 완료
 
 `문서 충돌: 있음`이면서 처리근거가 명백한 최신 사용자 결정이 아니거나 안전 관련 사항이면
 코드를 먼저 작성하지 않는다. 사용자 확인 후 진행한다.
+
+
+### v2.1.1 복구 검증 상태 (2026-09-14)
+
+`024_260915_v2.1.1.ipynb`는 v2.1 전략 조건을 바꾸지 않는 복구 release다. `copy` 명시 import, `open_paper_trade()` 선택 grid 169/20/16, `PROGRAM_START/PROGRAM_END` Cell 1 단일 설정원, `_v211` 출력 분리와 RESEARCH 전용 장외 가상시계 replay를 적용한다. release 승인은 깨끗한 별도 프로세스 cold-start, 저장소 정적검사, boundary replay, grid 원자성, negative-control, 독립 2차 비판적 리뷰가 모두 PASS한 경우에만 허용한다. 2026-09-15 첫 장중 실행은 `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`를 유지하며 실제·모의 주문은 0건이어야 한다.
