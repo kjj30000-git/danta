@@ -32,7 +32,26 @@ jobs:
       - name: Install validation dependencies
         run: python -m pip install --disable-pip-version-check pyflakes pandas requests websockets
       - name: Build v2.1.1 from frozen v2.1 parent
-        run: python .github/tools/build_v211.py --parent "$PARENT" --target "$TARGET" --report "$REPORT"
+        id: build_v211
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -o pipefail
+          python .github/tools/build_v211.py --parent "$PARENT" --target "$TARGET" --report "$REPORT" 2>&1 | tee /tmp/v211_build.log
+      - name: Persist build failure diagnostics
+        if: steps.build_v211.outcome == 'failure'
+        shell: bash
+        run: |
+          mkdir -p reports/validation
+          cp /tmp/v211_build.log reports/validation/2026-09-14_v2.1.1_build_failure.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add reports/validation/2026-09-14_v2.1.1_build_failure.txt
+          git commit -m "test: record v2.1.1 build failure diagnostics" || true
+          git push origin HEAD:main
+      - name: Stop after failed build
+        if: steps.build_v211.outcome == 'failure'
+        run: exit 1
       - name: Repository release validator
         run: python .github/tools/validate_release_notebook.py "$TARGET"
       - name: Independent second critical review
