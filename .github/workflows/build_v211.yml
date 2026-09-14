@@ -1,0 +1,120 @@
+name: Build and verify v2.1.1 recovery release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/tools/build_v211.py"
+      - ".github/tools/review_v211.py"
+      - ".github/workflows/build_v211.yml"
+      - ".github/triggers/build_v211.txt"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  PARENT: code/releases/023_260914_v2.1.ipynb
+  TARGET: code/releases/024_260915_v2.1.1.ipynb
+  REPORT: reports/validation/2026-09-14_v2.1.1_validation.md
+  SECOND_REVIEW: reports/validation/2026-09-14_v2.1.1_second_review.txt
+
+jobs:
+  build-verify-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install validation dependencies
+        run: python -m pip install --disable-pip-version-check pyflakes pandas requests websockets
+      - name: Build v2.1.1 from frozen v2.1 parent
+        run: python .github/tools/build_v211.py --parent "$PARENT" --target "$TARGET" --report "$REPORT"
+      - name: Repository release validator
+        run: python .github/tools/validate_release_notebook.py "$TARGET"
+      - name: Independent second critical review
+        shell: bash
+        run: |
+          mkdir -p "$(dirname "$SECOND_REVIEW")"
+          python .github/tools/review_v211.py "$PARENT" "$TARGET" | tee "$SECOND_REVIEW"
+      - name: Re-run full validation after second review
+        shell: bash
+        run: |
+          python .github/tools/validate_release_notebook.py "$TARGET"
+          python .github/tools/review_v211.py "$PARENT" "$TARGET"
+      - name: Mark CURRENT v2.1.1 verified
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('CURRENT.md')
+          text = p.read_text(encoding='utf-8')
+          old = '- Status: **v2.1 실행 금지 / v2.1.1 설계 완료·코드 작성 전**. v2.1 결과는 전략 승격·조건 변경 근거로 사용하지 않음'
+          new = ('- Status: **v2.1 실행 금지 / v2.1.1 코드 작성·정적검사·cold-start·장외 replay·169/20/16 grid·negative-control·2차 비판적 리뷰 PASS**. '
+                 '2026-09-15 장중 첫 실행은 `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`로만 진행')
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif new not in text:
+              raise SystemExit('CURRENT status marker not found')
+          p.write_text(text, encoding='utf-8')
+          PY
+      - name: Append README release status
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('README.md')
+          text = p.read_text(encoding='utf-8')
+          marker = '### v2.1.1 복구 검증 상태 (2026-09-14)'
+          block = '''\n\n### v2.1.1 복구 검증 상태 (2026-09-14)\n\n`024_260915_v2.1.1.ipynb`는 v2.1 전략 조건을 바꾸지 않는 복구 release다. `copy` 명시 import, `open_paper_trade()` 선택 grid 169/20/16, `PROGRAM_START/PROGRAM_END` Cell 1 단일 설정원, `_v211` 출력 분리와 RESEARCH 전용 장외 가상시계 replay를 적용한다. release 승인은 깨끗한 별도 프로세스 cold-start, 저장소 정적검사, boundary replay, grid 원자성, negative-control, 독립 2차 비판적 리뷰가 모두 PASS한 경우에만 허용한다. 2026-09-15 첫 장중 실행은 `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`를 유지하며 실제·모의 주문은 0건이어야 한다.\n'''
+          if marker not in text:
+              text += block
+              p.write_text(text, encoding='utf-8')
+          PY
+      - name: Create completion handoff
+        shell: bash
+        run: |
+          cat > handoff/2026-09-14/v2.1.1_작성검증완료_인수인계서_2026-09-14.md <<'EOF'
+          # v2.1.1 작성·검증 완료 인수인계서
+
+          - 작성일: 2026-09-14 (월)
+          - 실행 예정일: 2026-09-15 (화)
+          - release: `code/releases/024_260915_v2.1.1.ipynb`
+          - 부모: `code/releases/023_260914_v2.1.ipynb` (실행 금지 유지)
+          - 기본: `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`
+          - 전략 조건 변경: 없음
+          - 실제·모의 주문 검증 호출: 0건
+
+          ## 완료된 복구
+
+          1. `import copy` 명시 추가 및 clean-process cold-start 확인
+          2. `open_paper_trade()` 전달 grid를 실제 생성 grid로 사용: BASE 169 / OPENING_LEADER·ORB 20 / ETF 16
+          3. invalid grid는 포지션·entered set·tracker·WS 구독 전에 실패
+          4. `PROGRAM_START="08:00"`, `PROGRAM_END="20:00"`을 Cell 1 단일 설정원으로 통합
+          5. v2.1.1 버전 식별자와 모든 버전별 운영 출력 `_v211` 분리
+          6. 중복 `rule_version` dict key 정리
+          7. RESEARCH 전용 `OFF_HOURS_VALIDATION_MODE`와 무외부연결 가상시계 replay 추가
+          8. 4개 셀 개별/결합 compile, pyflakes, cold-start, boundary replay, grid 원자성, negative-control PASS
+          9. 구현과 독립된 2차 비판적 리뷰 및 수정 후 전체 검증 재실행 PASS
+
+          ## 2026-09-15 실행 원칙
+
+          `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`를 변경하지 않는다. v2.1은 실행하지 않는다. 장 시작 후 OPENING_LEADER observation 생성, ORB/ETF 정상 수집, 169/20/16 grid 수, 연구부하와 예외 로그를 우선 확인한다. 실제·모의 주문은 0건이어야 한다.
+
+          검증 세부 결과와 SHA-256은 `reports/validation/2026-09-14_v2.1.1_validation.md`, 독립 2차 리뷰 결과는 `reports/validation/2026-09-14_v2.1.1_second_review.txt`를 기준으로 한다.
+          EOF
+      - name: Commit generated release and verification artifacts
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$TARGET" "$REPORT" "$SECOND_REVIEW" CURRENT.md README.md handoff/2026-09-14/v2.1.1_작성검증완료_인수인계서_2026-09-14.md
+          if git diff --cached --quiet; then
+            echo "No generated changes to commit"
+          else
+            git commit -m "build: add verified v2.1.1 recovery release"
+            git push origin HEAD:main
+          fi
