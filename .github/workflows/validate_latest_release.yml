@@ -7,6 +7,7 @@ on:
       - "code/releases/**.ipynb"
       - ".github/tools/validate_release_notebook.py"
       - ".github/workflows/validate_latest_release.yml"
+      - ".github/triggers/validate_latest_release.txt"
   pull_request:
     paths:
       - "code/releases/**.ipynb"
