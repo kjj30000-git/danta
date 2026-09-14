@@ -19,7 +19,8 @@
 - Generated candidate: `code/releases/023_260914_v2.1.ipynb`
 - Candidate SHA-256: `aae7fb8b06069bfbc19ac44447253180365de408b05bc59118c56a2f3adae56e`
 - Verification: 4개 셀 compile, 부모 정의 316개 보존, 외부연결 차단 cold-start, OPENING_LEADER 시간순 상태·중복·20-grid·주문분리 mock 검증 통과
-- Status: 정적·mock 검증 완료 / 2026-09-14 전향 실행 대기
+- Incident: 2026-09-14 장중 실행에서 `copy` import 누락과 `selected_exit_strategies` 미정의 확인. 09:00~09:15 OPENING_LEADER·ORB 수집 실패 및 후처리 오류 발생
+- Status: **실행 금지 / 검증 무효**. v2.1 결과는 전략 성과 판정에 사용하지 않고, 수정 release의 깨끗한 정적검사·장외 가상시계 replay·전체 회귀검증 전까지 재실행하지 않음
 
 ## Latest handoff
 
