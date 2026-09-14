@@ -11,20 +11,19 @@
 
 ## Next target
 
-- Version: **v2.1**
-- Intended execution date: **2026-09-14**
-- Parent: `code/releases/022_260914_v2.0.ipynb`
+- Version: **v2.1.1**
+- Intended execution date: **2026-09-15**
+- Parent: `code/releases/023_260914_v2.1.ipynb` (기능 부모, 실행 금지 상태에서 국소 복구)
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Scope: v2.0 전체를 보존하고, 09:00~09:15 등락률 상위 종목의 OPENING_LEADER 관찰·직접돌파·눌림재돌파·시장대비 상대강도 가상연구 추가
-- Generated candidate: `code/releases/023_260914_v2.1.ipynb`
-- Candidate SHA-256: `aae7fb8b06069bfbc19ac44447253180365de408b05bc59118c56a2f3adae56e`
-- Verification: 4개 셀 compile, 부모 정의 316개 보존, 외부연결 차단 cold-start, OPENING_LEADER 시간순 상태·중복·20-grid·주문분리 mock 검증 통과
+- Scope: v2.1 전략·데이터 구조를 보존하고 `copy` import, 선택 grid, 운영시간 중복 설정을 복구하며 장외 가상시계 replay를 추가
+- Planned release: `code/releases/024_260915_v2.1.1.ipynb`
+- Verification basis: 깨끗한 정적검사, 별도 프로세스 cold-start, 장외 시간경계 replay, 기존 전체 회귀, negative-control
 - Incident: 2026-09-14 장중 실행에서 `copy` import 누락과 `selected_exit_strategies` 미정의 확인. 09:00~09:15 OPENING_LEADER·ORB 수집 실패 및 후처리 오류 발생
-- Status: **실행 금지 / 검증 무효**. v2.1 결과는 전략 성과 판정에 사용하지 않고, 수정 release의 깨끗한 정적검사·장외 가상시계 replay·전체 회귀검증 전까지 재실행하지 않음
+- Status: **v2.1 실행 금지 / v2.1.1 설계 완료·코드 작성 전**. v2.1 결과는 전략 승격·조건 변경 근거로 사용하지 않음
 
 ## Latest handoff
 
-- `handoff/2026-09-13/v2.0_to_v2.1_OPENING_LEADER_최종인수인계서_2026-09-13.md`
+- `handoff/2026-09-14/v2.1_to_v2.1.1_복구_장외검증_최종인수인계서_2026-09-14.md`
 
 ## v2.1 fixed decisions
 
