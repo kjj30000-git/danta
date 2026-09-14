@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "/home/runner/work/danta/danta/.github/tools/build_v211.py", line 606, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "/home/runner/work/danta/danta/.github/tools/build_v211.py", line 601, in main
+    build(args.parent, args.target, args.report)
+  File "/home/runner/work/danta/danta/.github/tools/build_v211.py", line 585, in build
+    cold = run_cold_start(target)
+           ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/danta/danta/.github/tools/build_v211.py", line 469, in run_cold_start
+    raise RuntimeError(
+RuntimeError: cold-start failed
+STDOUT:
+
+STDERR:
+Traceback (most recent call last):
+  File "/tmp/tmpaqjcn1f9.py", line 43, in <module>
+    replay = ns["run_off_hours_validation"]()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 14062, in run_off_hours_validation
+AssertionError
+
