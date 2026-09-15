@@ -9,21 +9,21 @@
 - Saved default: `AUTO_TRADE_ENABLED = False`
 - Status: release 실행 및 `data/1.7.1.3(260911)/` 결과 수집 완료
 
-## Next target
+## Current research release
 
-- Version: **v2.1.1**
-- Intended execution date: **2026-09-15**
-- Parent: `code/releases/023_260914_v2.1.ipynb` (기능 부모, 실행 금지 상태에서 국소 복구)
+- Version: **v2.1.2**
+- Intended execution date: **2026-09-16**
+- Parent: `code/releases/024_260915_v2.1.1.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Scope: v2.1 전략·데이터 구조를 보존하고 `copy` import, 선택 grid, 운영시간 중복 설정을 복구하며 장외 가상시계 replay를 추가
-- Planned release: `code/releases/024_260915_v2.1.1.ipynb`
-- Verification basis: 깨끗한 정적검사, 별도 프로세스 cold-start, 장외 시간경계 replay, 기존 전체 회귀, negative-control
-- Incident: 2026-09-14 장중 실행에서 `copy` import 누락과 `selected_exit_strategies` 미정의 확인. 09:00~09:15 OPENING_LEADER·ORB 수집 실패 및 후처리 오류 발생
-- Status: **v2.1 실행 금지 / v2.1.1 코드 작성·정적검사·cold-start·장외 replay·169/20/16 grid·negative-control·2차 비판적 리뷰 PASS**. 2026-09-15 장중 첫 실행은 `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`로만 진행
+- Scope: FIRST_75_PASS 의미 보존, LATER_PASS OFF 실제 생성 차단, CALM 계통의 확정 FIRST 부모관계 복구
+- Release: `code/releases/025_260916_v2.1.2.ipynb`
+- SHA-256: `f6c8e82d1b14c07169bc716aca79c2f8b0bbefeaf6596bd35e80cbdd2771ac62`
+- Verification basis: compile·pyflakes·clean-process cold-start·시간경계 replay·169/20/16 grid·FIRST/LATER/CALM 행동 회귀·negative-control·2차 비판적 리뷰
+- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 실제·키움 모의주문은 0건이어야 하며 실전 확대 승인이 아님
 
 ## Latest handoff
 
-- `handoff/2026-09-14/v2.1_to_v2.1.1_복구_장외검증_최종인수인계서_2026-09-14.md`
+- `handoff/2026-09-15/v2.1.1_to_v2.1.2_FIRST75_복구_최종인수인계서_2026-09-15.md`
 
 ## v2.1 fixed decisions
 

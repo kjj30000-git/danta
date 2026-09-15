@@ -1,0 +1,33 @@
+v2.1.2 독립 관점 2차 비판적 리뷰
+====================================
+대상: code/releases/025_260916_v2.1.2.ipynb
+부모: code/releases/024_260915_v2.1.1.ipynb
+
+PASS  부모/최종 함수·클래스 정의 335개 동일, 누락 0, 예기치 않은 추가 0
+PASS  FIRST/LATER 판정식은 보존하고 신규 paper 생성 gate만 분리
+PASS  LATER OFF에서도 pre_entry_type=LATER_PASS 추적 의미 보존
+PASS  CALM은 parent_pre_trade_id + FIRST_75_PASS + 최초시점 일치를 모두 요구
+PASS  CALM/PROTECT가 같은 부모 ID와 같은 진입시점·가격을 공유
+PASS  OPENING_LEADER/ORB/ETF 조건과 169/20/16 grid 불변
+PASS  PROGRAM_START/END 단일 설정원과 OFF_HOURS 기본 False 유지
+PASS  clean-process 외부 연결 및 broker 주문 0건
+PASS  LATER gate 제거 negative-control 실패
+PASS  CALM 부모조건 제거 negative-control 실패
+
+발견 및 조치:
+- 최초 fixture에서 _stock_score_time이 실제 현재시각으로 fallback하여 CALM 테스트가 실패함.
+- release 결함이 아니라 fixture의 판정시각 입력 누락으로 확인.
+- _score_evaluated_ts와 _scan_sample_ts를 fixture에 명시하고 전체 검증을 처음부터 재실행해 PASS.
+
+잔여위험:
+- 실제 키움 데이터 도착 순서와 네트워크 장애는 mock으로 확인하지 못함.
+- 본 release는 RESEARCH 전용 검증 상태이며 LIVE/MOCK 확대 승인이 아님.
+
+독립 깨끗한 복사본 재검증 (사용자 요청 후 추가):
+- 로컬 커밋 HEAD를 임시 디렉터리에 새로 추출하여 작업 폴더 상태를 재사용하지 않음.
+- 4개 셀/결합 compile, pyflakes, 335개 부모 정의 보존, main guard 1회 PASS.
+- 동결 설정 8종, 169/20/16 grid, 시간경계 replay PASS.
+- FIRST/LATER/CALM 행동 회귀 및 의미 negative-control 2종 PASS.
+- 외부 연결·실제/모의 broker 주문 0건.
+- 최종 SHA-256: f6c8e82d1b14c07169bc716aca79c2f8b0bbefeaf6596bd35e80cbdd2771ac62
+- 최종 판정: POST_BUILD_APPROVAL_PASS.

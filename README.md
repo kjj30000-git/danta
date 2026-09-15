@@ -228,7 +228,7 @@ mock에서 누락됐다. 같은 유형을 막기 위해 다음 항목을 release
 
 현재 최종 인수인계서:
 
-`handoff/2026-09-14/v2.1_to_v2.1.1_복구_장외검증_최종인수인계서_2026-09-14.md`
+`handoff/2026-09-15/v2.1.1_to_v2.1.2_FIRST75_복구_최종인수인계서_2026-09-15.md`
 
 v2.1 신규 연구의 핵심은 FIRST_75 점수 미세조정이 아니라, 기존 `KA10027` 등락률 상위 결과를 재사용해 09:00~09:15의 주도주를 독립 추적하는 `OPENING_LEADER` 연구다. 등락률 상위는 발견 기준, 실제 거래대금은 유동성 확인 기준으로 사용한다. 기존 거래대금 상위 ORB와 상태·전략명·표본을 섞지 않으며 실제·키움 모의주문에는 연결하지 않는다.
 
@@ -271,3 +271,7 @@ README 확인: 완료
 ### v2.1.1 복구 검증 상태 (2026-09-14)
 
 `024_260915_v2.1.1.ipynb`는 v2.1 전략 조건을 바꾸지 않는 복구 release다. `copy` 명시 import, `open_paper_trade()` 선택 grid 169/20/16, `PROGRAM_START/PROGRAM_END` Cell 1 단일 설정원, `_v211` 출력 분리와 RESEARCH 전용 장외 가상시계 replay를 적용한다. release 승인은 깨끗한 별도 프로세스 cold-start, 저장소 정적검사, boundary replay, grid 원자성, negative-control, 독립 2차 비판적 리뷰가 모두 PASS한 경우에만 허용한다. 2026-09-15 첫 장중 실행은 `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`를 유지하며 실제·모의 주문은 0건이어야 한다.
+
+### v2.1.2 FIRST_75 계통 복구 상태 (2026-09-15)
+
+`025_260916_v2.1.2.ipynb`는 v2.1.1을 부모로 FIRST_75 계통만 국소 복구한 연구 release다. FIRST/LATER 설정을 각각 신규 paper 진입 생성에 연결하고, CALM_FIRST_75/PROTECT는 같은 신호에서 확정·생성된 FIRST_75_PASS의 파생전략으로 제한한다. OPENING_LEADER·ORB·ETF·주문엔진·운영시간·169/20/16 grid는 변경하지 않았다. 정적·mock 검증은 통과했지만 실제·모의 주문 승인이 아니며 기본값은 `EXECUTION_MODE="RESEARCH"`, `OFF_HOURS_VALIDATION_MODE=False`다.
