@@ -11,37 +11,33 @@
 
 ## Current research release
 
-- Version: **v2.1.2**
-- Intended execution date: **2026-09-16**
-- Parent: `code/releases/024_260915_v2.1.1.ipynb`
+- Version: **v2.2.0**
+- Intended execution date: **2026-09-22**
+- Parent: `code/releases/025_260916_v2.1.2.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Scope: FIRST_75_PASS 의미 보존, LATER_PASS OFF 실제 생성 차단, CALM 계통의 확정 FIRST 부모관계 복구
-- Release: `code/releases/025_260916_v2.1.2.ipynb`
-- SHA-256: `f6c8e82d1b14c07169bc716aca79c2f8b0bbefeaf6596bd35e80cbdd2771ac62`
-- Verification basis: compile·pyflakes·clean-process cold-start·시간경계 replay·169/20/16 grid·FIRST/LATER/CALM 행동 회귀·negative-control·2차 비판적 리뷰
-- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 실제·키움 모의주문은 0건이어야 하며 실전 확대 승인이 아님
+- Scope: BASE·FIRST_75_PASS 의미 보존, PULLBACK_SUPPORT_ENTRY·PULLBACK_RECLAIM_ENTRY 신규 수집, 그 밖의 주식 신규 진입 생성 OFF, ETF 계통 불변
+- Release: `code/releases/026_260922_v2.2.0.ipynb`
+- SHA-256: `0b69fd0a3cf164a73ac5152b6674eb14199d8d6a101aa698f707fba221094dbe`
+- Verification basis: 4-cell compile·pyflakes·clean-process cold-start·부모 replay·부모 정의 302/302·1차 fixture 66개·독립 2차 fixture 32개·negative-control·결정적 재빌드
+- Reports: [빌드 검증](reports/build/v2.2.0_build_validation_2026-09-21.md) · [2차 비판적 리뷰](reports/inspection/v2.2.0_second_review_2026-09-21.md) · [최종 회귀검증](reports/regression/v2.2.0_final_regression_2026-09-21.md)
+- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·실제·키움 모의주문은 모두 0건이며 실전 확대 승인이 아님
 
 ## Latest handoff
 
 - [v2.2.0 눌림·지지·재상승 최종 인수인계서](handoff/2026-09-21/v2.1.2_to_v2.2.0_PULLBACK_SUPPORT_최종인수인계서_2026-09-21.md)
 
-## Next implementation — v2.2.0 (2026-09-21 (월))
+## v2.2.0 implementation and validation (2026-09-21 (월))
 
-- Status: **최종 인수인계서 등록 / 다음 코드 구현·검증 대상**. 현재 연구 release v2.1.2를 대체하는 검증 완료 선언이 아니다.
-- 예상 release 번호: **026**. 실행일이 확정되기 전 날짜를 넣은 release 경로를 임의로 만들지 않는다.
-- 설계 기준: [v2.2.0 눌림·지지·재상승 최종 인수인계서](handoff/2026-09-21/v2.1.2_to_v2.2.0_PULLBACK_SUPPORT_최종인수인계서_2026-09-21.md)
-- 부모: `code/releases/025_260916_v2.1.2.ipynb` 전체를 직접 읽고 최소 수정·통합한다.
-- 주식 신규 진입 연구는 `BASE`, `FIRST_75_PASS`, `PULLBACK_SUPPORT_ENTRY`, `PULLBACK_RECLAIM_ENTRY` 4개로 정리한다. BASE/FIRST_75의 기존 조건과 저장 의미는 유지한다.
-- 나머지 주식 전략은 신규 진입 표본 생성 OFF이며 함수·컬럼·과거 CSV 호환성은 보존한다. ETF 관련 기존 코드·파일·grid는 이번 변경 대상이 아니다.
-- BASE/FIRST_75 후보는 기존 paper trade 종료 후에도 당일 관찰 종료까지 추적한다.
-- 완료 1분봉 기준 눌림 -1.50%, 지지 이탈 허용폭 0.30%, 지지 후보 3봉, 확정 5봉 및 저점 대비 종가 +0.40%, RECLAIM은 SUPPORT 다음 봉부터 직전 5봉 고점 +0.10% 종가 돌파로 판단한다.
-- 신규 전략의 시간대 필터와 최대 눌림깊이 상한은 두지 않는다. 세션·프로그램 종료·기존 강제청산 경계는 유지한다. Higher Low와 거래량은 저장용 feature이며 진입 필수조건이 아니다.
-- 새 두 전략도 각각 가상체결 시에만 169-grid를 생성한다. 후보 대기 단계에서는 생성하지 않으며, 각 신규 전략은 동일종목 당일 최대 1회다. 왕복 추정비용은 0.24%다.
-- 신호 확정 뒤 첫 가용가격으로 가상체결하고 신호/체결 시각·가격을 분리한다.
-- Telegram은 기존 WATCH/HISTORY/30초/60초/고점이격 본문을 유지하고 전략명 prefix를 추가한다. 기존 가상전략 안내문만 삭제하며 grid는 유지한다.
-- 09:30~15:30 매시 30분에 전략별 당일 누적목록을 발송한다. `번호. 종목명(종목코드) - HH:MM:SS` 형식, 최초 신호시각 순서, 전략별 동일종목 1회 표시를 사용한다.
-- 합의사항을 v2.2.0 한 릴리스에 일괄 반영하되 기능별 검증 후 1차 검증 → 독립 2차 비판적 리뷰 → 수정 → 최종 전체 회귀검증을 수행한다.
-- 기본값은 `EXECUTION_MODE="RESEARCH"`이며 실제·키움 모의 주문은 0건이다.
+- `code/releases/026_260922_v2.2.0.ipynb`로 구현했으며 부모 4개 code cell과 top-level 정의 302개를 보존했다.
+- 주식 신규 진입 연구는 `BASE`, `FIRST_75_PASS`, `PULLBACK_SUPPORT_ENTRY`, `PULLBACK_RECLAIM_ENTRY` 4개다. 나머지 주식 전략은 함수·컬럼·과거 CSV 호환성을 유지하면서 신규 생성만 차단했다. ETF 코드는 변경하지 않았다.
+- 완료 1분봉으로 눌림 -1.50%, 지지 이탈 허용폭 0.30%, 후보 3봉, 확정 5봉·저점 대비 종가 +0.40%, SUPPORT 이후 직전 5봉 고점 +0.10% RECLAIM을 구현했다.
+- 후보 등록 중간봉, 재시작 첫 봉, WS sequence gap·재연결 봉은 불완전 봉으로 처리해 확정 판단에서 제외한다.
+- 신호 다음 수신 tick에서 가상체결하고 신규 전략별·종목별 당일 1회만 169-grid를 원자적으로 생성한다. 후보 상태에서는 grid를 생성하지 않는다.
+- 후보·paper grid·중복키·Telegram outbox를 원자 저장하며 signal ledger의 `FILL`로 checkpoint crash window를 복구한다.
+- Telegram 전략 prefix, 기존 후보 상세, 09:30~15:30 매시 30분 누적 요약, 전송 불명 상태의 중복 방지 정책을 반영했다.
+- 1차 fixture 66개와 독립 2차 fixture 32개가 PASS했다. 외부 연결·실제·모의 주문은 0건이었고 결정적 재빌드 결과도 동일했다.
+- Kiwoom 0B field 15 거래량 의미와 서버의 무통지 누락은 첫 장중 실행에서 관찰한다. 거래량은 진입 필수가 아닌 feature다.
+- 기본값은 `EXECUTION_MODE="RESEARCH"`이며 실제·키움 모의 주문은 0건이어야 한다.
 
 ## Historical decisions
 
