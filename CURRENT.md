@@ -24,7 +24,18 @@
 
 ## Latest handoff
 
-- [v2.2.0 눌림·지지·재상승 최종 인수인계서](handoff/2026-09-21/v2.1.2_to_v2.2.0_PULLBACK_SUPPORT_최종인수인계서_2026-09-21.md)
+- [v2.3.0 가격구조·시간별 SNAPSHOT 최종 인수인계서](handoff/2026-09-22/v2.2.0_to_v2.3.0_STRUCTURE_SNAPSHOT_최종인수인계서_2026-09-22.md)
+
+## Next approved design: v2.3.0 (2026-09-22 (화))
+
+- 부모는 검증된 `code/releases/026_260922_v2.2.0.ipynb` 전체본이며 BASE·FIRST_75_PASS·ETF·주문안전 경로를 보존한다.
+- v2.2.0 `PULLBACK_SUPPORT_ENTRY`와 `PULLBACK_RECLAIM_ENTRY`는 코드·과거 호환성을 남기고 신규 생성과 Telegram만 OFF한다.
+- 신규 `PULLBACK_STRUCTURE_ENTRY`는 시간 제한 없이 `L1 → R1/B → L2 방어 → B+0.10% 완료봉 종가 돌파 → 다음 완료봉 B−0.20% 유지`로 진입한다.
+- 신규 SNAPSHOT은 유효 L1 뒤 30·60·90·120·150·180·210·240분을 평가하며 DIRECT와 RECLAIM을 독립 가상진입으로 비교한다.
+- SNAPSHOT은 실제 가상진입 생성 시에만 Telegram을 발송한다. 모든 신규 알림은 README의 문단·글머리기호 가독성 규칙을 따른다.
+- BASE/FIRST_75는 기존 169-grid, 신규 STRUCTURE/SNAPSHOT 3종은 TP +1.00~+3.00%와 SL −0.75~−2.25%의 63-grid를 사용한다. 신규 대표 표시전략은 `T200_S125`다.
+- 눌림 신규 진입은 15:10 이전, 평가는 15:20까지다. 240분 이후에도 STRUCTURE는 시간필터 없이 관찰하되 세션 경계는 지킨다.
+- 목표 버전은 v2.3.0이며 아직 release 코드가 아니다. 구현·검증은 최신 인수인계서를 따른다.
 
 ## v2.2.0 implementation and validation (2026-09-21 (월))
 
