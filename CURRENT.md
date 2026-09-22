@@ -11,22 +11,22 @@
 
 ## Current research release
 
-- Version: **v2.2.0**
-- Intended execution date: **2026-09-22**
-- Parent: `code/releases/025_260916_v2.1.2.ipynb`
+- Version: **v2.3.0**
+- Intended execution date: **2026-09-23**
+- Parent: `code/releases/026_260922_v2.2.0.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Scope: BASE·FIRST_75_PASS 의미 보존, PULLBACK_SUPPORT_ENTRY·PULLBACK_RECLAIM_ENTRY 신규 수집, 그 밖의 주식 신규 진입 생성 OFF, ETF 계통 불변
-- Release: `code/releases/026_260922_v2.2.0.ipynb`
-- SHA-256: `0b69fd0a3cf164a73ac5152b6674eb14199d8d6a101aa698f707fba221094dbe`
-- Verification basis: 4-cell compile·pyflakes·clean-process cold-start·부모 replay·부모 정의 302/302·1차 fixture 66개·독립 2차 fixture 32개·negative-control·결정적 재빌드
-- Reports: [빌드 검증](reports/build/v2.2.0_build_validation_2026-09-21.md) · [2차 비판적 리뷰](reports/inspection/v2.2.0_second_review_2026-09-21.md) · [최종 회귀검증](reports/regression/v2.2.0_final_regression_2026-09-21.md)
+- Scope: BASE·FIRST_75_PASS 및 ETF·주문안전 경로 보존, 가격구조 STRUCTURE와 30~240분 SNAPSHOT DIRECT/RECLAIM 신규 수집, v2.2.0 SUPPORT/RECLAIM 신규 생성 OFF
+- Release: `code/releases/027_260923_v2.3.0.ipynb`
+- SHA-256: `526169acc4b88a4dcc254b9963c604083600fbb27dfbba6055b6a4a9bd90d4fa`
+- Verification basis: 4-cell compile·pyflakes·clean-process 장외 replay·부모 정의 333/333·주문안전 핵심 정의 49/49 동일·구조/시간경계 fixture·169/63-grid·negative-control
+- Reports: [빌드 검증](reports/build/v2.3.0_build_validation_2026-09-23.md) · [2차 비판적 리뷰](reports/inspection/v2.3.0_second_review_2026-09-23.md) · [최종 회귀검증](reports/regression/v2.3.0_final_regression_2026-09-23.md)
 - Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·실제·키움 모의주문은 모두 0건이며 실전 확대 승인이 아님
 
 ## Latest handoff
 
 - [v2.3.0 가격구조·시간별 SNAPSHOT 최종 인수인계서](handoff/2026-09-22/v2.2.0_to_v2.3.0_STRUCTURE_SNAPSHOT_최종인수인계서_2026-09-22.md)
 
-## Next approved design: v2.3.0 (2026-09-22 (화))
+## v2.3.0 implemented design (2026-09-23 (수))
 
 - 부모는 검증된 `code/releases/026_260922_v2.2.0.ipynb` 전체본이며 BASE·FIRST_75_PASS·ETF·주문안전 경로를 보존한다.
 - v2.2.0 `PULLBACK_SUPPORT_ENTRY`와 `PULLBACK_RECLAIM_ENTRY`는 코드·과거 호환성을 남기고 신규 생성과 Telegram만 OFF한다.
@@ -35,7 +35,7 @@
 - SNAPSHOT은 실제 가상진입 생성 시에만 Telegram을 발송한다. 모든 신규 알림은 README의 문단·글머리기호 가독성 규칙을 따른다.
 - BASE/FIRST_75는 기존 169-grid, 신규 STRUCTURE/SNAPSHOT 3종은 TP +1.00~+3.00%와 SL −0.75~−2.25%의 63-grid를 사용한다. 신규 대표 표시전략은 `T200_S125`다.
 - 눌림 신규 진입은 15:10 이전, 평가는 15:20까지다. 240분 이후에도 STRUCTURE는 시간필터 없이 관찰하되 세션 경계는 지킨다.
-- 목표 버전은 v2.3.0이며 아직 release 코드가 아니다. 구현·검증은 최신 인수인계서를 따른다.
+- `code/releases/027_260923_v2.3.0.ipynb`로 구현·2차 검증을 마쳤다. 기본값은 RESEARCH이며 실제·키움 모의주문 승인이 아니다.
 
 ## v2.2.0 implementation and validation (2026-09-21 (월))
 

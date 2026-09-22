@@ -337,6 +337,8 @@ README 확인: 완료
 
 기본값은 `EXECUTION_MODE="RESEARCH"`다. 정적·mock 검증 통과는 실전 확대 승인이 아니다. 첫 장중 실행에서는 Kiwoom 0B field 15 거래량 의미, 누락봉 지표, queue backlog, Telegram 전송 상태를 확인한다.
 
-### v2.3.0 승인 설계 / 구현 전 (2026-09-22 (화))
+### v2.3.0 연구 release 완료 및 2차 검증 (2026-09-23 (수))
 
-다음 구현 기준은 [v2.3.0 가격구조·시간별 SNAPSHOT 최종 인수인계서](handoff/2026-09-22/v2.2.0_to_v2.3.0_STRUCTURE_SNAPSHOT_최종인수인계서_2026-09-22.md)다. v2.2.0 실행 결과에서 5분 SUPPORT와 이동하는 최근 5분 고점 RECLAIM이 의도보다 이른 진입을 만들 수 있음을 확인하여, 다음 release는 시간 제한 없는 가격구조 전략과 30분 간격·최대 240분 SNAPSHOT 비교군으로 전환한다. BASE/FIRST_75의 기존 169-grid는 보존하고 신규 STRUCTURE/SNAPSHOT은 63-grid를 사용한다. 이 항목은 승인된 설계이며 아직 release 완료를 뜻하지 않는다.
+구현 기준은 [v2.3.0 가격구조·시간별 SNAPSHOT 최종 인수인계서](handoff/2026-09-22/v2.2.0_to_v2.3.0_STRUCTURE_SNAPSHOT_최종인수인계서_2026-09-22.md)다. 부모 `code/releases/026_260922_v2.2.0.ipynb`를 직접 보존하여 `code/releases/027_260923_v2.3.0.ipynb`를 작성했다. BASE/FIRST_75의 169-grid와 ETF·주문안전 경로는 유지하고, 신규 STRUCTURE/SNAPSHOT 3종에만 63-grid를 적용했다. v2.2.0 SUPPORT/RECLAIM은 함수·과거 호환성을 보존하되 신규 생성과 Telegram을 OFF했다.
+
+4개 code cell compile, pyflakes 동등 정적검사, clean-process 장외 replay, 부모 정의 333/333 보존, 주문·broker 핵심 정의 49/49 동일, 구조 및 15:10/15:20 경계 fixture, 169/63-grid 결정순서, legacy 신규생성 OFF를 확인했다. 검증 중 외부 연결과 실제·키움 모의 BUY/SELL은 0건이었다. 기본값은 `EXECUTION_MODE="RESEARCH"`이며 실전 확대 승인이 아니다.
