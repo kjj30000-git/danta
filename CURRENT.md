@@ -17,10 +17,11 @@
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
 - Scope: BASE·FIRST_75_PASS 및 ETF·주문안전 경로 보존, 가격구조 STRUCTURE와 30~240분 SNAPSHOT DIRECT/RECLAIM 신규 수집, v2.2.0 SUPPORT/RECLAIM 신규 생성 OFF
 - Release: `code/releases/027_260923_v2.3.0.ipynb`
-- SHA-256: `526169acc4b88a4dcc254b9963c604083600fbb27dfbba6055b6a4a9bd90d4fa`
+- SHA-256: `917bb933f70b208b0f9d8f959b40452298a0c78b8898898de4bf97b4561c5a05`
 - Verification basis: 4-cell compile·pyflakes·clean-process 장외 replay·부모 정의 333/333·주문안전 핵심 정의 49/49 동일·구조/시간경계 fixture·169/63-grid·negative-control
 - Reports: [빌드 검증](reports/build/v2.3.0_build_validation_2026-09-23.md) · [2차 비판적 리뷰](reports/inspection/v2.3.0_second_review_2026-09-23.md) · [최종 회귀검증](reports/regression/v2.3.0_final_regression_2026-09-23.md)
 - Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·실제·키움 모의주문은 모두 0건이며 실전 확대 승인이 아님
+- 2026-09-23 시작오류 hotfix: `validate_v21_opening_leader_config()`와 장외 회귀검증의 구버전 고정 assertion을 v2.3.0 호환으로 수정하고, 실제 기본 `run_scanner()` 시작 경로가 토큰 요청 직전까지 통과하는 것을 재검증함
 
 ## Latest handoff
 

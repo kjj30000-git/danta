@@ -342,3 +342,5 @@ README 확인: 완료
 구현 기준은 [v2.3.0 가격구조·시간별 SNAPSHOT 최종 인수인계서](handoff/2026-09-22/v2.2.0_to_v2.3.0_STRUCTURE_SNAPSHOT_최종인수인계서_2026-09-22.md)다. 부모 `code/releases/026_260922_v2.2.0.ipynb`를 직접 보존하여 `code/releases/027_260923_v2.3.0.ipynb`를 작성했다. BASE/FIRST_75의 169-grid와 ETF·주문안전 경로는 유지하고, 신규 STRUCTURE/SNAPSHOT 3종에만 63-grid를 적용했다. v2.2.0 SUPPORT/RECLAIM은 함수·과거 호환성을 보존하되 신규 생성과 Telegram을 OFF했다.
 
 4개 code cell compile, pyflakes 동등 정적검사, clean-process 장외 replay, 부모 정의 333/333 보존, 주문·broker 핵심 정의 49/49 동일, 구조 및 15:10/15:20 경계 fixture, 169/63-grid 결정순서, legacy 신규생성 OFF를 확인했다. 검증 중 외부 연결과 실제·키움 모의 BUY/SELL은 0건이었다. 기본값은 `EXECUTION_MODE="RESEARCH"`이며 실전 확대 승인이 아니다.
+
+2026-09-23 첫 실행에서 `validate_v21_opening_leader_config()`의 `STRATEGY_VERSION == "v2.2.0"` 잔존 assertion이 v2.3.0 시작을 차단했다. 구버전 exact-lock 두 곳을 v2.3.0 호환으로 수정하고, 기본 설정의 실제 `run_scanner()` 시작 경로를 토큰 요청 경계 직전까지 재현하여 PASS했다. 이후 릴리스는 compile·함수 fixture뿐 아니라 기본 실행모드의 실제 시작 검증함수를 모두 통과해야 한다.
