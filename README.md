@@ -13,6 +13,7 @@
 - `reports/regression/` — 회귀테스트 결과
 - `reports/inspection/` — 핵심 구현 점검 보고서
 - `reports/analysis/` — 장별 실행 결과 분석
+- `reports/design/` — 다음 버전 수정·복구 설계
 - `DATA_ANALYSIS_GUIDE.md` — 재사용 가능한 실행 결과 분석 지침
 - `data/` — `버전(실행일자)` 형식의 장별 실행 결과
 - `research/` — 장중 운영 코드와 분리한 독립 수집·백테스트 프로젝트
