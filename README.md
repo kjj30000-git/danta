@@ -351,3 +351,12 @@ README 확인: 완료
 4개 code cell compile, pyflakes 동등 정적검사, clean-process 장외 replay, 부모 정의 333/333 보존, 주문·broker 핵심 정의 49/49 동일, 구조 및 15:10/15:20 경계 fixture, 169/63-grid 결정순서, legacy 신규생성 OFF를 확인했다. 검증 중 외부 연결과 실제·키움 모의 BUY/SELL은 0건이었다. 기본값은 `EXECUTION_MODE="RESEARCH"`이며 실전 확대 승인이 아니다.
 
 2026-09-23 첫 실행에서 `validate_v21_opening_leader_config()`의 `STRATEGY_VERSION == "v2.2.0"` 잔존 assertion이 v2.3.0 시작을 차단했다. 구버전 exact-lock 두 곳을 v2.3.0 호환으로 수정하고, 기본 설정의 실제 `run_scanner()` 시작 경로를 토큰 요청 경계 직전까지 재현하여 PASS했다. 이후 릴리스는 compile·함수 fixture뿐 아니라 기본 실행모드의 실제 시작 검증함수를 모두 통과해야 한다.
+
+
+### v2.3.1 데이터경로 복구 release 완료 및 검증 (2026-09-27 (일))
+
+부모는 삭제 전 검증본 commit `f6cb94bf6cd0aaefc290e3168912ee1526d5c7d8`의 `code/releases/027_260923_v2.3.0.ipynb`이며, `code/releases/028_260928_v2.3.1.ipynb`로 복구했다. 최초 부분봉 상태를 신규 생성·재시작에서만 한 번 설정하고, 실제 tick→분봉 경로에서 유효봉·후보별 minute 원장·health gate·SNAPSHOT ledger-first를 검증했다. 모든 출력과 state는 v231로 격리했다.
+
+메인 다음 독립 셀은 `ka10077`, `ka10170`, `ka10076`, `kt00018` 조회만 사용해 `broker_daily_stock_pnl.csv`를 `trade_date + stock_code` 단위로 누적한다. 자동·수동은 확정 가능한 주문번호만 분류하며 불확실하면 UNKNOWN 또는 MANUAL_OR_UNMATCHED로 보존한다.
+
+5개 코드 셀 compile, 미정의 이름, clean-process 시작, 실제 tick fixture, 부모 정의 341/341, 주문·broker 핵심 정의 20/20, 수익률 셀 독립 fixture와 negative control 4종이 PASS했다. 검증 중 외부 연결과 실제·키움 모의 주문은 0건이었다. 기본값은 `EXECUTION_MODE="RESEARCH"`이며 실전 확대 승인이 아니다.
