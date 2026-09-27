@@ -17,13 +17,13 @@ ck(c['bar_counts']=={'bars':3,'valid_bars':2,'invalid_bars':1},'tick path one pa
 for _ in range(3):g['v230_ensure_candidate_schema'](c)
 ck(not c['needs_partial_bar'],'schema idempotent')
 # sequence gap, reconnect, recovery
-for q,m in [(10,5),(11,6),(12,7),(13,8)]:g['v220_on_tick']('999901',10000,base.replace(second=0)+timedelta(minutes=m),{},q)
+for q,m in [(8,5),(9,6),(10,7),(11,8)]:g['v220_on_tick']('999901',10000,base.replace(second=0)+timedelta(minutes=m),{},q)
 ck(c['history'][-1]['valid'] and c['invalid_reasons']['NON_CONTIGUOUS_MINUTE']>=1,'minute-gap recovery')
-g['v220_on_tick']('999901',10000,base.replace(second=20)+timedelta(minutes=8),{},15)
-for q,m in [(16,9),(17,10),(18,11)]:g['v220_on_tick']('999901',10000,base.replace(second=0)+timedelta(minutes=m),{},q)
-ck(c['invalid_reasons'].get('SEQUENCE_GAP',0)>=1 and c['history'][-1]['valid'],'sequence-gap recovery');g['v220_mark_stream_gap']()
-for q,m in [(19,12),(20,13),(21,14)]:g['v220_on_tick']('999901',10000,base.replace(second=0)+timedelta(minutes=m),{},q)
-ck(c['history'][-1]['valid'],'reconnect recovery')
+g['v220_on_tick']('999901',10000,base.replace(second=20)+timedelta(minutes=8),{},13)
+for q,m in [(14,9),(15,10),(16,11)]:g['v220_on_tick']('999901',10000,base.replace(second=0)+timedelta(minutes=m),{},q)
+ck(c['invalid_reasons'].get('SEQUENCE_GAP',0)==1 and c['history'][-1]['valid'],'sequence-gap recovery');g['v220_mark_stream_gap']()
+for q,m in [(17,12),(18,13),(19,14)]:g['v220_on_tick']('999901',10000,base.replace(second=0)+timedelta(minutes=m),{},q)
+ck(c['history'][-1]['valid'] and c['invalid_reasons'].get('POST_RECONNECT_PARTIAL',0)==1,'reconnect exactly one invalid then recovery')
 # state schema and day reset
 g['v220_checkpoint'](True);ck(g['v220_restore'](base),'same-day restore');ck(g['v220_candidates']['999901']['needs_partial_bar'],'restart partial once');g['v220_reset_day'](base+timedelta(days=1));ck(not g['v220_candidates'] and all(v==0 for v in g['v220_metrics'].values()),'day reset')
 # health isolation
