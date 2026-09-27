@@ -11,21 +11,20 @@
 
 ## Current research release
 
-- Version: **v2.3.0**
-- Intended execution date: **2026-09-23**
-- Parent: `code/releases/026_260922_v2.2.0.ipynb`
+- Version: **v2.3.1**
+- Intended execution date: **2026-09-28**
+- Parent: deleted-before commit `f6cb94bf6cd0aaefc290e3168912ee1526d5c7d8`의 `code/releases/027_260923_v2.3.0.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Scope: BASE·FIRST_75_PASS 및 ETF·주문안전 경로 보존, 가격구조 STRUCTURE와 30~240분 SNAPSHOT DIRECT/RECLAIM 신규 수집, v2.2.0 SUPPORT/RECLAIM 신규 생성 OFF
-- Release: `code/releases/027_260923_v2.3.0.ipynb`
-- SHA-256: `917bb933f70b208b0f9d8f959b40452298a0c78b8898898de4bf97b4561c5a05`
-- Verification basis: 4-cell compile·pyflakes·clean-process 장외 replay·부모 정의 333/333·주문안전 핵심 정의 49/49 동일·구조/시간경계 fixture·169/63-grid·negative-control
-- Reports: [빌드 검증](reports/build/v2.3.0_build_validation_2026-09-23.md) · [2차 비판적 리뷰](reports/inspection/v2.3.0_second_review_2026-09-23.md) · [최종 회귀검증](reports/regression/v2.3.0_final_regression_2026-09-23.md)
-- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·실제·키움 모의주문은 모두 0건이며 실전 확대 승인이 아님
-- 2026-09-23 시작오류 hotfix: `validate_v21_opening_leader_config()`와 장외 회귀검증의 구버전 고정 assertion을 v2.3.0 호환으로 수정하고, 실제 기본 `run_scanner()` 시작 경로가 토큰 요청 직전까지 통과하는 것을 재검증함
+- Release: `code/releases/028_260928_v2.3.1.ipynb`
+- SHA-256: `ea0846d1e7f2efbe9a2501784d263dcb2d72a064340cff71093c03d46bee7bd5`
+- Scope: v2.3.0 전략조건 유지, 부분봉 상태·minute 원장·health gate·SNAPSHOT 저장순서 복구, v231 출력/state 격리, 종목별 실제 실현손익 독립 셀 추가
+- Verification basis: 5-cell compile·pyflakes·clean-process 시작·실제 tick replay·부모 정의 341/341·주문/broker 핵심 정의 20/20·수익률 셀 fixture·negative-control 4종
+- Reports: [빌드 검증](reports/build/v2.3.1_build_validation_2026-09-27.md) · [2차 비판적 리뷰](reports/inspection/v2.3.1_second_review_2026-09-27.md) · [최종 회귀검증](reports/regression/v2.3.1_final_regression_2026-09-27.md)
+- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·실제·키움 모의주문 0건. 첫 장중 실행에서 5분 health 기준과 실제 broker 조회 응답을 확인한다.
 
 ## Latest handoff
 
-- [v2.3.0 가격구조·시간별 SNAPSHOT 최종 인수인계서](handoff/2026-09-22/v2.2.0_to_v2.3.0_STRUCTURE_SNAPSHOT_최종인수인계서_2026-09-22.md)
+- [v2.3.1 데이터경로 복구·종목별 실제수익률 수집 최종 인수인계서](handoff/2026-09-27/v2.3.0_to_v2.3.1_데이터경로복구_실제수익률수집_최종인수인계서_2026-09-27.md)
 
 ## v2.3.0 implemented design (2026-09-23 (수))
 
@@ -87,3 +86,4 @@ Scanner / paper / live CSV와 상태 JSON은 다음 형식으로 저장한다.
 `data/X.Y.Z(YYMMDD[, YYMMDD...])/`
 
 v2.0 신규 ETF 파일과 연구 파일도 동일한 실행일자 폴더 아래에 둔다.
+
