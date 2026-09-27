@@ -16,7 +16,7 @@
 - Parent: deleted-before commit `f6cb94bf6cd0aaefc290e3168912ee1526d5c7d8`의 `code/releases/027_260923_v2.3.0.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
 - Release: `code/releases/028_260928_v2.3.1.ipynb`
-- SHA-256: `ea0846d1e7f2efbe9a2501784d263dcb2d72a064340cff71093c03d46bee7bd5`
+- SHA-256: `514d75aebddac7da7d601889e53e620285b4949262394f49e82e72d55e9e0335`
 - Scope: v2.3.0 전략조건 유지, 부분봉 상태·minute 원장·health gate·SNAPSHOT 저장순서 복구, v231 출력/state 격리, 종목별 실제 실현손익 독립 셀 추가
 - Verification basis: 5-cell compile·pyflakes·clean-process 시작·실제 tick replay·부모 정의 341/341·주문/broker 핵심 정의 20/20·수익률 셀 fixture·negative-control 4종
 - Reports: [빌드 검증](reports/build/v2.3.1_build_validation_2026-09-27.md) · [2차 비판적 리뷰](reports/inspection/v2.3.1_second_review_2026-09-27.md) · [최종 회귀검증](reports/regression/v2.3.1_final_regression_2026-09-27.md)
