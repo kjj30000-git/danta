@@ -362,3 +362,15 @@ README 확인: 완료
 메인 다음 독립 셀은 `ka10077`, `ka10170`, `ka10076`, `kt00018` 조회만 사용해 `broker_daily_stock_pnl.csv`를 `trade_date + stock_code` 단위로 누적한다. 자동·수동은 확정 가능한 주문번호만 분류하며 불확실하면 UNKNOWN 또는 MANUAL_OR_UNMATCHED로 보존한다.
 
 5개 코드 셀 compile, 미정의 이름, clean-process 시작, 실제 tick fixture, 부모 정의 341/341, 주문·broker 핵심 정의 20/20, 수익률 셀 독립 fixture와 negative control 4종이 PASS했다. 검증 중 외부 연결과 실제·키움 모의 주문은 0건이었다. 기본값은 `EXECUTION_MODE="RESEARCH"`이며 실전 확대 승인이 아니다.
+
+### v2.3.2 장기 보합 돌파·누적 알림 분리 release 완료 (2026-09-28 (월))
+
+부모 `code/releases/028_260928_v2.3.1.ipynb` 전체와 BASE·FIRST_75_PASS·ETF·주문엔진·기존 SNAPSHOT 의미를 보존하여 `code/releases/029_260929_v2.3.2.ipynb`를 작성했다. 완료 1분봉 기준 60분 이상 장기 보합 박스를 만들고, 상단 +0.10% 종가돌파 뒤 다음 완료봉이 상단을 유지하면 다음 정상 tick에서 `PULLBACK_BALANCE_BREAKOUT` 63-grid 가상진입을 생성한다. 하단 -0.20%, 부분봉·gap·재접속 첫 봉·세션 종료는 박스를 무효화한다.
+
+8개 SNAPSHOT 시간축에는 보합 지속시간·가격폭·순변화율·기울기·평균 절대변동률·중심이동·방향효율·가격압축·거래량수축·돌파거래량과 계산 불가 사유를 저장한다. 과거 v231 SNAPSHOT CSV는 변경하지 않고 확장 원장을 `pullback_snapshot_evaluations_v232.csv`로 분리했다. 신규 보합 원장은 `pullback_balance_evaluations_v232.csv`, `pullback_balance_events_v232.csv`, 가상체결은 `paper_trades_v232.csv`다.
+
+30분 누적 Telegram은 같은 채팅방에서 BASE → FIRST 75 PASS → PULLBACK STRUCTURE ENTRY → SNAPSHOT 30~240분 → 장기 보합 돌파 순서의 별도 말풍선으로 09:30~15:30 매 30분 발송한다. 종목명·6자리 코드·최초 신호시각만 표시하고 동일 시각·전략 outbox key로 재시작 중복을 막는다.
+
+5개 code cell compile·pyflakes·clean-process 실제 시작·부모 정의 366/366·주문/broker 정의 21/21·1차 30개·독립 2차 13개·negative-control·결정적 재빌드가 PASS했다. 2차 리뷰에서 구버전 시작 허용목록 두 곳, v231 CSV 스키마 충돌, balance box 복구키, 15:30 종료 사건을 찾아 수정했다. 상세 결과는 [빌드 검증](reports/build/v2.3.2_build_validation_2026-09-28.md), [2차 비판적 리뷰](reports/inspection/v2.3.2_second_review_2026-09-28.md), [최종 회귀검증](reports/regression/v2.3.2_final_regression_2026-09-28.md)에 기록했다.
+
+기본값은 `EXECUTION_MODE="RESEARCH"`이며 검증 중 외부 연결·Telegram 전송·실제·키움 모의 주문은 0건이었다. 정적·mock 검증 통과는 실전 확대 승인이 아니다.

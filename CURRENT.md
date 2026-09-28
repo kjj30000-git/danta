@@ -11,16 +11,16 @@
 
 ## Current research release
 
-- Version: **v2.3.1**
-- Intended execution date: **2026-09-28**
-- Parent: deleted-before commit `f6cb94bf6cd0aaefc290e3168912ee1526d5c7d8`의 `code/releases/027_260923_v2.3.0.ipynb`
+- Version: **v2.3.2**
+- Intended execution date: **2026-09-29**
+- Parent: `code/releases/028_260928_v2.3.1.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Release: `code/releases/028_260928_v2.3.1.ipynb`
-- SHA-256: `514d75aebddac7da7d601889e53e620285b4949262394f49e82e72d55e9e0335`
-- Scope: v2.3.0 전략조건 유지, 부분봉 상태·minute 원장·health gate·SNAPSHOT 저장순서 복구, v231 출력/state 격리, 종목별 실제 실현손익 독립 셀 추가
-- Verification basis: 5-cell compile·pyflakes·clean-process 시작·실제 tick replay·부모 정의 341/341·주문/broker 핵심 정의 20/20·수익률 셀 fixture·negative-control 4종
-- Reports: [빌드 검증](reports/build/v2.3.1_build_validation_2026-09-27.md) · [2차 비판적 리뷰](reports/inspection/v2.3.1_second_review_2026-09-27.md) · [최종 회귀검증](reports/regression/v2.3.1_final_regression_2026-09-27.md)
-- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·실제·키움 모의주문 0건. 첫 장중 실행에서 5분 health 기준과 실제 broker 조회 응답을 확인한다.
+- Release: `code/releases/029_260929_v2.3.2.ipynb`
+- SHA-256: `b57cf213d76140f318619b9ff68edc6e626305dc11ce12c68a41200a137597c7`
+- Scope: v2.3.1 전체 보존, 완료 1분봉 장기 보합 박스·돌파 연구 추가, SNAPSHOT feature 실계산, 전략별·시간축별 30분 누적 Telegram 말풍선 분리
+- Verification basis: 5-cell compile·pyflakes·clean-process 시작·부모 정의 366/366·주문/broker 핵심 정의 21/21·1차 30개·독립 2차 13개·negative-control 4종·결정적 재빌드
+- Reports: [빌드 검증](reports/build/v2.3.2_build_validation_2026-09-28.md) · [2차 비판적 리뷰](reports/inspection/v2.3.2_second_review_2026-09-28.md) · [최종 회귀검증](reports/regression/v2.3.2_final_regression_2026-09-28.md)
+- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·Telegram 전송·실제·키움 모의주문 0건. 첫 장중 실행에서 v232 원장과 30분 분리 알림을 확인한다.
 
 ## Latest handoff
 
