@@ -24,13 +24,15 @@
 
 ## Latest handoff
 
-- [v2.3.2 장기 보합 돌파·알림 분리 최종 인수인계서](handoff/2026-09-28/v2.3.1_to_v2.3.2_장기보합돌파_알림분리_최종인수인계서_2026-09-28.md)
+- [v2.3.2 → v2.3.3 장기 보합 실제 지속시간·종료상태 최종 인수인계서](handoff/2026-09-29/v2.3.2_to_v2.3.3_장기보합_지속시간_종료상태_최종인수인계서_2026-09-29.md)
 
-## Next-version preliminary handoff
+## Next implementation target
 
-- [v2.3.2 → v2.3.3(후보) 장기 보합 지속시간·보합종료 알림 사전 인수인계서](handoff/2026-09-29/v2.3.2_to_v2.3.3_장기보합_지속시간_보합종료알림_사전인수인계서_2026-09-29.md)
-- Status: 현재 v2.3.2는 그대로 장중 수집. 차기 코드에서는 살아 있는 박스의 Telegram 표시를 발송시점 실제 보합 지속시간으로 갱신하고, 종료된 박스는 종료시각·총 지속시간·사유를 당일 누적 표시하는 방향을 사용자 확정사항으로 보존한다.
-- 코드 작성은 아직 요청되지 않았으며, 추가 합의가 생기면 최종 인수인계서 작성 전 이 문서에 반영한다.
+- Target: `code/releases/030_260930_v2.3.3.ipynb`
+- Scope: v2.3.2 전체 보존, 장기 보합 박스의 실제 지속시간·종료상태·cutoff 기준 Telegram·재시작 복구만 최소 수정한다.
+- Frozen: 보합 range·순변화율·slope·돌파 임계값과 BASE/FIRST_75/STRUCTURE/SNAPSHOT/ETF/주문엔진은 변경하지 않는다.
+- Research status: 현 장기 보합 출력은 고전적 수평 박스로 검증된 전략이 아니라 광범위 연구 후보군이다. 신규 진폭·형태 필터는 표본 확대 전까지 보류한다.
+- Safety: `EXECUTION_MODE = "RESEARCH"`, `AUTO_TRADE_ENABLED = False`, `USE_MOCK = False`, 실제·키움 모의주문 0건을 유지한다.
 
 ## v2.3.0 implemented design (2026-09-23 (수))
 
