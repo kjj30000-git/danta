@@ -16,11 +16,11 @@
 - Parent: `code/releases/029_260929_v2.3.2.ipynb`
 - Default mode: `EXECUTION_MODE = "RESEARCH"`, `AUTO_TRADE_ENABLED = False`, `USE_MOCK = False`
 - Release: `code/releases/030_260930_v2.3.3.ipynb`
-- SHA-256: `2874bf8fbceb351ca508e294363f0f1a2f0d4e1a659c2b62773f3e495cd96c4b`
+- SHA-256: `19dcd0166b00456144b35672935e73ddc2b4fdc963c3ffe84fe7a7112537b8b5`
 - Scope: 박스별 실제 경과시간, cutoff 상태, 종료 우선순위, milestone·원장 복구. 보합 판정과 진폭·형태 기준은 불변.
-- Verification: 5-cell compile·pyflakes, 부모 정의 보존, clean-process 토큰 경계 시작, 완료봉 120분 경로, 2026-09-29 실제 보합 사건 20건 replay, 부모 tick replay, negative-control, 결정적 재빌드.
+- Verification: 5-cell compile·pyflakes, 부모 정의 보존, clean-process 토큰 경계 시작, 완료봉 120분 경로, 2026-09-29 실제 보합 사건 20건 replay, 실제 v232 전날 checkpoint 복구, 60→120분 milestone, 돌파 후 cleanup, 15:30 종료 말풍선, 부모 tick replay, negative-control, 결정적 재빌드.
 - Reports: [빌드](reports/build/v2.3.3_build_validation_2026-09-29.md) · [2차 리뷰](reports/inspection/v2.3.3_second_review_2026-09-29.md) · [최종 회귀](reports/regression/v2.3.3_final_regression_2026-09-29.md)
-- Status: **정적·격리 replay PASS / RESEARCH 실행 가능**. 실제 broker 및 Telegram 전송 검증은 수행하지 않았고 실제·키움 모의주문 0건.
+- Status: **2026-09-29 재검토 수정본 정적·격리 replay PASS / RESEARCH 실행 가능**. 실제 broker 및 Telegram 전송 검증은 수행하지 않았고 실제·키움 모의주문 0건.
 
 ## Latest handoff
 
