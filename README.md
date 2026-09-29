@@ -380,3 +380,7 @@ README 확인: 완료
 ### v2.3.3 장기 보합 관측 상태 보정 (2026-09-29)
 
 부모 `code/releases/029_260929_v2.3.2.ipynb`의 보합 range·순변화율·slope·돌파 및 하단 이탈 임계값과 나머지 전략·주문엔진을 유지한 `code/releases/030_260930_v2.3.3.ipynb`를 작성했다. 박스별 최초 시작·완성, 실제 경과시간, cutoff 당시 상태, 종료시각·사유, milestone과 재시작 사건 복구를 추가했다. 돌파완료 후 내부 정리는 사용자 최종 상태를 덮어쓰지 않는다. 합성 경계 fixture와 2026-09-29 실제 보합 사건 20건 replay를 구분해 검증했다. 2026-09-28에는 v2.3.2 보합 원장이 없어 해당 날짜의 박스 replay는 불가하다. 기본 RESEARCH이며 검증 중 외부 연결·Telegram 전송·실제·키움 모의 주문은 0건이다. 정적·격리 검증은 실제 broker 확인을 대신하지 않는다. [빌드 검증](reports/build/v2.3.3_build_validation_2026-09-29.md) · [2차 리뷰](reports/inspection/v2.3.3_second_review_2026-09-29.md) · [최종 회귀](reports/regression/v2.3.3_final_regression_2026-09-29.md).
+
+#### GitHub 반영 경로 (2026-09-29)
+
+전체 코드 검증 PASS 후 main 자동 반영 시 로컬 `git push` 인증이 없으면 연결된 GitHub 도구의 파일 생성·갱신 기능으로 동일 검증본을 직접 반영한다. 반영 뒤 release·보고서·CURRENT.md·README.md를 원격에서 다시 읽어 로컬 내용과 일치하는지 확인한다. 인증 실패만으로 작업을 멈추거나 동일한 업로드 허가를 다시 요청하지 않는다.
