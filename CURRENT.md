@@ -11,16 +11,16 @@
 
 ## Current research release
 
-- Version: **v2.3.2**
-- Intended execution date: **2026-09-29**
-- Parent: `code/releases/028_260928_v2.3.1.ipynb`
-- Default mode: `EXECUTION_MODE = "RESEARCH"`
-- Release: `code/releases/029_260929_v2.3.2.ipynb`
-- SHA-256: `b57cf213d76140f318619b9ff68edc6e626305dc11ce12c68a41200a137597c7`
-- Scope: v2.3.1 전체 보존, 완료 1분봉 장기 보합 박스·돌파 연구 추가, SNAPSHOT feature 실계산, 전략별·시간축별 30분 누적 Telegram 말풍선 분리
-- Verification basis: 5-cell compile·pyflakes·clean-process 시작·부모 정의 366/366·주문/broker 핵심 정의 21/21·1차 30개·독립 2차 13개·negative-control 4종·결정적 재빌드
-- Reports: [빌드 검증](reports/build/v2.3.2_build_validation_2026-09-28.md) · [2차 비판적 리뷰](reports/inspection/v2.3.2_second_review_2026-09-28.md) · [최종 회귀검증](reports/regression/v2.3.2_final_regression_2026-09-28.md)
-- Status: **정적·mock 검증 PASS / RESEARCH 실행 가능**. 검증 중 외부 연결·Telegram 전송·실제·키움 모의주문 0건. 첫 장중 실행에서 v232 원장과 30분 분리 알림을 확인한다.
+- Version: **v2.3.3**
+- Intended execution date: **2026-09-30**
+- Parent: `code/releases/029_260929_v2.3.2.ipynb`
+- Default mode: `EXECUTION_MODE = "RESEARCH"`, `AUTO_TRADE_ENABLED = False`, `USE_MOCK = False`
+- Release: `code/releases/030_260930_v2.3.3.ipynb`
+- SHA-256: `2874bf8fbceb351ca508e294363f0f1a2f0d4e1a659c2b62773f3e495cd96c4b`
+- Scope: 박스별 실제 경과시간, cutoff 상태, 종료 우선순위, milestone·원장 복구. 보합 판정과 진폭·형태 기준은 불변.
+- Verification: 5-cell compile·pyflakes, 부모 정의 보존, clean-process 토큰 경계 시작, 완료봉 120분 경로, 2026-09-29 실제 보합 사건 20건 replay, 부모 tick replay, negative-control, 결정적 재빌드.
+- Reports: [빌드](reports/build/v2.3.3_build_validation_2026-09-29.md) · [2차 리뷰](reports/inspection/v2.3.3_second_review_2026-09-29.md) · [최종 회귀](reports/regression/v2.3.3_final_regression_2026-09-29.md)
+- Status: **정적·격리 replay PASS / RESEARCH 실행 가능**. 실제 broker 및 Telegram 전송 검증은 수행하지 않았고 실제·키움 모의주문 0건.
 
 ## Latest handoff
 
@@ -28,11 +28,8 @@
 
 ## Next implementation target
 
-- Target: `code/releases/030_260930_v2.3.3.ipynb`
-- Scope: v2.3.2 전체 보존, 장기 보합 박스의 실제 지속시간·종료상태·cutoff 기준 Telegram·재시작 복구만 최소 수정한다.
-- Frozen: 보합 range·순변화율·slope·돌파 임계값과 BASE/FIRST_75/STRUCTURE/SNAPSHOT/ETF/주문엔진은 변경하지 않는다.
-- Research status: 현 장기 보합 출력은 고전적 수평 박스로 검증된 전략이 아니라 광범위 연구 후보군이다. 신규 진폭·형태 필터는 표본 확대 전까지 보류한다.
-- Safety: `EXECUTION_MODE = "RESEARCH"`, `AUTO_TRADE_ENABLED = False`, `USE_MOCK = False`, 실제·키움 모의주문 0건을 유지한다.
+- v2.3.3 첫 장중 수집의 박스별 지속시간·종료사유·30분 cutoff 요약을 실제 수신 원장과 대조한다.
+- 진폭·형태 신규 필터는 독립 episode가 축적되기 전까지 보류한다.
 
 ## v2.3.0 implemented design (2026-09-23 (수))
 
