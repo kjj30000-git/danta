@@ -376,3 +376,7 @@ README 확인: 완료
 5개 code cell compile·pyflakes·clean-process 실제 시작·부모 정의 366/366·주문/broker 정의 21/21·1차 30개·독립 2차 13개·negative-control·결정적 재빌드가 PASS했다. 2차 리뷰에서 구버전 시작 허용목록 두 곳, v231 CSV 스키마 충돌, balance box 복구키, 15:30 종료 사건을 찾아 수정했다. 상세 결과는 [빌드 검증](reports/build/v2.3.2_build_validation_2026-09-28.md), [2차 비판적 리뷰](reports/inspection/v2.3.2_second_review_2026-09-28.md), [최종 회귀검증](reports/regression/v2.3.2_final_regression_2026-09-28.md)에 기록했다.
 
 기본값은 `EXECUTION_MODE="RESEARCH"`이며 검증 중 외부 연결·Telegram 전송·실제·키움 모의 주문은 0건이었다. 정적·mock 검증 통과는 실전 확대 승인이 아니다.
+
+### v2.3.3 장기 보합 관측 상태 보정 (2026-09-29)
+
+부모 `code/releases/029_260929_v2.3.2.ipynb`의 보합 range·순변화율·slope·돌파 및 하단 이탈 임계값과 나머지 전략·주문엔진을 유지한 `code/releases/030_260930_v2.3.3.ipynb`를 작성했다. 박스별 최초 시작·완성, 실제 경과시간, cutoff 당시 상태, 종료시각·사유, milestone과 재시작 사건 복구를 추가했다. 돌파완료 후 내부 정리는 사용자 최종 상태를 덮어쓰지 않는다. 합성 경계 fixture와 2026-09-29 실제 보합 사건 20건 replay를 구분해 검증했다. 2026-09-28에는 v2.3.2 보합 원장이 없어 해당 날짜의 박스 replay는 불가하다. 기본 RESEARCH이며 검증 중 외부 연결·Telegram 전송·실제·키움 모의 주문은 0건이다. 정적·격리 검증은 실제 broker 확인을 대신하지 않는다. [빌드 검증](reports/build/v2.3.3_build_validation_2026-09-29.md) · [2차 리뷰](reports/inspection/v2.3.3_second_review_2026-09-29.md) · [최종 회귀](reports/regression/v2.3.3_final_regression_2026-09-29.md).
