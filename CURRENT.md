@@ -11,25 +11,23 @@
 
 ## Current research release
 
-- Version: **v2.3.3**
-- Intended execution date: **2026-09-30**
-- Parent: `code/releases/029_260929_v2.3.2.ipynb`
-- Default mode: `EXECUTION_MODE = "RESEARCH"`, `AUTO_TRADE_ENABLED = False`, `USE_MOCK = False`
-- Release: `code/releases/030_260930_v2.3.3.ipynb`
-- SHA-256: `19dcd0166b00456144b35672935e73ddc2b4fdc963c3ffe84fe7a7112537b8b5`
-- Scope: 박스별 실제 경과시간, cutoff 상태, 종료 우선순위, milestone·원장 복구. 보합 판정과 진폭·형태 기준은 불변.
-- Verification: 5-cell compile·pyflakes, 부모 정의 보존, clean-process 토큰 경계 시작, 완료봉 120분 경로, 2026-09-29 실제 보합 사건 20건 replay, 실제 v232 전날 checkpoint 복구, 60→120분 milestone, 돌파 후 cleanup, 15:30 종료 말풍선, 부모 tick replay, negative-control, 결정적 재빌드.
-- Reports: [빌드](reports/build/v2.3.3_build_validation_2026-09-29.md) · [2차 리뷰](reports/inspection/v2.3.3_second_review_2026-09-29.md) · [최종 회귀](reports/regression/v2.3.3_final_regression_2026-09-29.md)
-- Status: **2026-09-29 재검토 수정본 정적·격리 replay PASS / RESEARCH 실행 가능**. 실제 broker 및 Telegram 전송 검증은 수행하지 않았고 실제·키움 모의주문 0건.
+- Version: **v2.3.4**
+- Intended execution date: **2026-11-09**
+- Parent: [030_260930_v2.3.3.ipynb](code/releases/030_260930_v2.3.3.ipynb)
+- Release: [031_261109_v2.3.4.ipynb](code/releases/031_261109_v2.3.4.ipynb)
+- SHA-256: `1f35bf9e9b53ad1c2e81b98dd93dd5158eb5d3f5b3023e62fddcb1dafddd4ba3`
+- Default: `EXECUTION_MODE="RESEARCH"`, `AUTO_TRADE_ENABLED=False`, `USE_MOCK=False`
+- Scope: 장초반 첫 눌림 재돌파, 같은 후보의 BASE/FIRST 비교, 코스피·코스닥 시점 관측, 후보 장애 격리, 15:20 청산 및 원장 복구.
+- Reports: [1차 검증](reports/build/v2.3.4_build_validation_2026-11-08.md) · [2차 리뷰](reports/inspection/v2.3.4_second_review_2026-11-08.md) · [최종 회귀](reports/regression/v2.3.4_final_regression_2026-11-08.md)
+- Status: 정적·격리 검증 및 실제 보합 사건 원장 replay PASS. 장중 키움 실수신과 Telegram 실발송 미검증. 검증 중 실제·키움 모의 주문 0건.
 
 ## Latest handoff
 
 - [v2.3.3 → v2.3.4 최종 인수인계서](handoff/2026-11-08/v2.3.3_to_v2.3.4_final_handoff_2026-11-08.md)
 
-## Next implementation target
+## Next research check
 
-- v2.3.4 장초반 첫 눌림 재돌파와 코스피·코스닥 시점별 관측을 추가한다.
-- 후보별 데이터 장애 격리, 15:20 가상 청산, 종료·재시작 원장 정합성을 검증한다.
+- 첫 장중 RESEARCH 실행에서 코스피·코스닥 수신 상태, 후보별 결측과 복구, 가상 진입·청산과 종료 원장 정합성을 대조한다.
 
 ## v2.3.0 implemented design (2026-09-23 (수))
 

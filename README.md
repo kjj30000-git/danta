@@ -388,3 +388,15 @@ README 확인: 완료
 #### v2.3.3 재검토 수정 (2026-09-29)
 
 첫 업로드 직후 재검토에서 전날 v232 checkpoint를 버전 검사 때문에 먼저 거부하는 시작 오류와 milestone 누락, 돌파 후 cleanup 누락, 15:30 요약 선예약 문제를 확인했다. 수정본은 날짜를 버전보다 먼저 검사하고, 실제 경과시간으로 milestone을 기록하며, 돌파 terminal 상태를 보존한 내부 정리와 cutoff 종료 요약을 적용한다. 첫 업로드의 SHA와 보고서 PASS는 이 경계 검증을 포함하지 않았으므로 현재 release SHA와 수정된 보고서를 기준으로 한다.
+
+
+### v2.3.4 장초반 첫 눌림 재돌파 연구 (2026-11-08)
+
+실행 기준은 [031_261109_v2.3.4.ipynb](code/releases/031_261109_v2.3.4.ipynb)다. 장초반 09:00~09:15 등락률 후보를 등록하고 09:05 이상 09:30 미만의 첫 눌림 재돌파를 같은 후보의 BASE와 FIRST_75 가상진입에 비교한다. 코스피·코스닥은 각 판단 시각까지 수신된 값으로 연결한다.
+
+- BASE/FIRST의 기존 장중 가상진입 범위와 청산 정책을 유지한다. 대표 조합이 기본이며 Cell 1에서 169-grid를 복원할 수 있다.
+- 장기 보합 판정 기준을 유지하고, 대표 +2.00%/-1.25% 및 15:20 가상청산을 적용한다. 박스 관찰 및 전략별 누적 Telegram은 15:30까지다. STRUCTURE·SNAPSHOT·ETF 신규 가상진입은 기본 OFF다.
+- 새 장초반 연구는 `opening_events_v234.csv`로 분석한다. `opening_state_v234.sqlite3`는 같은 작업 폴더에서 재시작할 때 후보·진입·청산 복구에 쓰인다. `paper_cutoff_exits_v234.csv`는 15:20 정책군의 TP/SL과 시간청산, 청산 미확정을 담는다.
+- 저장 기본값은 RESEARCH이며 검증 중 실제·키움 모의 주문 0건이다. 키움 장중 실수신과 Telegram 전송은 별도로 확인한다.
+
+[1차 검증](reports/build/v2.3.4_build_validation_2026-11-08.md) · [2차 리뷰](reports/inspection/v2.3.4_second_review_2026-11-08.md) · [최종 회귀](reports/regression/v2.3.4_final_regression_2026-11-08.md)
