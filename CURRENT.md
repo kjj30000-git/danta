@@ -15,7 +15,7 @@
 - Intended execution date: **2026-11-09**
 - Parent: [030_260930_v2.3.3.ipynb](code/releases/030_260930_v2.3.3.ipynb)
 - Release: [031_261109_v2.3.4.ipynb](code/releases/031_261109_v2.3.4.ipynb)
-- SHA-256: `1f35bf9e9b53ad1c2e81b98dd93dd5158eb5d3f5b3023e62fddcb1dafddd4ba3`
+- SHA-256: `70baaf1f4d86b5e0e1eda4c42c00b07066b5aba943f4d336be253e738ca21499`
 - Default: `EXECUTION_MODE="RESEARCH"`, `AUTO_TRADE_ENABLED=False`, `USE_MOCK=False`
 - Scope: 장초반 첫 눌림 재돌파, 같은 후보의 BASE/FIRST 비교, 코스피·코스닥 시점 관측, 후보 장애 격리, 15:20 청산 및 원장 복구.
 - Reports: [1차 검증](reports/build/v2.3.4_build_validation_2026-11-08.md) · [2차 리뷰](reports/inspection/v2.3.4_second_review_2026-11-08.md) · [최종 회귀](reports/regression/v2.3.4_final_regression_2026-11-08.md)

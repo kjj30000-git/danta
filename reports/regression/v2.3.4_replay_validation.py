@@ -238,15 +238,36 @@ def scenario(m):
     m['v234_start'](Clock.value)
     assert all(m['paper_position_ids_by_code'].get(code) for code in ('990090', '990091'))
     Clock.value = Clock(2026, 11, 9, 15, 20, 1)
-    m['v20_force_close_research_due'](Clock.value)
-    m['v20_force_close_research_due'](Clock.value)
-    m['v234_export_cutoff']()
+    m['v220_maintenance'](Clock.value)
+    m['v220_maintenance'](Clock.value)
     with open('paper_cutoff_exits_v234.csv', encoding='utf-8-sig', newline='') as f:
         rows = {row['stock_code']: row for row in csv.DictReader(f)}
     assert rows['990090']['result'] == 'TIME_EXIT' and float(rows['990090']['exit_price']) == 101
     assert rows['990091']['result'] == 'EXIT_UNCONFIRMED' and not rows['990091']['gross_return_pct']
     assert len(rows) == 2
     print('PASS journal-ahead restart, pre-cutoff price only, missing price and no duplicate exit')
+
+
+def fill_tick_provenance(m):
+    dt = m['datetime']
+    moment = dt(2026, 11, 9, 10, 0, 2)
+    m['v220_reset_day'](moment)
+    c = m['v230_create_candidate_state']({
+        'code': '999091', 'stock': {'stock_code': '999091', 'stock_name': 'fixture'},
+        'candidate_start_time': moment.replace(minute=59, hour=9),
+        'candidate_source': 'BASE', 'sources': {'BASE'}, 'parent_trade_ids': [],
+    })
+    c.update(data_status='OK', v234_wire='100001')
+    m['v220_candidates'][c['code']] = c
+    used = []
+    original = m['v220_fill_pending']
+    m['v220_fill_pending'] = lambda candidate, price, received: used.append(candidate['v234_wire'])
+    try:
+        m['v220_on_tick'](c['code'], 100, moment, {'20': '100002'}, 1)
+    finally:
+        m['v220_fill_pending'] = original
+    assert used == ['100002'], used
+    print('PASS pending-fill receives the current tick exchange timestamp')
 
 
 def historical(m):
@@ -278,7 +299,7 @@ if __name__ == '__main__':
     parser.add_argument('stage', choices=('build', 'review', 'regression'))
     stage = parser.parse_args().stage
     checks = {'build': (cold_start, fixture), 'review': (replay,),
-              'regression': (cold_start, fixture, replay, regression, scenario, historical)}
+              'regression': (cold_start, fixture, replay, regression, scenario, fill_tick_provenance, historical)}
     old = Path.cwd()
     try:
         for check in checks[stage]:
