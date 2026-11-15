@@ -11,20 +11,20 @@
 
 ## Current research release
 
-- Version: **v2.3.4**
-- Intended execution date: **2026-11-09**
-- Parent: [030_260930_v2.3.3.ipynb](code/releases/030_260930_v2.3.3.ipynb)
-- Release: [031_261109_v2.3.4.ipynb](code/releases/031_261109_v2.3.4.ipynb)
-- SHA-256: `70baaf1f4d86b5e0e1eda4c42c00b07066b5aba943f4d336be253e738ca21499`
+- Version: **v2.3.5**
+- Intended execution date: **2026-11-16 (월)**
+- Parent: [031_261109_v2.3.4.ipynb](code/releases/031_261109_v2.3.4.ipynb)
+- Release: [032_261116_v2.3.5.ipynb](code/releases/032_261116_v2.3.5.ipynb)
+- SHA-256: `75a8ccdf3b2c3f45374f4959c239545ed74a49fd66eb6427756e207fb8d1b409`
 - Default: `EXECUTION_MODE="RESEARCH"`, `AUTO_TRADE_ENABLED=False`, `USE_MOCK=False`
-- Scope: 장초반 첫 눌림 재돌파, 같은 후보의 BASE/FIRST 비교, 코스피·코스닥 시점 관측, 후보 장애 격리, 15:20 청산 및 원장 복구.
-- Reports: [1차 검증](reports/build/v2.3.4_build_validation_2026-11-08.md) · [2차 리뷰](reports/inspection/v2.3.4_second_review_2026-11-08.md) · [최종 회귀](reports/regression/v2.3.4_final_regression_2026-11-08.md)
-- Status: 정적·격리 검증 및 실제 보합 사건 원장 replay PASS. 장중 키움 실수신과 Telegram 실발송 미검증. 검증 중 실제·키움 모의 주문 0건.
+- Scope: A 장초반 수급 지속/B 초반 하락 실패 후 회복, 코스피·코스닥 기본/지수비교,호가 가상체결·정책별 공유600만원,공용구독·시가·원장 정합성 최소수정.
+- Reports: [1차 검증](reports/build/v2.3.5_build_validation_2026-11-15.md) · [독립 2차 리뷰](reports/inspection/v2.3.5_second_review_2026-11-15.md) · [최종 회귀](reports/regression/v2.3.5_final_regression_2026-11-15.md) · [입력 계약/재현 한계](reports/build/v235/api_contracts.md)
+- Status: 정적·격리/mock PASS. 운영25개·독립반증10개·부모회귀·결정적재빌드 완료. 실제·키움 모의주문0건. 수익성·실제체결·키움장중실수신·Telegram실표시는 미검증.
 
 ## Latest handoff
 
 - [v2.3.4 → v2.3.5 수익 기회 발굴·지수 비교 최종 인수인계서](handoff/2026-11-15/v2.3.4_to_v2.3.5_profit_opportunity_final_handoff_2026-11-15.md)
-- 상태: 2026-11-15 연구 구현 명세 확정. 코드 미작성, 수익성 미검증. 부모는 현재 v2.3.4 전체본. 다음 버전 v2.3.5, 실행 예정일 2026-11-16.
+- 상태: 2026-11-15 v2.3.5 전체본 구현 및 최종 정적·격리 검증 완료. 수익성은 미검증. 인수인계서는 작성 당시 명세로 보존한다.
 - 범위: A 장초반 수급 지속 / B 초반 하락 실패 후 회복, 코스피·코스닥 지수 기본/비교군, 호가 기반 내부 가상체결·정책별 공유자금, 구독·시가·원장 정합성 최소 수정.
 
 ## Next research check
@@ -32,7 +32,7 @@
 - 2026-11-15 사용자 결정: 오류 수정·수집 연장 중심에서 비용 후 수익 기회 발굴·빠른 반증·후보 교체 중심으로 전환한다. 신규 검증 후보 최대 2개, 한 달 내 채택·탈락·표본부족 판단. RESEARCH와 실제·키움 모의 주문 0건 유지.
 - 최신 분석: [3개월 전략·데이터 재평가](reports/analysis/261115_three_month_audit/REPORT.md).
 - 다음 코드 설계 검토안: [수익 기회 발굴 중심 설계](reports/design/261115_profit_opportunity_next_design.md). 기존 첫 눌림 개선안만으로 다음 연구를 제한하지 않는다.
-- 다음 작업: 별도 전체 코드 작성 요청 시 최신 최종 인수인계서와 v2.3.4 부모를 기준으로 v2.3.5를 최소 변경 구현하고 검증한다. 기존 입력으로 A/B 완전 재현이 어려운 항목과 신규 필드 계약을 먼저 확인하며, 새 가설의 과거 수익성 통과를 주장하지 않는다.
+- 다음 작업: 11/16 신규 RESEARCH 실행에서 구독ACK·master·호가/봉·B참조겹침·평가분모·원장일치를 확인한다. A/B 과거 수익성 통과를 주장하지 않는다. 정상 수집 개시일과 12/15 판정기한은 별도로 관리한다. 분석 시 opportunity registry,SQLite일관backup,5종CSV와 부모계열v235 CSV/state를 함께 사용한다.
 - 구독 상한·상대강도 결측·청산 원장 정합성은 수익 검증을 막는 최소 수정 대상으로 다룬다. 이전 v2.3.4 인수인계서는 부모 구현 이력으로 보존하고, 최신 구현 명세는 위 v2.3.5 최종 인수인계서를 따른다.
 
 ## v2.3.0 implemented design (2026-09-23 (수))

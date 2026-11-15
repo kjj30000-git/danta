@@ -1,0 +1,15 @@
+test_known_condition_failure_is_not_missing_data (__main__.IndependentReview.test_known_condition_failure_is_not_missing_data) ... ok
+test_post05_partial_bar_invalidates_first_event (__main__.IndependentReview.test_post05_partial_bar_invalidates_first_event) ... ok
+test_rank_bad_row_isolated_from_normal_rows (__main__.IndependentReview.test_rank_bad_row_isolated_from_normal_rows) ... ok
+test_reconnect_requires_new_ack (__main__.IndependentReview.test_reconnect_requires_new_ack) ... ok
+test_reference_overlap_mismatch_never_initializes_range (__main__.IndependentReview.test_reference_overlap_mismatch_never_initializes_range) ... ok
+test_remaining_active_slot_obeys_rank_priority (__main__.IndependentReview.test_remaining_active_slot_obeys_rank_priority) ... ok
+test_report_account_return_preserves_actual_profit (__main__.IndependentReview.test_report_account_return_preserves_actual_profit) ... ok
+test_sql_failure_recovery_does_not_duplicate_committed_journal (__main__.IndependentReview.test_sql_failure_recovery_does_not_duplicate_committed_journal) ... ok
+test_terminal_signal_is_not_later_missing_data (__main__.IndependentReview.test_terminal_signal_is_not_later_missing_data) ... ok
+test_unconfirmed_fill_is_reported_and_blocks_profit_pass (__main__.IndependentReview.test_unconfirmed_fill_is_reported_and_blocks_profit_pass) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 2.877s
+
+OK

@@ -1,0 +1,11 @@
+PASS cold startup through token boundary
+v2.3.1 장외 tick replay PASS / 신규 주문 0건
+✅ v1.7.1.3 주문 E2E/fallback/불명확응답/연구동결 테스트 통과
+PASS 09:15 boundary, partial high exclusion, future received index exclusion, next tick fill
+PASS restart after committed fill and cutoff idempotence
+PASS candidate isolation/recovery, cutoff no fill, shared ledger conflict and Telegram uncertainty
+PASS order AST identity and independent PnL partial fill aggregation
+PASS comparison 09:05/09:30 ±1s, legacy full-day collection and restored 169 grid
+PASS journal-ahead restart, pre-cutoff price only, missing price and no duplicate exit
+PASS pending-fill receives the current tick exchange timestamp
+PASS actual 2026-09-29 balance ledger 20 events and 15:30 separate strategy summaries
