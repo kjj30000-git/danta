@@ -1,0 +1,11 @@
+folder,recorded_closed_rows,gross_pnl_won,field
+1.6.10(260904),4,-24216.0,live_realized_pnl
+1.6.6(260828),3,-9662.0,live_realized_pnl
+"1.6.7(260831, 260901)",2,8010.0,live_realized_pnl
+1.6.8(260902),2,7220.0,live_realized_pnl
+1.6.9(260903),3,-29916.0,live_realized_pnl
+1.7.0(260907),4,928.0,live_realized_pnl
+1.7.1(260908),4,-18225.0,live_realized_pnl
+1.7.1.1(260909)(중도 중단),1,-13500.0,live_realized_pnl
+1.7.1.2(260910),2,-18648.0,live_realized_pnl
+1.7.1.3(260911),2,-13050.0,live_realized_pnl

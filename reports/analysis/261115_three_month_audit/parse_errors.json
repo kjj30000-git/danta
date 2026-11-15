@@ -1,0 +1,10 @@
+[
+  {
+    "path": "data/1.6.4(260826)/scanner_system_v164.csv",
+    "error": "'utf-8' codec can't decode byte 0xa9 in position 5665: invalid start byte"
+  },
+  {
+    "path": "data/1.7.0(260907)/scanner_system_v170.csv",
+    "error": "'utf-8' codec can't decode byte 0x85 in position 4156: invalid start byte"
+  }
+]
